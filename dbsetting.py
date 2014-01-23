@@ -5,8 +5,8 @@ import datetime
 import hashlib
 from lib.settings import MySQL_user, MySQL_pass, MySQL_host, MySQL_DB
 
-username = 'batch'
-password = 'batch'
+username = 'rixb'
+password = 'rixb'
 
 
 password = hashlib.md5(password).hexdigest()
@@ -24,7 +24,7 @@ cursor.execute("create TABLE auth_user (id INT(11) NOT NULL primary key auto_inc
                 password CHAR(32) NOT NULL,session CHAR(32) NULL)")
 print '[*] Create a test blog ...'
 cursor.execute("insert into articles(title, date, content) values (%s, %s, %s)", \
-               ('Hello, Batch!', str(datetime.datetime.now()).split('.')[0],'Welcome to My Blog!'))
+               ('Hello, World!', str(datetime.datetime.now()).split('.')[0],'Welcome to My Blog!'))
 print '[*] Create your account %s...' % username
 cursor.execute("insert into auth_user(username, password) value (%s, %s)", (username, password))
 conn.commit()

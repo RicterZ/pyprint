@@ -1,12 +1,11 @@
 # -*- coding:utf-8 -*-
 import web
 import jinja2 as jj
-import local_settings
+from local_settings import *
 
 web.config.debug = False
-templates_path = 'templates'
-MySQL_host = 'ricter.info'
-MySQL_user = 'ricter'
+#MySQL_host = 'localhost'
+#MySQL_user = 'root'
 #MySQL_pass = ''
 #MySQL_DB = ''
 
