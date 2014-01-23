@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+<title>{{ title }}</title>
+<link href="http://www.ricter.info" />
+{% for item in data %}
+<item>
+  <title>{{ item.title }}</title>
+  <link>/articles/{{ item.id }}</link>
+  <pubDate>{{ item.date }}</pubDate>
+  <description><![CDATA[{{ item.content }}]]></description>
+</item>
+{% endfor %}
+</feed>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <ul>
+    {% set b=0 %}
+    {% for item in data %}
+        {% set a = item.date.split('-')[1] %}
+        <li>
+            {% if a != b %}<span>{{ a }}</span>{% endif %}
+            <span>{{ item.date.split(' ')[0].split('-')[2] }}</span><p>{{ item.title }}</p>
+        </li>
+        {% set b = item.date.split('-')[1] %}
+    {% endfor %}
+    </ul>
+{% endblock %}

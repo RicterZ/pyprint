@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="articles">
+        {% for item in data %}
+            <div class="article">
+                <h1><a href="/article/{{ item.id }}">{{ item.title }}</a></h1>
+                <h3>POST on {{ item.date }}</h3>
+                <div class="content">
+                    {{ item.content }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
