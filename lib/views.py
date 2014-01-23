@@ -32,7 +32,7 @@ class ArticleHandler(BaseHandler):
         if not article_id:
             return response(403)
         post_format = web.input(format='').format
-        data = markdown_to_html(get_one_article(article_id))
+        data = markdown_to_html(get_a_article(article_id))
         try:
             data = data[0]
         except IndexError:
@@ -45,8 +45,10 @@ class ArticleHandler(BaseHandler):
     def DELETE(self, article_id):
         @authentication
         def func():
-            del_one_article(article_id)
-            return response(204)
+            if del_a_article(article_id):
+                return response(204)
+            else:
+                return response(404)
         return func()
 
     def PUT(self, article_id):
@@ -54,8 +56,10 @@ class ArticleHandler(BaseHandler):
         def func():
             data = web.input(title='', content='')
             if not (data.title == '' or data.content == ''):
-                update_one_article(article_id, data)
-                return response(200, "Update success")
+                if update_a_article(article_id, data):
+                    return response(200, "Update success")
+                else:
+                    return response(404)
         return func()
 
     def POST(self):

@@ -14,18 +14,20 @@ def list_all_articles():
     return data
 
 
-def get_one_article(article_id):
+def get_a_article(article_id):
     data = db.select('articles', where='id=%d' % int(article_id))
     return data
 
 
-def del_one_article(article_id):
-    db.delete('articles', where='id=%d' % int(article_id))
+def del_a_article(article_id):
+    data = db.delete('articles', where='id=%d' % int(article_id))
+    return data
 
 
-def update_one_article(article_id, data):
-    db.update('articles', where='id=%d' % int(article_id), title=data.title,
-              date=now(), content=data.content)
+def update_a_article(article_id, data):
+    data = db.update('articles', where='id=%d' % int(article_id), title=data.title,
+                     date=now(), content=data.content)
+    return data
 
 
 def post_a_article(data):
@@ -35,6 +37,7 @@ def post_a_article(data):
 def timeline_list():
     data = db.select('articles', where='1', order='id desc', what="title, date")
     return data
+
 
 def check_login(data):
     try:

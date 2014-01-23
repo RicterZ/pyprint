@@ -31,8 +31,19 @@ var rixb = {
             }
         })
     },
-    put: function(id) {
-
+    put: function(id, title, content) {
+        $.ajax({
+            type: "PUT",
+            url: "/article/" + id,
+            data: {title: title, content: content},
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(msg) {
+                console.log(msg.responseText);
+            }
+        })
     },
     delete: function(id) {
         $.ajax({
@@ -40,10 +51,10 @@ var rixb = {
             url: "/article/" + id,
             dataType: "json",
             success: function(data) {
-                console.log(data);
+                console.log('Article Delete success');
             },
             error: function(msg) {
-                console.log(msg)
+                console.log(msg.responseText)
             }
         })
     }
