@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
 <title>{{ title }}</title>
-<link href="http://www.ricter.info" />
+<link href="http://{{ url }}" />
 {% for item in data %}
 <item>
   <title>{{ item.title }}</title>
-  <link>/articles/{{ item.id }}</link>
+  <link>http://{{ url }}/article/{{ item.id }}</link>
   <pubDate>{{ item.date }}</pubDate>
   <description><![CDATA[{{ item.content }}]]></description>
 </item>

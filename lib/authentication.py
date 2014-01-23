@@ -1,11 +1,11 @@
 __author__ = 'Ricter'
 import web
-from lib.utils import response
+from lib.http_response import Forbidden
 from lib.models import auth_check
 
 
 def authentication(func):
-    def is_permission():
+    def has_permission():
         try:
             cookies = web.cookies()
             username = cookies.username
@@ -17,10 +17,10 @@ def authentication(func):
             return False
 
     def decorator(_func=func):
-        if is_permission():
+        if has_permission():
             return _func
         else:
             def return_a_error():
-                return response(403)
+                raise Forbidden
             return return_a_error
     return decorator(func)

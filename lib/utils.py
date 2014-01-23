@@ -4,20 +4,11 @@ import datetime
 import hashlib
 import random
 import string
-import json
-from lib.http_response import *
 from lib.settings import *
 
 
 def render(template_file, title, **kwargs):
     return env.get_template(template_file).render(title=title, **kwargs)
-
-
-def response(status, message=""):
-    if status == 200:
-        return json.dumps({"message": message})
-    else:
-        raise HTTP_RESPONSE[status]
 
 
 def markdown_to_html(data):
@@ -47,11 +38,4 @@ def password_to_md5(password):
 def make_session():
     return ''.join(random.sample(string.letters+string.digits, 20))
 
-
-HTTP_RESPONSE = {
-    201: Created,
-    204: NoContent,
-    401: Unauthorized,
-    403: Forbidden,
-}
 

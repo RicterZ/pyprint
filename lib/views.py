@@ -1,9 +1,19 @@
 __author__ = 'Ricter'
 
-from lib.utils import markdown_to_html, render, response
+import json
+from lib.utils import markdown_to_html, render
+from lib.http_response import HTTP_RESPONSE
 from lib.authentication import authentication
 from lib.models import *
 from lib.settings import *
+
+
+def response(status, message=""):
+    if status == 200:
+        web.header('Content-Type', 'application/json')
+        return json.dumps({"message": message})
+    else:
+        raise HTTP_RESPONSE[status]
 
 
 class BaseHandler:
@@ -14,13 +24,23 @@ class BaseHandler:
 class IndexHandler(BaseHandler):
     def GET(self):
         data = markdown_to_html(list_three_articles())
-        return render("index.html", title='Ricter', data=data)
+        return render("index.html", title='Ricter Blog', data=data)
 
 
 class ArticleHandler(BaseHandler):
-    def GET(self, article_id):
+    def GET(self, article_id=None):
+        if not article_id:
+            return response(403)
+        post_format = web.input(format='').format
         data = markdown_to_html(get_one_article(article_id))
-        return render("index.html", title=data[0].title, data=data)
+        try:
+            data = data[0]
+        except IndexError:
+            return response(404)
+        if post_format == 'json':
+            return response(200, data)
+        else:
+            return render("index.html", title=data.title, data=[data])
 
     def DELETE(self, article_id):
         @authentication
@@ -80,4 +100,4 @@ class RssHandler(BaseHandler):
     def GET(self):
         web.header('Content-type', "text/xml; charset=utf-8")
         data = markdown_to_html(list_all_articles())
-        return render("rss.xml", title='Ricter Blog', data=data)
+        return render("rss.xml", title='Ricter Blog', data=data, url=web.ctx.host)

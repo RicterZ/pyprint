@@ -40,3 +40,22 @@ class Forbidden(HTTPError):
         status = "403 Forbidden"
         headers = {'Content-Type': 'application/json'}
         HTTPError.__init__(self, status, headers, self.message)
+
+
+class NotFound(HTTPError):
+    """`404 Not Found` error"""
+    message = '{"message": "Not Found"}'
+
+    def __init__(self):
+        status = "404 Not Found"
+        headers = {'Content-Type': 'application/json'}
+        HTTPError.__init__(self, status, headers, self.message)
+
+
+HTTP_RESPONSE = {
+    201: Created,
+    204: NoContent,
+    401: Unauthorized,
+    403: Forbidden,
+    404: NotFound,
+}
