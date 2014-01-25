@@ -51,7 +51,6 @@ class ArticleHandler(BaseHandler):
         if post_format == 'json':
             return response(200, data)
         else:
-            print self.DISQUS
             return self.render("index.html", title=data.title, data=[data],
                                DISQUS=self.DISQUS)
 
