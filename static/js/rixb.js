@@ -3,14 +3,17 @@
  */
 
 var rixb = {
-    get: function(id) {
+    get: function(id, title_obj, content_obj, tag_obj) {
+        var is_show = (arguments.length==4)
         $.ajax({
             type: "GET",
-            url: "/article/" + id,
+            url: "/articles/" + id,
             data: {"format": "json"},
             dataType: "json",
             success: function(data) {
-                console.log(data);
+                if (is_show) {
+                    console.log(data);
+                }
             },
             error: function(msg) {
                 console.log(msg.responseText);
@@ -20,7 +23,7 @@ var rixb = {
     post: function(title, content, tag) {
         $.ajax({
             type: "POST",
-            url: "/article",
+            url: "/articles",
             data: {"title": title, "content": content, "tag": tag},
             dataType: "json",
             success: function(data) {
@@ -34,7 +37,7 @@ var rixb = {
     put: function(id, title, content, tag) {
         $.ajax({
             type: "PUT",
-            url: "/article/" + id,
+            url: "/articles/" + id,
             data: {"title": title, "content": content, "tag": tag},
             dataType: "json",
             success: function(data) {
@@ -48,7 +51,7 @@ var rixb = {
     delete: function(id) {
         $.ajax({
             type: "DELETE",
-            url: "/article/" + id,
+            url: "/articles/" + id,
             dataType: "json",
             success: function(data) {
                 console.log('Article Delete success');

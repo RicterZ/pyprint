@@ -1,7 +1,88 @@
 {% extends "base.html" %}
 
-{% block body %}
-    
+{% block style %}
+<style>
+    .manage {
+        width: 80%;
+        margin: 60px auto;
+    }
+
+    .title-list {
+        overflow-y: overlay;
+        height: 600px;
+        background: #FFF;
+        display: inline-block;
+    }
+
+    .title-list li {
+        width: 410px;
+        font-size: 30px;
+        font-weight: 300;
+    }
+
+    .article-active {
+        width: 310px;
+        background: #EEE;
+        border-left: 10px solid #CCC;
+    }
+
+    .article-active:hover {
+        border-left: 10px solid #999;
+    }
+
+    .title-list a {
+        padding: 20px 40px;
+        color: #333;
+        width: 320px;
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+
+    .title-list a:hover {
+        background: #EEE;
+    }
+
+    .title-container {
+        background: #FFF;
+    }
+
+    #title-list-header {
+        padding: 10px;
+        font-size: 40px;
+        font-weight: 300;
+    }
+</style>
 {% endblock %}
 
+{% block body %}
+<div class="manage">
+    <div class="title-container">
+    <h3 id="title-list-header">All POSTs</h3>
+        <ul class="title-list">
+        {% set active = 'article-active' %}
+        {% for article in data %}
+            {% if not loop.first %}{% set active = '' %}{% endif %}
+            <li><a href="##" class="article-item {{ active }}" data-article="{{ article.id }}">{{ article.title }}</a></li>
+        {% endfor %}
+        </ul>
+        <div id="article-area"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+$(".article-item").click(function() {
+    $(".article-item").removeClass("article-active");
+    $(this).addClass("article-active");
+    rixb.get(this.attributes['data-article'].nodeValue);
+})
+
+</script>
+{% endblock %}
 

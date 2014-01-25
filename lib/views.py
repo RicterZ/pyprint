@@ -115,7 +115,8 @@ class ManageHandler(BaseHandler):
     def GET(self):
         @authentication
         def func():
-            pass
+            data = timeline_list()
+            return self.render("editor.html", title="Manage", data=data)
         return func()
 
 
