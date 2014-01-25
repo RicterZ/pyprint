@@ -70,7 +70,7 @@ cursor.execute("create TABLE auth_user (id INT(11) NOT NULL primary key auto_inc
 print "[*] Create table 'user_data' ..."
 cursor.execute("create TABLE user_data (id INT(11) NOT NULL primary key auto_increment,username CHAR(20) NOT NULL,\
                blog_title CHAR(40) NOT NULL,blog_intro LONGTEXT,blog_keyword CHAR(40) NOT NULL,disqus_code LONGTEXT,\
-               email CHAR(50) NOT NULL)")
+               email CHAR(50) NOT NULL, blog_description LONGTEXT)")
 print "[*] Create table 'friends_link' ..."
 cursor.execute("create TABLE friends_link (id INT(11) NOT NULL primary key auto_increment,friend_name CHAR(30) NOT NULL,\
                link CHAR(50) NOT NULL)")
