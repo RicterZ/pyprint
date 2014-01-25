@@ -7,7 +7,7 @@ var rixb = {
         $.ajax({
             type: "GET",
             url: "/article/" + id,
-            data: {format: "json"},
+            data: {"format": "json"},
             dataType: "json",
             success: function(data) {
                 console.log(data);
@@ -17,11 +17,11 @@ var rixb = {
             }
         })
     },
-    post: function(title, content) {
+    post: function(title, content, tag) {
         $.ajax({
             type: "POST",
             url: "/article",
-            data: {title: title, content: content},
+            data: {"title": title, "content": content, "tag": tag},
             dataType: "json",
             success: function(data) {
                 console.log(data);
@@ -31,11 +31,11 @@ var rixb = {
             }
         })
     },
-    put: function(id, title, content) {
+    put: function(id, title, content, tag) {
         $.ajax({
             type: "PUT",
             url: "/article/" + id,
-            data: {title: title, content: content},
+            data: {"title": title, "content": content, "tag": tag},
             dataType: "json",
             success: function(data) {
                 console.log(data);
@@ -55,6 +55,22 @@ var rixb = {
             },
             error: function(msg) {
                 console.log(msg.responseText)
+            }
+        })
+    },
+    login: function(u, p, obj) {
+        $.ajax({
+            type: "POST",
+            url: "/signin",
+            dataType: "json",
+            data: {"username": u, "password": p},
+            success: function(data) {
+                window.location = '/editor';
+            },
+            error: function(msg) {
+                eval("var resopnse = " + msg.responseText);
+                obj.text(resopnse.message);
+                obj.show();
             }
         })
     }

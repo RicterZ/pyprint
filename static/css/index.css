@@ -1,0 +1,144 @@
+.article > h1, .article > h6 {
+    color: #FFF;
+}
+
+.articles {
+    width: 80%;
+    padding: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.article {
+    padding: 30px 60px;
+}
+
+.aricle-container {
+    background: #FFF;
+    padding: 40px;
+    margin: 0 auto;
+}
+
+.content {
+    border-top: 1px #F8F8F8 solid;
+    border-bottom: 1px #F8F8F8 solid;
+    padding: 20px 60px;
+}
+
+.article > h1 {
+    padding: 5px 0;
+    font-size: 45px;
+    font-weight: 300;
+    max-width: 700px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.date {
+    padding: 10px;
+    background: #FFF;
+    color: #63B8FF;
+    text-align: right;
+}
+
+.tags {
+    background: #FFF;
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.tag {
+    display: inline-block;
+    float: left;
+    padding: 4px 6px 0px 4px;
+    color: #63B8FF;
+    font-size: 16px;
+    font-weight: 600;
+    vertical-align: top;
+}
+
+.bookmark {
+    color: #63B8FF;
+    display: inline-block;
+    float: left;
+    font-size: 21px;
+}
+
+.clock {
+    display: inline-block;
+    font-size: 23px;
+    vertical-align: sub;
+    margin-right: 5px;
+}
+
+.content *{
+    font-weight: 300;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 
+{
+    padding: 8px 0;
+}
+
+.content h1 {
+    font-size: 40px;
+}
+
+.content h2 {
+    font-size: 35px;
+}
+
+.content h3 {
+    font-size: 30px;
+}
+
+.content h4 {
+    font-size: 25px;
+}
+
+.content h5 {
+    font-size: 20px;
+}
+
+.content h6 {
+    font-size: 15px;
+}
+
+.content ul {
+    margin-left: 40px;
+}
+
+.content li > ul {
+    margin-left: 40px;
+}
+
+.content pre {
+    background: #EEE;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    padding: 20px;
+    overflow: auto;
+}
+
+.content blockquote {
+    border-left: 10px solid #EEE;
+    padding-left: 10px;
+    font-weight: 600;
+}
+
+.comment {
+    margin-top: 20px;
+    border-top: 1px #F8F8F8 solid;
+    padding-top: 20px;
+}
+
+.content img {
+    width: 100%;
+    border: 10px solid #63B8FF;
+}

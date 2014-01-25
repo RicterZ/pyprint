@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*:focus { outline: none; }
+
+body {
+    font-family: Tahoma, Helvetica, "Microsoft Yahei", "微软雅黑", Arial, STHeiti;
+}
+
+a {
+    color: #FFF;
+    text-decoration: blink;
+}
+
+.main-container {
+    background: #63B8FF;
+    padding-bottom: 120px;
+    min-width: 960px;
+}
+
+.header, .footer {
+    padding: 40px 20px 8px 40px;
+    width: 80%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.header h1 .header li, .header a {
+    color: #FFF;
+}
+
+.header h1 {
+    font-size: 100px;
+    font-weight: 300;
+    display: inline-block;
+}
+
+.header ul {
+    display: inline-block;
+}
+
+.header li {
+    display: inline-block;
+}
+
+.header a {
+    padding: 10px 30px;
+    margin: 0 20px;
+    border-radius: 10px;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    transition: all .3s ease;
+
+}
+
+.header a:target {
+    background: #FFF;
+    color: #63B8FF;
+}
+
+.header li>a:hover {
+    background: #FFF;
+    color: #63B8FF;
+}
+
+.footer {
+    text-align: right;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.footer a {
+    color: #666;
+    font-weight: 600;
+}
+
+.copyright {
+    font-size: 12px;
+}

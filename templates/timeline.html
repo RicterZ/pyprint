@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/timeline.css">
+{% endblock %}
+
+
 {% block body %}
+<div class="timeline">
     <ul>
     {% set b=0 %}
     {% for item in data %}
         {% set a = item.date.split('-')[1] %}
-        <li>
-            {% if a != b %}<span>{{ a }}</span>{% endif %}
-            <span>{{ item.date.split(' ')[0].split('-')[2] }}</span><p>{{ item.title }}</p>
+        <li class="item">
+            {% if a != b %}<span class="month">{{ a }}月</span><span class="circle"></span>{% endif %}
+            <span class="day">{{ item.date.split(' ')[0].split('-')[2] }}日</span><a class="title" href="/articles/{{ item.id }}">{{ item.title }}</a>
         </li>
         {% set b = item.date.split('-')[1] %}
     {% endfor %}
     </ul>
+</div>
 {% endblock %}

@@ -18,13 +18,24 @@ def response(status, message=""):
 
 class BaseHandler:
     def __init__(self):
-        pass
+        data = get_user_data()
+        self.NAME = data.username
+        self.INTRO = data.blog_intro
+        self.DISQUS = data.disqus_code
+        self.EMAIL = data.email
+        self.FRIENDS = get_friends_link()
+        self.KEYWORD = data.blog_keyword
+        self.DESCRIPTION = data.blog_description
+
+    def render(self, template, **kwargs):
+        return render(template, NAME=self.NAME, EMAIL=self.EMAIL, FRIENDS=self.FRIENDS,
+                      INTRO=self.INTRO, **kwargs)
 
 
 class IndexHandler(BaseHandler):
     def GET(self):
-        data = markdown_to_html(list_three_articles())
-        return render("index.html", title='Ricter Blog', data=data)
+        data = get_tag_for_articles(markdown_to_html(list_three_articles()))
+        return self.render("index.html", title=self.NAME, data=data)
 
 
 class ArticleHandler(BaseHandler):
@@ -32,7 +43,7 @@ class ArticleHandler(BaseHandler):
         if not article_id:
             return response(403)
         post_format = web.input(format='').format
-        data = markdown_to_html(get_a_article(article_id))
+        data = get_tag_for_articles(markdown_to_html(get_a_article(article_id)))
         try:
             data = data[0]
         except IndexError:
@@ -40,7 +51,9 @@ class ArticleHandler(BaseHandler):
         if post_format == 'json':
             return response(200, data)
         else:
-            return render("index.html", title=data.title, data=[data])
+            print self.DISQUS
+            return self.render("index.html", title=data.title, data=[data],
+                               DISQUS=self.DISQUS)
 
     def DELETE(self, article_id):
         @authentication
@@ -54,7 +67,7 @@ class ArticleHandler(BaseHandler):
     def PUT(self, article_id):
         @authentication
         def func():
-            data = web.input(title='', content='')
+            data = web.input(title='', content='', tag='')
             if not (data.title == '' or data.content == ''):
                 if update_a_article(article_id, data):
                     return response(200, "Update success")
@@ -65,7 +78,7 @@ class ArticleHandler(BaseHandler):
     def POST(self):
         @authentication
         def func():
-            data = web.input(title='', content='')
+            data = web.input(title='', content='', tag='')
             if not (data.title == '' or data.content == ''):
                 post_a_article(data)
                 return response(201)
@@ -74,7 +87,7 @@ class ArticleHandler(BaseHandler):
 
 class LoginHandler(BaseHandler):
     def GET(self):
-        return render("signin.html", title="Login")
+        return self.render("signin.html", title="Login")
 
     def POST(self):
         data = web.input(username='', password='')
@@ -89,7 +102,14 @@ class LoginHandler(BaseHandler):
 class TimelineHandler(BaseHandler):
     def GET(self):
         data = timeline_list()
-        return render("timeline.html", title="Timeline", data=data)
+        return self.render("timeline.html", title="Timeline", data=data)
+
+
+class TagHandler(BaseHandler):
+    def GET(self, tag_id):
+        data = get_tag_for_articles(get_articles_by_tag(tag_id))
+        tag_name = get_tag(tag_id).tag_name
+        return self.render("index.html", title=tag_name, data=data)
 
 
 class ManageHandler(BaseHandler):
@@ -104,4 +124,5 @@ class RssHandler(BaseHandler):
     def GET(self):
         web.header('Content-type', "text/xml; charset=utf-8")
         data = markdown_to_html(list_all_articles())
-        return render("rss.xml", title='Ricter Blog', data=data, url=web.ctx.host)
+        return render("rss.xml", title=self.NAME, data=data, url=web.ctx.host)
+

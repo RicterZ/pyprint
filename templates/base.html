@@ -2,14 +2,45 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>{{ title }} | I am Ricter</title>
+    <title>{{ title }} | {{ INTRO }}</title>
+    <meta name="keyword" content="{{ KEYWORD }}">
+    <meta name="description" content="{{ DESCRIPTION }}">
+    <link rel="stylesheet" href="/static/css/common.css">
     {% block css %}
+    {% endblock %}
+    {% block style %}
     {% endblock %}
 </head>
 <body>
+<div class="main-container">
+<div class="header">
+    <h1><a href="/">{{ NAME }}</a></h1>
+    <ul>
+        <li><a href="/timeline">Timeline</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/about">About me</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+    </ul>
+</div>
 {% block body %}
 {% endblock %}
-
+</div>
+<div class="footer">
+    <p class="copyright">
+        Powered By <a target="_blank" href="http://github.com/RicterZ/rixb-webpy">rixb</a><br />
+        {% if FRIENDS %}
+        Friends:
+        {% for friend in FRIENDS %}
+        <a target="_blank" href="http://{{ friend.link }}">{{ friend.friend_name }}</a>
+        {% if not loop.last %}|{% endif %}
+        {% endfor %}
+        {% endif %}
+        <br />
+        Contact: <a href="mailto://{{ EMAIL }}">{{ EMAIL }}</a>
+    </p>
+</div>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/rixb.js"></script>
 {% block script %}
 {% endblock %}
 </body>

@@ -1,0 +1,54 @@
+.timeline {
+    width: 80%;
+    margin: 60px;
+    padding: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.timeline ul {
+    padding: 30px 60px;
+}
+
+.timeline li {
+    display: block;
+    color: #FFF;
+    font-size: 36px;
+}
+
+span.month {
+    float: left;    
+    margin-left: -136px;
+}
+
+span.circle {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: #FFF;
+    border-radius: 100%;
+    float: left;
+    margin-left: -48px;
+    margin-top: -12px;
+}
+
+li.item {
+    border-left: 5px #FFF solid;
+    padding: 10px 0 10px 30px;
+    margin-left: 120px;
+}
+
+span.day {
+    display: inline-block;
+    font-size: 24px;
+    padding-right: 30px;
+    vertical-align: top;
+}
+
+a.title {
+    display: inline-block;
+    max-width: 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
