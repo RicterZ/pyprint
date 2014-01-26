@@ -3,16 +3,23 @@
  */
 
 var rixb = {
-    get: function(id, title_obj, content_obj, tag_obj) {
-        var is_show = (arguments.length==4)
+    get: function(id, is_raw, title_obj, tag_obj, content_obj) {
+        var is_show = (arguments.length==5)
         $.ajax({
             type: "GET",
             url: "/articles/" + id,
-            data: {"format": "json"},
+            data: {"format": "json", "raw": is_raw},
             dataType: "json",
             success: function(data) {
                 if (is_show) {
-                    console.log(data);
+                    var data = data.message;
+                    var tags = ''
+                    title_obj[0].value = data.title;
+                    for (var i=0;i<data.tag.length;i++) {
+                        tags += data.tag[i].tag_name + ',';
+                    }
+                    tag_obj[0].value = tags.substring(0, tags.length-1);
+                    content_obj.val(data.content);
                 }
             },
             error: function(msg) {
@@ -41,20 +48,21 @@ var rixb = {
             data: {"title": title, "content": content, "tag": tag},
             dataType: "json",
             success: function(data) {
-                console.log(data);
+                callback();
+                //console.log(data);
             },
             error: function(msg) {
                 console.log(msg.responseText);
             }
         })
     },
-    delete: function(id) {
+    delete: function(id, callback) {
         $.ajax({
             type: "DELETE",
             url: "/articles/" + id,
             dataType: "json",
             success: function(data) {
-                console.log('Article Delete success');
+                callback();
             },
             error: function(msg) {
                 console.log(msg.responseText)
@@ -77,4 +85,9 @@ var rixb = {
             }
         })
     }
+}
+
+function set_button_data(data) {
+    $(".delete")[0].attributes['data-article'].nodeValue = data;
+    $(".publish")[0].attributes['data-article'].nodeValue = data;
 }

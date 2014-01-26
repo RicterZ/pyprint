@@ -1,0 +1,123 @@
+    .manage {
+        width: 80%;
+        margin: 60px auto;
+        min-width: 960px;
+        max-width: 1080px;
+    }
+
+    .title-list {
+        width: 35%;
+        overflow-x: hidden;
+        overflow-y: overlay;
+        height: 600px;
+        background: #FFF;
+        display: inline-block;
+    }
+
+    .title-list li {
+        width: 450px;
+        font-size: 30px;
+        font-weight: 300;
+        display: block;
+    }
+
+    .article-active {
+        width: 310px;
+        background: #EEE;
+        border-left: 10px solid #CCC;
+    }
+
+    .article-active:hover {
+        border-left: 10px solid #999;
+    }
+
+    .title-list a {
+        padding: 20px 40px;
+        color: #333;
+        width: 320px;
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+
+    .title-list a:hover {
+        background: #EEE;
+    }
+
+    .title-container {
+        background: #FFF;
+    }
+
+    #title-list-header {
+        padding: 10px;
+        font-size: 40px;
+        font-weight: 300;
+    }
+
+    .article-area {
+        width: 60%;
+        padding: 3%;
+        display: inline-block;
+        height: 560px;
+        padding: 20px;
+        vertical-align: bottom;
+    }
+
+    #edit-tag {
+        margin: 20px auto;
+        width: 93%;
+    }
+
+    #edit-title {
+        height: 40px;
+        display: block;
+        width: 93%;
+        margin: 0 auto;
+        font-size: 30px;
+    }
+
+    #edit-content {
+        width: 93%;
+        height: 400px;
+        min-height: 400px;
+        margin: 0 auto;
+    }
+
+    .button {
+        margin: 0 10px;
+        display: inline-table;
+        float: right;
+        font-size: 30px;
+        padding: 4px;
+        width: 200px;
+        color: #FFF;
+        text-align: center;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+
+    .publish {
+        background: #63B8FF;
+    }
+
+    .publish:hover {
+        background: #91CDFF;
+    }
+
+    .article-active > .delete {
+        visibility: visible;
+    }
+
+    .delete {
+        display: none;
+        background: #D6776A;
+    }
+
+    .delete:hover {
+        background: #F8AFA5;
+    }

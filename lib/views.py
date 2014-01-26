@@ -1,7 +1,7 @@
 __author__ = 'Ricter'
 
 import json
-from lib.utils import markdown_to_html, render
+from lib.utils import markdown_to_html, render, article_to_storage
 from lib.http_response import HTTP_RESPONSE
 from lib.authentication import authentication
 from lib.models import *
@@ -42,8 +42,14 @@ class ArticleHandler(BaseHandler):
     def GET(self, article_id=None):
         if not article_id:
             return response(403)
-        post_format = web.input(format='').format
-        data = get_tag_for_articles(markdown_to_html(get_a_article(article_id)))
+        web_input = web.input(format='', raw='false')
+        post_format = web_input.format
+        raw = web_input.raw
+        if raw == 'true':
+            data = get_tag_for_articles(article_to_storage(get_a_article(article_id)))
+        else:
+            data = get_tag_for_articles(markdown_to_html(get_a_article(article_id)))
+
         try:
             data = data[0]
         except IndexError:

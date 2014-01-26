@@ -11,6 +11,16 @@ def render(template_file, title, **kwargs):
     return env.get_template(template_file).render(title=title, **kwargs)
 
 
+def article_to_storage(data):
+    """
+    `data` is a `web.utils.IterBetter` instance
+    """
+    result_list = []
+    for item in data:
+        result_list.append(item)
+    return result_list
+
+
 def markdown_to_html(data):
     """
     `data` is a `web.utils.IterBetter` instance
