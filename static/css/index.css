@@ -114,6 +114,11 @@
     margin-left: 40px;
 }
 
+.content a {
+    color: #000;
+    text-decoration: underline;
+}
+
 .content li > ul {
     margin-left: 40px;
 }
