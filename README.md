@@ -22,6 +22,7 @@ and `esc :wq` to save it.
 then,
 
     $ cd ..
+    $ python init_db.py
     $ python main.py
 
 and in the browser access `http://127.0.0.1:8080/`
