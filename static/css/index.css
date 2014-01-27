@@ -135,6 +135,10 @@
     overflow: auto;
 }
 
+.content p {
+	line-height: 20px;
+}
+
 .content > p > code, .content > code{
 	color: #C73535;
 	background: #EEE;
