@@ -120,7 +120,7 @@
 }
 
 .content a:hover {
-	color: #4296F3;
+	color: #095CB8;
 }
 
 .content li > ul {
@@ -135,7 +135,7 @@
     overflow: auto;
 }
 
-.content > code {
+.content > p > code, .content > code{
 	color: #C73535;
 	background: #EEE;
 	border-radius: 5px;
