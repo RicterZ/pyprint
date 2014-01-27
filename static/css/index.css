@@ -115,8 +115,12 @@
 }
 
 .content a {
-    color: #000;
+    color: #70ADF0;
     text-decoration: underline;
+}
+
+.content a:hover {
+	color: #4296F3;
 }
 
 .content li > ul {
@@ -129,6 +133,15 @@
     border: 1px solid #CCC;
     padding: 20px;
     overflow: auto;
+}
+
+.content > code {
+	color: #C73535;
+	background: #EEE;
+	border-radius: 5px;
+	border: 1px solid #CCC;
+	padding: 3px;
+	overflow: auto;
 }
 
 .content blockquote {
