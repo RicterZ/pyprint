@@ -6,9 +6,10 @@ import datetime
 import hashlib
 from lib.settings import MySQL_user, MySQL_pass, MySQL_host, MySQL_DB
 
-username = 'rixb'
-password = 'rixb'
-test_blog = """
+def init_database():
+    username = 'rixb'
+    password = 'rixb'
+    test_blog = """
 #Welcome to My Blog!
 This is rixb - a web.py blog system.   
 It's RESTful and lightweight.    
@@ -45,7 +46,6 @@ Here is some test text.
 Thank you.
 """
 
-def init_database():
     password = hashlib.md5(password).hexdigest()
     print '[*] Connect to your MySQL host %s ...' % MySQL_host
     conn = MySQLdb.connect(host=MySQL_host, user=MySQL_user, passwd=MySQL_pass)

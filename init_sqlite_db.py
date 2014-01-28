@@ -5,10 +5,11 @@ import sqlite3
 import datetime
 from lib.settings import sqlite_path
 
-username = 'rixb'
-password = 'rixb'
+def init_database():
+    username = 'rixb'
+    password = 'rixb'
 
-test_blog = '''
+    test_blog = '''
 #Welcome to My Blog!
 This is rixb - a web.py blog system.   
 It's RESTful and lightweight.    
@@ -45,7 +46,6 @@ Here is some test text.
 Thank you.
 '''
 
-def init_database():
     print '[*] Create database ...'
 
     db = sqlite3.connect(sqlite_path)
