@@ -1,7 +1,7 @@
 __author__ = 'Ricter'
 
 import json
-from lib.utils import markdown_to_html, render, article_to_storage
+from lib.utils import markdown_to_html, render, article_to_storage, clean_input
 from lib.http_response import HTTP_RESPONSE
 from lib.authentication import authentication
 from lib.models import *
@@ -131,4 +131,15 @@ class RssHandler(BaseHandler):
         web.header('Content-type', "text/xml; charset=utf-8")
         data = markdown_to_html(list_all_articles())
         return render("rss.xml", title=self.NAME, data=data, url=web.ctx.host)
+
+class SearchHandler(BaseHandler):
+    def GET(self):
+        v = web.input(kw='')
+        if not v.kw == '':
+            data = markdown_to_html(search_article(clean_input(v.kw)))
+            return self.render("index.html", title=self.NAME, data=data)
+    
+    def POST(self):
+        pass
+
 

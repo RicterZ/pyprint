@@ -11,4 +11,5 @@ urls = (
     '/timeline', 'TimelineHandler',
     '/rss.xml', 'RssHandler',
     '/tags/([\d]+)', 'TagHandler',
+    '/search', 'SearchHandler',
 )

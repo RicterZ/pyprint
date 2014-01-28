@@ -3,7 +3,7 @@
 from lib.settings import database_type
 
 def main():
-    if database_type == 'MySQL':
+    if database_type == 'mysql':
         import init_mysql_db
         init_mysql_db.init_database()
     elif database_type == 'sqlite':

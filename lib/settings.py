@@ -3,7 +3,7 @@ import jinja2 as jj
 
 # database_type = 'mysql' or 'sqlite'
 database_type = 'mysql'
-# these values is for MySQL
+# these values is for mysql
 MySQL_host = 'localhost'
 MySQL_user = 'root'
 MySQL_pass = ''
