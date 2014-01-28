@@ -136,3 +136,7 @@ def get_user_data():
 def get_friends_link():
     data = db.select('friends_link', where="1")
     return data
+
+def search_article(kw):
+    data = db.select('articles', where="title='%%s%' or content='%%s%'" % (str(kw), str(kw)))
+    return data
