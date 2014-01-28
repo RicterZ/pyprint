@@ -48,4 +48,7 @@ def password_to_md5(password):
 def make_session():
     return ''.join(random.sample(string.letters+string.digits, 20))
 
+def clean_input(ipt):
+    return str(ipt).replace('"', '').replace("'", '')
+
 

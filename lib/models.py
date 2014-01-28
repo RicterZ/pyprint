@@ -138,5 +138,5 @@ def get_friends_link():
     return data
 
 def search_article(kw):
-    data = db.select('articles', where="title='%%s%' or content='%%s%'" % (str(kw), str(kw)))
+    data = db.select('articles', where="title like '%%%s%%' or content like '%%%s%%'" % (str(kw), str(kw)))
     return data
