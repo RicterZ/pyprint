@@ -134,12 +134,12 @@ class RssHandler(BaseHandler):
 
 class SearchHandler(BaseHandler):
     def GET(self):
-        pass
-
-    def POST(self):
         data = web.input(kw='')
         if not kw == '':
             data = search_article(kw)
             return self.render("index.html", title=self.NAME, data=data)
+    
+    def POST(self):
+        pass
 
 
