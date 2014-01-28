@@ -3,6 +3,7 @@ __author__ = 'Madimo'
 
 import sqlite3
 import datetime
+from lib.settings import sqlite_path
 
 username = 'rixb'
 password = 'rixb'
@@ -47,7 +48,7 @@ Thank you.
 def init_database():
     print '[*] Create database ...'
 
-    db = sqlite3.connect('rixb.db')
+    db = sqlite3.connect(sqlite_path)
 
     db.execute('''
         create table articles (
@@ -131,5 +132,5 @@ def init_database():
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     init_database()
