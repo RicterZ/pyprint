@@ -13,10 +13,16 @@ rixb powered by web.py
 
 then, set some parameters.
 
+    database_type = 'mysql'
     MySQL_host = 'localhost'
     MySQL_user = 'root'
     MySQL_pass = 'xxx'
     MySQL_DB = 'rixb'
+    
+or 
+
+    database_type = 'sqlite'
+    sqlite_path = 'rixbdb.db'
 
 and `esc :wq` to save it.
 then,
