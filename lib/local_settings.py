@@ -3,7 +3,7 @@
 
 # database_type = 'mysql' or 'sqlite'
 # it depends what database you want to use
-database_type = 'mysql'
+database_type = 'sqlite'
 
 # if you use mysql, please set these values
 # if you don't use mysql, just ignore it

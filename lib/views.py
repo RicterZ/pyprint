@@ -135,12 +135,12 @@ class RssHandler(BaseHandler):
 
 class SearchHandler(BaseHandler):
     def GET(self):
-        pass
+        return self.render("search.html", title='Search')
 
     def POST(self):
-        v = web.input(kw='')
-        if kw:
-            data = markdown_to_html(search_article(clean_input(v.kw)))
+        v = web.input(kw='').kw
+        if v:
+            data = markdown_to_html(search_article(clean_input(v)))
             return self.render("index.html", title=self.NAME, data=data)
         else:
             return web.seeother('/search')

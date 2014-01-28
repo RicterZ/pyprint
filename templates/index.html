@@ -1,10 +1,5 @@
 {% extends "base.html" %}
 
-{% block style %}
-<style>
-</style>
-{% endblock %} 
-
 {% block css %}
 <link rel="stylesheet" href="/static/css/index.css">
 <link rel="stylesheet" href="/static/css/foundation-icons.css" />
@@ -15,7 +10,7 @@
         {% for item in data %}
             <div class="article">
                 <h1><a href="/articles/{{ item.id }}">{{ item.title }}</a></h1>
-                <div class="aricle-container">
+                <div class="article-container">
                     <h6 class="date"><i class="fi-clock clock"></i>{{ item.date }}</h6>
                     <div class="content">{{ item.content }}</div>
                     {% if item.tag %}
