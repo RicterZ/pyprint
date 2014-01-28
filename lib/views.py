@@ -132,14 +132,18 @@ class RssHandler(BaseHandler):
         data = markdown_to_html(list_all_articles())
         return render("rss.xml", title=self.NAME, data=data, url=web.ctx.host)
 
+
 class SearchHandler(BaseHandler):
     def GET(self):
+        pass
+
+    def POST(self):
         v = web.input(kw='')
-        if not v.kw == '':
+        if kw:
             data = markdown_to_html(search_article(clean_input(v.kw)))
             return self.render("index.html", title=self.NAME, data=data)
-    
-    def POST(self):
-        pass
+        else:
+            return web.seeother('/search')
+
 
 
