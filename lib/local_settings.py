@@ -1,12 +1,12 @@
 # this local_settings is your database settings
 
 
-# database_type = 'MySQL' or 'sqlite'
+# database_type = 'mysql' or 'sqlite'
 # it depends what database you want to use
-database_type = 'sqlite'
+database_type = 'mysql'
 
-# if you use MySQL, please set these values
-# if you don't use MySQL, just ignore it
+# if you use mysql, please set these values
+# if you don't use mysql, just ignore it
 MySQL_host = 'localhost'
 MySQL_user = 'xxx'
 MySQL_pass = 'xxx'
