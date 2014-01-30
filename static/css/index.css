@@ -72,6 +72,10 @@
     margin-right: 5px;
 }
 
+.content {
+    background: #FFF;
+}
+
 .content p{
     font-weight: 300;
 }
