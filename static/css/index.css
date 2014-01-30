@@ -169,3 +169,12 @@
     width: 100%;
     border: 10px solid #63B8FF;
 }
+
+.comment {
+    background: #FFF;
+    padding: 30px;
+}
+
+.comment a {
+    color:#000;
+}

@@ -1,0 +1,61 @@
+.form-container {
+    width: 80%;
+    margin: 60px;
+    padding: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+form {
+    margin: 30px 60px;
+    padding: 30px 60px;
+}
+
+.search-title {
+    font-size: 45px;
+    padding-bottom: 20px;
+    font-weight: 300;
+    color: #FFF;
+    text-align: center;
+}
+
+.input {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    transition: all .3s ease;
+    padding: 5px 20px;
+    border-radius: 4px 0 0 4px;
+    border: 4px solid #FFF;
+    height: 20px;
+    color: #999;
+    font-family: Tahoma, Helvetica, "Microsoft Yahei", "微软雅黑", Arial, STHeiti;
+    font-size: 18px;
+    width: 630px;
+    float: left;
+}
+
+.input-container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+button {
+    color: #000;
+    float: left;
+    display: inline-block;
+    height: 36px;
+    width: 120px;
+    border: 4px solid #FFF;
+    border-radius: 0 4px 4px 0;
+    background: #FFF;
+    vertical-align: top;
+}
+
+.search-icon {
+    height: 25px;
+    width: 25px;
+    display: block;
+    font-size: 25px;
+    color: #000;
+    margin: 0 auto;
+}
