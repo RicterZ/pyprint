@@ -1,3 +1,4 @@
 *.pyc
 .idea
+*.db
 lib/local_settings.py

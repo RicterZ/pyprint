@@ -33,9 +33,9 @@ $(".publish").click(function() {
     var article_id = this.attributes['data-article'].nodeValue;
     if (article_id != "") {
         rixb.put(article_id, $("#edit-title").val(), $("#edit-content").val(), 
-                 $("#edit-tag").val(), function() {})
+                 $("#edit-tag").val(), function() {$(".article-area > *").val("");})
     } else {
         rixb.post($("#edit-title").val(), $("#edit-content").val(), 
-                  $("#edit-tag").val(), function() {});
+                  $("#edit-tag").val(), function() {$(".article-area > *").val("");});
     }
 })

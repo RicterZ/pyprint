@@ -6,6 +6,7 @@
     }
 
     .title-list {
+        border-top: 1px #F8F8F8 solid;
         width: 35%;
         overflow-x: hidden;
         overflow-y: overlay;
@@ -50,10 +51,11 @@
 
     .title-container {
         background: #FFF;
+        margin-bottom: 50px;
     }
 
-    #title-list-header {
-        padding: 10px;
+    .settings-header {
+        padding: 20px;
         font-size: 40px;
         font-weight: 300;
     }
@@ -101,11 +103,11 @@
         transition: all .3s ease;
     }
 
-    .publish {
+    .publish, .save {
         background: #63B8FF;
     }
 
-    .publish:hover {
+    .publish:hover, .save:hover {
         background: #91CDFF;
     }
 

@@ -27,21 +27,22 @@ var rixb = {
             }
         })
     },
-    post: function(title, content, tag) {
+    post: function(title, content, tag, callback) {
         $.ajax({
             type: "POST",
             url: "/articles",
             data: {"title": title, "content": content, "tag": tag},
             dataType: "json",
             success: function(data) {
-                console.log(data);
+                callback();
+                //console.log(data);
             },
             error: function(msg) {
                 console.log(msg);
             }
         })
     },
-    put: function(id, title, content, tag) {
+    put: function(id, title, content, tag, callback) {
         $.ajax({
             type: "PUT",
             url: "/articles/" + id,

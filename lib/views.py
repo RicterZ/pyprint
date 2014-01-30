@@ -29,7 +29,8 @@ class BaseHandler:
 
     def render(self, template, **kwargs):
         return render(template, NAME=self.NAME, EMAIL=self.EMAIL, FRIENDS=self.FRIENDS,
-                      INTRO=self.INTRO, **kwargs)
+                      INTRO=self.INTRO, KEYWORD=self.KEYWORD, DESCRIPTION=self.DESCRIPTION,
+                      **kwargs)
 
 
 class IndexHandler(BaseHandler):

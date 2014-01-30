@@ -8,17 +8,25 @@
 
 {% block style %}
 <style>
+.input-container > textarea {
+    display: block;
+}
 
+.input-container > lable {
+    font-size: 28px;
+    vertical-align: sub;
+    margin-right: 20px;
+}
 </style>
 {% endblock %}
 
 {% block body %}
 <div class="manage">
     <div class="title-container">
-    <h3 id="title-list-header">
-        All POSTs
-        <a class="button publish" href="##" data-article="">Publish</a>
-        <a class="button delete" href="##" data-article="">Delete</a>
+        <h3 class="settings-header">
+            All POSTs
+            <a class="button publish" href="##" data-article="">Publish</a>
+            <a class="button delete" href="##" data-article="">Delete</a>
         </h3>
         <ul class="title-list">
         {% for article in data %}
@@ -30,9 +38,17 @@
         {% endfor %}
         </ul>
         <div class="article-area content">
-            <input class="input" autocomplete="off" type="text" name="title" id="edit-title" placeholder="Title"></input>
-            <input class="input" autocomplete="off" type="text" name="title" id="edit-tag" placeholder="Tags"></input>
+            <input class="input" autocomplete="off" type="text"  id="edit-title" placeholder="Title" />
+            <input class="input" autocomplete="off" type="text"  id="edit-tag" placeholder="Tags" />
             <textarea class="input" id="edit-content" placeholder="Content"></textarea>
+        </div>
+    </div>
+    <div class="title-container">
+        <h3 class="settings-header">Settings<a class="button save" href="##">Save</a></h3>
+        <div class="input-container">
+        <lable>Main Title:</lable><input class="input" autocomplete="off" type="text" id="username" placeholder="Main Title(which will display in all pages)" /><br />
+        <lable>Word Description: </lable><input class="input" autocomplete="off" type="text" id="blog-title" placeholder="Word description" />
+        <textarea class="input" autocomplete="off" type="text" id="" placeholder="Description (which in meta tag)"></textarea>
         </div>
     </div>
 </div>

@@ -72,7 +72,7 @@
     margin-right: 5px;
 }
 
-.content *{
+.content p{
     font-weight: 300;
 }
 
@@ -84,6 +84,7 @@
 .content h6 
 {
     padding: 8px 0;
+    font-weight: 300;
 }
 
 .content h1 {

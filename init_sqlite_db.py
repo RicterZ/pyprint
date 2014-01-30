@@ -4,6 +4,8 @@ __author__ = 'Madimo'
 import sqlite3
 import datetime
 from lib.settings import sqlite_path
+from lib.utils import password_to_md5
+
 
 def init_database():
     username = 'rixb'
@@ -123,7 +125,7 @@ Thank you.
         ('rixb', 'rixb', 'Here is My Blog!', 'My Blog :)', 'rixb', '', 'root@yoursite.com'))
 
     # create account
-    db.execute("insert into auth_user(username, password) values (?, ?)", (username, password))
+    db.execute("insert into auth_user(username, password) values (?, ?)", (username, password_to_md5(password)))
 
     db.commit()
     db.close()

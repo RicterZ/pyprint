@@ -86,11 +86,13 @@ def add_tag(tag_name):
     if not tag_name:
         return
     tag = get_tag_by_name(tag_name)
-    if tag:
-        return tag[0].id
-    else:
+    try:
+        tag = tag[0]
+    except IndexError:
         tag_id = db.insert('tags', tag_name=tag_name)
         return tag_id
+    else:
+        return tag.id
 
 
 def add_article_tag(article_id, tag_id):
@@ -124,8 +126,13 @@ def save_session(username):
 
 
 def auth_check(username, session):
-    data = db.select('auth_user', where="username='%s'" % clean_input(username))[0]
-    return str(data.session) == str(session)
+    data = db.select('auth_user', where="username='%s'" % clean_input(username))
+    try:
+        data = data[0]
+    except IndexError:
+        return False
+    else:
+        return str(data.session) == str(session)
 
 
 def get_user_data():
@@ -137,6 +144,11 @@ def get_friends_link():
     data = db.select('friends_link', where="1")
     return data
 
+
 def search_article(kw):
     data = db.select('articles', where="title like '%%%s%%' or content like '%%%s%%'" % (str(kw), str(kw)))
     return data
+
+
+def save_settings():
+    pass
