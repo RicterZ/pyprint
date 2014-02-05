@@ -12,4 +12,5 @@ urls = (
     '/rss.xml', 'RssHandler',
     '/tags/([\d]+)', 'TagHandler',
     '/search', 'SearchHandler',
+    '/settings', 'SettingsHandler',
 )

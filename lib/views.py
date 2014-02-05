@@ -123,7 +123,14 @@ class ManageHandler(BaseHandler):
         @authentication
         def func():
             data = timeline_list()
-            return self.render("editor.html", title="Manage", data=data)
+            user_data = get_user_data()
+            return self.render("editor.html", title="Manage", data=data, user_data=user_data)
+        return func()
+
+    def POST(self):
+        @authentication
+        def func():
+            data = web.input()
         return func()
 
 
@@ -145,6 +152,7 @@ class SearchHandler(BaseHandler):
             return self.render("index.html", title=self.NAME, data=data)
         else:
             return web.seeother('/search')
+
 
 
 
