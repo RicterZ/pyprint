@@ -152,3 +152,4 @@ def search_article(kw):
 
 def save_settings():
     pass
+

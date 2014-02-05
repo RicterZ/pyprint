@@ -62,31 +62,31 @@
         <div class="input-container">
         <div class="input-group">
             <label>Main Title:</label>
-            <input class="input" autocomplete="off" type="text" id="username" placeholder="Main Title(which will display in all pages)" />
+            <input class="input" autocomplete="off" type="text" id="username" placeholder="Main Title(which will display in all pages)"  value="{{ user_data.blog_title }}" />
         </div>
         <div class="input-group">
             <label>Word Description: </label>
-            <input class="input" autocomplete="off" type="text" id="blog-title" placeholder="Word description" />
+            <input class="input" autocomplete="off" type="text" id="blog-title" placeholder="Word description" value="{{ user_data.blog_intro }}" />
         </div>
          <div class="input-group">
             <label>Keywords: </label>
-            <input class="input" autocomplete="off" type="text" id="keyword" placeholder="Keywords" />
+            <input class="input" autocomplete="off" type="text" id="keyword" placeholder="Keywords" value="{{ user_data.keyword }}" />
         </div>
         <div class="input-group">
             <label>Description:</label>
-            <textarea class="input" autocomplete="off" type="text" id="desc" placeholder="Description (which in meta tag)"></textarea>
+            <textarea class="input" autocomplete="off" type="text" id="desc" placeholder="Description (which in meta tag)">{{ user_data.blog_description }}</textarea>
         </div>
         <div class="input-group">
             <label>Name:</label>
-            <input class="input" autocomplete="off" type="text" id="name" placeholder="Name" />
+            <input class="input" autocomplete="off" type="text" id="name" placeholder="Name" value="{{ user_data.username }}" />
         </div>
         <div class="input-group">
             <label>Email:</label>
-            <input class="input" autocomplete="off" type="text" id="email" placeholder="Email Address" />
+            <input class="input" autocomplete="off" type="text" id="email" placeholder="Email Address" value="{{ user_data.email }}" />
         </div>
         <div class="input-group">
             <label>Disqus: </label>
-            <textarea class="input" autocomplete="off" type="text" id="disqus" placeholder="The JavaScript of Disqus"></textarea>
+            <textarea class="input" autocomplete="off" type="text" id="disqus" placeholder="The JavaScript of Disqus">{{ user_data.disqus_code }}</textarea>
         </div>
         </div>
     </div>
