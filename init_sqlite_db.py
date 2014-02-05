@@ -82,7 +82,7 @@ Thank you.
             id integer not null primary key autoincrement,
             username char(20) not null,
             password char(32) not null,
-            session char(32) null
+            session char(32) default null
         )
     ''')
 
@@ -122,7 +122,7 @@ Thank you.
     db.execute('''
         insert into user_data(username, blog_title, blog_description, blog_intro, blog_keyword, disqus_code, email)
         values (?, ?, ?, ?, ?, ?, ?)''', 
-        ('rixb', 'rixb', 'Here is My Blog!', 'My Blog :)', 'rixb', '', 'root@yoursite.com'))
+        (username, 'rixb', 'Here is My Blog!', 'My Blog :)', 'rixb', '', 'root@yoursite.com'))
 
     # create account
     db.execute("insert into auth_user(username, password) values (?, ?)", (username, password_to_md5(password)))

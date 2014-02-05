@@ -126,7 +126,7 @@ Thank you.
 
     print "[*] Create default setting ..."
     cursor.execute("insert into user_data(username, blog_description, blog_intro, blog_keyword, disqus_code, email) values \
-    (%s, %s, %s, %s, %s, %s)", ('rixb', 'Here is My Blog!', 'My Blog :)', 'rixb', '', 'root@yoursite.com'))
+    (%s, %s, %s, %s, %s, %s)", (username, 'Here is My Blog!', 'My Blog :)', 'rixb', '', 'root@yoursite.com'))
 
     print "[*] Create your account %s..." % username
     cursor.execute("insert into auth_user(username, password) values (%s, %s)", (username, password))
