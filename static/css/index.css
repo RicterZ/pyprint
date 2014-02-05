@@ -160,20 +160,14 @@
 }
 
 .comment {
-    margin-top: 20px;
     border-top: 1px #F8F8F8 solid;
     padding-top: 20px;
+    background: #FFF;
 }
 
 .content img {
     width: 100%;
     border: 10px solid #63B8FF;
-}
-
-.comment {
-    margin-top: 60px;
-    background: #FFF;
-    padding: 30px;
 }
 
 .comment a {
