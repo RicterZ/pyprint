@@ -1,5 +1,28 @@
 {% extends "base.html" %}
 
+{% block style %}
+<style>
+.paging {
+    display: inline-block;
+    padding: 20px;
+    margin: 20px 60px;
+}
+
+.paging:hover {
+    background: #FFF;
+    color: #63B8FF;
+}
+
+.newer {
+    float: left;
+}
+
+.older {
+    float: right;
+}
+</style>
+{% endblock %}
+
 {% block css %}
 <link rel="stylesheet" href="/static/css/index.css">
 <link rel="stylesheet" href="/static/css/foundation-icons.css" />
@@ -29,6 +52,12 @@
                 </div>
             </div>
         {% endfor %}
+    {% if page and data %}
+        {% if page-1 > 0 %}
+            <a class="paging newer" href="/?p={{ page-1 }}">&lt;&lt; Newer Posts</a>
+        {% endif %}
+        <a class="paging older" href="/?p={{ page+1 }}">Older Posts &gt;&gt;</a>
+    {% endif %}
     </div>
     {% if DISQUS %}
     <script type="text/javascript">

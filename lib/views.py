@@ -35,8 +35,15 @@ class BaseHandler:
 
 class IndexHandler(BaseHandler):
     def GET(self):
-        data = get_tag_for_articles(markdown_to_html(list_three_articles()))
-        return self.render("index.html", title=self.NAME, data=data)
+        page = web.input(p=1).p
+        try:
+            page = int(page)
+        except ValueError:
+            page = 1
+        if page < 1:
+            page = 1
+        data = get_tag_for_articles(markdown_to_html(list_three_articles(page=page)))
+        return self.render("index.html", title=self.NAME, data=data, page=page)
 
 
 class ArticleHandler(BaseHandler):

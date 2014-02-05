@@ -4,8 +4,9 @@ from lib.settings import *
 from utils import clean_input, now, password_to_md5, make_session, markdown_to_html
 
 
-def list_three_articles():
-    data = db.select('articles', where='1', limit=3, order='id desc')
+def list_three_articles(page=1):
+    #data = db.select('articles', where='1', limit=3, order='id desc')
+    data = db.query('select * from articles where 1 order by id desc limit %d, 3' % (page - 1))
     return data
 
 
