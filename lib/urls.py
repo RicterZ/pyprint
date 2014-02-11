@@ -8,6 +8,7 @@ urls = (
     '/articles/([\d]+)', 'ArticleHandler',
     '/signin', 'LoginHandler',
     '/editor', 'ManageHandler',
+    '/editor/friends', 'FriendLinkHandler',
     '/timeline', 'TimelineHandler',
     '/rss.xml', 'RssHandler',
     '/tags/([\d]+)', 'TagHandler',

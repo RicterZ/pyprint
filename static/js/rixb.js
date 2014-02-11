@@ -35,10 +35,9 @@ var rixb = {
             dataType: "json",
             success: function(data) {
                 callback();
-                //console.log(data);
             },
             error: function(msg) {
-                console.log(msg);
+                callback();
             }
         })
     },
@@ -50,10 +49,9 @@ var rixb = {
             dataType: "json",
             success: function(data) {
                 callback();
-                //console.log(data);
             },
             error: function(msg) {
-                console.log(msg.responseText);
+                callback();
             }
         })
     },
@@ -66,7 +64,8 @@ var rixb = {
                 callback();
             },
             error: function(msg) {
-                console.log(msg.responseText)
+                console.log(msg);
+                //callback();
             }
         })
     },
@@ -85,7 +84,21 @@ var rixb = {
                 obj.show();
             }
         })
-    }
+    },
+    add_friend: function(name, link) {
+        $.ajax({
+            type: "POST",
+            url: "/editor/friends",
+            dataType: "json",
+            data: {"name": name, "link": link},
+            success: function(data) {
+                alert("Add success!");
+            },
+            error: function(msg) {
+                alert("Add fail.");
+            }
+        })
+    },
 }
 
 function set_button_data(data) {

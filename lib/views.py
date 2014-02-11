@@ -19,6 +19,7 @@ def response(status, message=""):
 class BaseHandler:
     def __init__(self):
         data = get_user_data()
+        self.TITLE = data.blog_title
         self.NAME = data.username
         self.INTRO = data.blog_intro
         self.DISQUS = data.disqus_code
@@ -43,7 +44,7 @@ class IndexHandler(BaseHandler):
         if page < 1:
             page = 1
         data = get_tag_for_articles(markdown_to_html(list_three_articles(page=page)))
-        return self.render("index.html", title=self.NAME, data=data, page=page)
+        return self.render("index.html", title=self.TITLE, data=data, page=page)
 
 
 class ArticleHandler(BaseHandler):
@@ -130,14 +131,19 @@ class ManageHandler(BaseHandler):
         @authentication
         def func():
             data = timeline_list()
-            user_data = get_user_data()
-            return self.render("editor.html", title="Manage", data=data, user_data=user_data)
+            return self.render("editor.html", title="Manage", data=data,
+                               TITLE=self.TITLE, DISQUS=self.DISQUS)
         return func()
 
     def POST(self):
         @authentication
         def func():
-            data = web.input()
+            data = web.input(
+                username='', intro='', keyword='',
+                desc='', main_title='', email='', disqus=''
+            )
+            save_settings(data)
+            return web.seeother('/editor')
         return func()
 
 
@@ -161,5 +167,14 @@ class SearchHandler(BaseHandler):
             return web.seeother('/search')
 
 
-
+class FriendLinkHandler(object):
+    def POST(self):
+        @authentication
+        def func():
+            web_input = web.input(name='', link='')
+            if not web_input.name or not web_input.link:
+                return response(400)
+            add_friend_link(web_input.name, web_input.link)
+            return response(200)
+        return func()
 

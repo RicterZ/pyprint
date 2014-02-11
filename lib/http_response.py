@@ -22,6 +22,16 @@ class NoContent(HTTPError):
         HTTPError.__init__(self, status, headers, self.message)
 
 
+class BadRequest(HTTPError):
+    """`400 Bad Request` error"""
+    message = '{"message": "Bad request"}'
+
+    def __init__(self):
+        status = "401 Bad Request"
+        headers = {'Content-type': 'application/json'}
+        HTTPError.__init__(self, status, headers, self.message)
+
+
 class Unauthorized(HTTPError):
     """`401 Unauthorized` error"""
     message = '{"message": "Authentication Failed"}'
@@ -55,6 +65,7 @@ class NotFound(HTTPError):
 HTTP_RESPONSE = {
     201: Created,
     204: NoContent,
+    400: BadRequest,
     401: Unauthorized,
     403: Forbidden,
     404: NotFound,

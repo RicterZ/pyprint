@@ -8,29 +8,7 @@
 
 {% block style %}
 <style>
-.input-group > textarea {
-    resize: none;
-    height: 100px;
-}
 
-.input-group > label {
-    font-size: 28px;
-    vertical-align: sub;
-    margin-right: 20px;
-    width: 25%;
-    display: inline-block;
-    text-align: right;
-    vertical-align: top;
-}
-
-.input-group > .input {
-    display: inline-block;
-    width: 60%;
-}
-
-.input-group {
-    margin: 10px auto;
-}
 </style>
 {% endblock %}
 
@@ -58,36 +36,55 @@
         </div>
     </div>
     <div class="title-container">
-        <h3 class="settings-header">Settings<a class="button save" href="##">Save</a></h3>
+        <form method="POST" action="/editor" class="setting">
+        <h3 class="settings-header">Settings<button class="button save" type="submit">Save</button></h3>
         <div class="input-container">
         <div class="input-group">
             <label>Main Title:</label>
-            <input class="input" autocomplete="off" type="text" id="username" placeholder="Main Title(which will display in all pages)"  value="{{ user_data.blog_title }}" />
+            <input class="input" autocomplete="off" type="text" name="main_title" placeholder="Main Title(which will display in all pages)"  value="{{ TITLE }}" />
         </div>
         <div class="input-group">
             <label>Word Description: </label>
-            <input class="input" autocomplete="off" type="text" id="blog-title" placeholder="Word description" value="{{ user_data.blog_intro }}" />
+            <input class="input" autocomplete="off" type="text" name="intro" placeholder="Word description" value="{{ INTRO }}" />
         </div>
          <div class="input-group">
             <label>Keywords: </label>
-            <input class="input" autocomplete="off" type="text" id="keyword" placeholder="Keywords" value="{{ user_data.keyword }}" />
+            <input class="input" autocomplete="off" type="text" name="keyword" placeholder="Keywords" value="{{ KEYWORD }}" />
         </div>
         <div class="input-group">
             <label>Description:</label>
-            <textarea class="input" autocomplete="off" type="text" id="desc" placeholder="Description (which in meta tag)">{{ user_data.blog_description }}</textarea>
+            <textarea class="input" autocomplete="off" type="text" name="desc" placeholder="Description (which in meta tag)">{{ DESCRIPTION }}</textarea>
         </div>
         <div class="input-group">
             <label>Name:</label>
-            <input class="input" autocomplete="off" type="text" id="name" placeholder="Name" value="{{ user_data.username }}" />
+            <input class="input" autocomplete="off" type="text" name="username" placeholder="Name" value="{{ NAME }}" />
         </div>
         <div class="input-group">
             <label>Email:</label>
-            <input class="input" autocomplete="off" type="text" id="email" placeholder="Email Address" value="{{ user_data.email }}" />
+            <input class="input" autocomplete="off" type="text" name="email" placeholder="Email Address" value="{{ EMAIL }}" />
         </div>
         <div class="input-group">
             <label>Disqus: </label>
-            <textarea class="input" autocomplete="off" type="text" id="disqus" placeholder="The JavaScript of Disqus">{{ user_data.disqus_code }}</textarea>
+            <textarea class="input" autocomplete="off" type="text" name="disqus" placeholder="The JavaScript of Disqus">{{ DISQUS }}</textarea>
         </div>
+        </div>
+        </form>
+    </div>
+    <div class="title-container">
+        <h3 class="settings-header">Friend Link<a class="button add-link" href="##">Add</a></h3>
+        <div class="input-container">
+        <div class="input-group">
+            <label>Name:</label><input class="input" type="text" id="friend" placeholder="Friend name" />
+        </div>
+        <div class="input-group">
+            <label>Link:</label><input class="input" type="text" id="link" placeholder="Link" />
+        </div>
+        {% for f in FRIENFDS %}
+        <div class="input-group">
+            <label>{{ f.friend_name }}</label>
+            <input value="{{ f.link }}" type="text" />
+        </div>
+        {% endfor %}
         </div>
     </div>
 </div>

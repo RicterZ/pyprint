@@ -21,4 +21,4 @@ if database_type == 'mysql':
 elif database_type == 'sqlite':
 	db = web.database(dbn='sqlite', db=sqlite_path)
 
-env = jj.Environment(loader=jj.FileSystemLoader('templates'))
+env = jj.Environment(loader=jj.FileSystemLoader('templates'), autoescape=True)

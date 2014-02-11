@@ -35,7 +35,7 @@
                 <h1><a href="/articles/{{ item.id }}">{{ item.title }}</a></h1>
                 <div class="article-container">
                     <h6 class="date"><i class="fi-clock clock"></i>{{ item.date }}</h6>
-                    <div class="content">{{ item.content }}</div>
+                    <div class="content">{{ item.content|safe }}</div>
                     {% if item.tag %}
                         <div class="tags">
                         <i class="fi-pricetag-multiple bookmark"></i>

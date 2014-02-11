@@ -33,9 +33,21 @@ $(".publish").click(function() {
     var article_id = this.attributes['data-article'].nodeValue;
     if (article_id != "") {
         rixb.put(article_id, $("#edit-title").val(), $("#edit-content").val(), 
-                 $("#edit-tag").val(), function() {$(".article-area > *").val("");})
+                 $("#edit-tag").val(), function() {
+                $(".article-area > *").val("");
+                alert('Update successful!');
+                window.location.reload();
+            })
     } else {
         rixb.post($("#edit-title").val(), $("#edit-content").val(), 
-                  $("#edit-tag").val(), function() {$(".article-area > *").val("");});
+                  $("#edit-tag").val(), function() {
+                $(".article-area > *").val("");
+                alert('Publish successful!');
+                window.location.reload();
+            });
     }
+})
+
+$(".add-link").click(function(){
+    rixb.add_friend($("#friend").val(), $("#link").val());
 })

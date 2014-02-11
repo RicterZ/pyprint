@@ -152,6 +152,11 @@ def search_article(kw):
     return data
 
 
-def save_settings():
-    pass
+def save_settings(data):
+    db.update('user_data', where="id=1", username=data.username, blog_description=data.desc,
+              blog_intro=data.intro, blog_keyword=data.keyword, disqus_code=data.disqus,
+              email=data.email, blog_title=data.main_title)
 
+
+def add_friend_link(name, link):
+    db.insert('friends_link', friend_name=name, link=link)
