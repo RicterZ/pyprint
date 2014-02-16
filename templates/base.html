@@ -27,7 +27,8 @@
 </div>
 <div class="footer">
     <p class="copyright">
-        Powered By <a target="_blank" href="http://github.com/RicterZ/rixb-webpy">rixb</a><br />
+        All content copyright {{ EMAIL }} &copy; 2014 • All rights reserved. Powered By <a target="_blank" href="http://github.com/RicterZ/rixb-webpy">rixb</a><br />
+        Contact: <a href="mailto:{{ EMAIL }}">{{ EMAIL }}</a>
         {% if FRIENDS %}
         Friends:
         {% for friend in FRIENDS %}
@@ -35,8 +36,6 @@
         {% if not loop.last %}|{% endif %}
         {% endfor %}
         {% endif %}
-        <br />
-        Contact: <a href="mailto:{{ EMAIL }}">{{ EMAIL }}</a>
     </p>
 </div>
 <script src="/static/js/jquery.js"></script>

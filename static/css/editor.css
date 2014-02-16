@@ -1,5 +1,6 @@
+
     .manage {
-        width: 80%;
+        width: 75%;
         margin: 60px auto;
         min-width: 960px;
         max-width: 1080px;
@@ -90,7 +91,6 @@
     }
 
     .button {
-        border: 0;
         margin: 0 10px;
         display: inline-table;
         float: right;
@@ -104,11 +104,11 @@
         transition: all .3s ease;
     }
 
-    .publish, .save, .add-link {
+    .publish, .save {
         background: #63B8FF;
     }
 
-    .publish:hover, .save:hover, .add-link:hover {
+    .publish:hover, .save:hover {
         background: #91CDFF;
     }
 
@@ -123,9 +123,4 @@
 
     .delete:hover {
         background: #F8AFA5;
-    }
-
-    form.setting {
-        margin: 0;
-        padding: 0;
     }

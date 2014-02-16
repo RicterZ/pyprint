@@ -1,11 +1,12 @@
+
 .article > h1, .article > h6 {
-    color: #FFF;
+    color: #333;
 }
 
 .articles {
-    width: 80%;
+    width: 75%;
     padding: 20px;
-    max-width: 1080px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
@@ -14,15 +15,16 @@
 }
 
 .article-container {
-    background: #FFF;
+    background: #EEE
     padding: 40px;
     margin: 0 auto;
 }
 
 .content {
-    border-top: 1px #F8F8F8 solid;
-    border-bottom: 1px #F8F8F8 solid;
+    /*border-top: 3px #F8F8F8 solid;*/
+    /*border-bottom: 3px #F8F8F8 solid;*/
     padding: 20px 60px;
+    background: #FFF;
 }
 
 .article > h1 {
@@ -38,7 +40,7 @@
 .date {
     padding: 10px;
     background: #FFF;
-    color: #63B8FF;
+    color: #333;
     text-align: right;
 }
 
@@ -52,14 +54,14 @@
     display: inline-block;
     float: left;
     padding: 4px 6px 0px 4px;
-    color: #63B8FF;
+    color: #333;
     font-size: 16px;
     font-weight: 600;
     vertical-align: top;
 }
 
 .bookmark {
-    color: #63B8FF;
+    color: #333;
     display: inline-block;
     float: left;
     font-size: 21px;
@@ -70,10 +72,6 @@
     font-size: 23px;
     vertical-align: sub;
     margin-right: 5px;
-}
-
-.content {
-    background: #FFF;
 }
 
 .content p{
@@ -161,13 +159,13 @@
 
 .comment {
     border-top: 1px #F8F8F8 solid;
-    padding-top: 20px;
+    padding: 20px 60px 0;
     background: #FFF;
 }
 
 .content img {
     width: 100%;
-    border: 10px solid #63B8FF;
+    border: 5px solid #EEE;
 }
 
 .comment a {

@@ -10,35 +10,36 @@ body {
 }
 
 a {
-    color: #FFF;
+    color: #333;
     text-decoration: blink;
 }
 
 .main-container {
-    background: #63B8FF;
+    background: #F0F0F0;
     padding-bottom: 120px;
-    min-width: 960px;
 }
 
 .header, .footer {
     padding: 40px 20px 8px 40px;
-    width: 80%;
-    max-width: 1080px;
+    width: 75%;
+    max-width: 960px;
     margin: 0 auto;
 }
 
 .header h1 .header li, .header a {
-    color: #FFF;
+    color: #333;
 }
 
 .header h1 {
-    font-size: 100px;
+    font-size: 80px;
     font-weight: 300;
     display: inline-block;
 }
 
 .header ul {
-    display: inline-block;
+	margin: 0 auto;
+	padding: 0 5px;
+    display: block;
 }
 
 .header li {
@@ -56,17 +57,15 @@ a {
 }
 
 .header a:target {
-    background: #FFF;
-    color: #63B8FF;
+    color: #000;
 }
 
 .header li>a:hover {
-    background: #FFF;
-    color: #63B8FF;
+    color: #000;
 }
 
 .footer {
-    text-align: right;
+    text-align: center;
     padding: 40px 20px;
     color: #666;
 }
@@ -78,28 +77,4 @@ a {
 
 .copyright {
     font-size: 12px;
-}
-
-.input-group > textarea {
-    resize: none;
-    height: 100px;
-}
-
-.input-group > label {
-    font-size: 28px;
-    vertical-align: sub;
-    margin-right: 20px;
-    width: 30%;
-    display: inline-block;
-    text-align: right;
-    vertical-align: top;
-}
-
-.input-group > .input {
-    display: inline-block;
-    width: 60%;
-}
-
-.input-group {
-    margin: 10px auto;
 }
