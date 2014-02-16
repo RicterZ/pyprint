@@ -67,3 +67,13 @@ form {
     margin: 0 auto;
     display: none;
 }
+
+@media screen and (max-width: 980px) {
+    form {
+        margin: 0;
+    }
+
+    .form-container {
+        width: auto;
+    }
+}

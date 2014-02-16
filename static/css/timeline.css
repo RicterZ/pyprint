@@ -52,3 +52,18 @@ a.title {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+
+@media screen and (max-width: 980px) {
+    .timeline {
+        width: 100%;
+        padding: 0;
+    }
+
+    .timeline ul {
+        padding: 0;
+        margin: 0;
+
+    }
+    
+}   

@@ -6,6 +6,7 @@
         max-width: 1080px;
     }
 
+
     .title-list {
         border-top: 1px #F8F8F8 solid;
         width: 35%;
@@ -130,3 +131,45 @@
         margin: 0;
         padding: 0;
     }
+
+
+@media screen and (max-width: 980px) {
+    .manage {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .input-group > label {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    .title-list {
+        width: 100%;
+    }
+
+    .title-list a {
+        width: 100%;
+    }
+
+    .title-list li {
+        width: 100%;
+    }
+
+    #edit-title, #edit-tag, #edit-content {
+        width: 100%;
+    }
+
+    .article-area {
+        display: block;
+        padding: 0;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .content {
+        padding: 20px 0;
+    }
+}   

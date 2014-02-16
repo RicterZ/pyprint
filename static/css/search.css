@@ -6,6 +6,8 @@
     margin: 0 auto;
 }
 
+
+
 form {
     margin: 30px 60px;
     padding: 30px 60px;
@@ -43,7 +45,7 @@ button {
     color: #000;
     float: left;
     display: inline-block;
-    height: 36px;
+    height: 38px;
     width: 120px;
     border: 4px solid #FFF;
     border-radius: 0 4px 4px 0;
@@ -59,3 +61,29 @@ button {
     color: #000;
     margin: 0 auto;
 }
+
+@media screen and (max-width: 980px) {
+    .form-container {
+        width: 100%;
+    }
+
+    form {
+        margin: 0;
+        padding: 0;
+    }
+
+    .input-container {
+        width: 100%;
+    }
+
+    .input {
+        width: 60%;
+        padding: 5px 5%;
+    }
+
+    button {
+        border: 0;
+        width: 20%;
+    }
+    
+}   

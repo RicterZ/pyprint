@@ -10,9 +10,11 @@
     margin: 0 auto;
 }
 
+
 .article {
     padding: 30px 60px;
 }
+
 
 .article-container {
     background: #EEE
@@ -171,3 +173,19 @@
 .comment a {
     color:#000;
 }
+
+
+@media screen and (max-width: 980px) {
+    .articles {
+        padding: 0;
+        width: 96%;
+    }
+    
+    .article {
+        padding: 20px 0 0 0;
+    }
+
+    a.paging {
+        margin: 20px 0;
+    }
+}   
