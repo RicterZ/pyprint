@@ -78,3 +78,28 @@ a {
 .copyright {
     font-size: 12px;
 }
+
+
+.input-group > textarea {
+    resize: none;
+    height: 100px;
+}
+
+.input-group > label {
+    font-size: 28px;
+    vertical-align: sub;
+    margin-right: 20px;
+    width: 30%;
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+}
+
+.input-group > .input {
+    display: inline-block;
+    width: 60%;
+}
+
+.input-group {
+    margin: 10px auto;
+}
