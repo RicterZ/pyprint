@@ -9,11 +9,25 @@
 <div class="timeline">
     <ul>
     {% set b=0 %}
+    {% set month = {
+        '01': 'Jan',
+        '02': 'Feb',
+        '03': 'Mar',
+        '04': 'Apr',
+        '05': 'May',
+        '06': 'Jun',
+        '07': 'Jul',
+        '08': 'Aug',
+        '09': 'Sep',
+        '10': 'Oct',
+        '11': 'Nov',
+        '12': 'Dec'}
+    %}
     {% for item in data %}
         {% set a = item.date.split('-')[1] %}
         <li class="item">
-            {% if a != b %}<span class="month">{{ a }}月</span><span class="circle"></span>{% endif %}
-            <span class="day">{{ item.date.split(' ')[0].split('-')[2] }}日</span><a class="title" href="/articles/{{ item.id }}">{{ item.title }}</a>
+            {% if a != b %}<span class="month">{{ month[a] }}.</span><span class="circle"></span>{% endif %}
+            <span class="day">{{ item.date.split(' ')[0].split('-')[2] }}</span><a class="title" href="/articles/{{ item.id }}">{{ item.title }}</a>
         </li>
         {% set b = item.date.split('-')[1] %}
     {% endfor %}
