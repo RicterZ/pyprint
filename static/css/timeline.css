@@ -63,7 +63,29 @@ a.title {
     .timeline ul {
         padding: 0;
         margin: 0;
+        overflow: hidden;
+    }
 
+    span.day {
+    	padding-right: 10px;
+    }
+
+    li.item  {
+    	height: 50px;
+    	padding: 0 0 10px 16px;
+    	white-space: nowrap;
+		text-overflow: ellipsis;
+		font-size: 24px;
+		margin-left: 90px;
+    }
+
+    span.month {
+    	margin-left: -90px;
+    }
+
+    span.circle {
+    	margin-left: -35px;
+		margin-top: 0px;
     }
     
 }   

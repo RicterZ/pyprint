@@ -185,6 +185,10 @@
         padding: 20px 0 0 0;
     }
 
+    .content {
+    	padding: 20px 5px;
+    }
+
     a.paging {
         margin: 20px 0;
     }
