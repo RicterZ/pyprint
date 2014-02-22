@@ -1,7 +1,7 @@
 __author__ = 'Ricter'
 
 import json
-from lib.utils import markdown_to_html, render, article_to_storage, clean_input
+from lib.utils import markdown_to_html, render, article_to_storage, clean_input, password_to_md5
 from lib.http_response import HTTP_RESPONSE
 from lib.authentication import authentication
 from lib.models import *
@@ -27,11 +27,12 @@ class BaseHandler:
         self.FRIENDS = get_friends_link()
         self.KEYWORD = data.blog_keyword
         self.DESCRIPTION = data.blog_description
+        self.EMAIL_MD5 = password_to_md5(self.EMAIL.lower())
 
     def render(self, template, **kwargs):
         return render(template, NAME=self.NAME, EMAIL=self.EMAIL, FRIENDS=self.FRIENDS,
                       INTRO=self.INTRO, KEYWORD=self.KEYWORD, DESCRIPTION=self.DESCRIPTION,
-                      **kwargs)
+                      EMAIL_MD5=self.EMAIL_MD5, **kwargs)
 
 
 class IndexHandler(BaseHandler):
