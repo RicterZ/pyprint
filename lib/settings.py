@@ -14,7 +14,7 @@ sqlite_path = 'rixbdb.db'
 # if you are a developer, you should set web.config.debug = True
 web.config.debug = False
 
-from local_settings import *
+#from local_settings import *
 
 if database_type == 'mysql':
 	db = web.database(host=MySQL_host, dbn='mysql', db=MySQL_DB, user=MySQL_user, pw=MySQL_pass)
