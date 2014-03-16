@@ -1,5 +1,5 @@
 *.py
 *.pyc
 lib
-*.db
+*.db3
 .idea
