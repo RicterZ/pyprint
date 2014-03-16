@@ -11,7 +11,7 @@
    <ul class="friends content">
        {% if FRIENDS %}
        {% for friend in FRIENDS %}
-       <li><a href="http://{{ friend.link }}">{{ friend.friend_name }}</a></li>
+       <li><a target="_blank" href="http://{{ friend.link }}">{{ friend.friend_name }}</a></li>
        {% endfor %}
        {% else %}
        <li>你暂时没有友链。</li>
