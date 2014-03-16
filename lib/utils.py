@@ -1,4 +1,3 @@
-__author__ = 'Ricter'
 import markdown
 import datetime
 import hashlib

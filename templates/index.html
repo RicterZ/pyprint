@@ -1,67 +1,42 @@
 {% extends "base.html" %}
 
-{% block style %}
-<style>
-.paging {
-    display: inline-block;
-    padding: 20px;
-    margin: 20px 60px;
-}
-
-.paging:hover {
-    background: #FFF;
-    color: #63B8FF;
-}
-
-.newer {
-    float: left;
-}
-
-.older {
-    float: right;
-}
-</style>
-{% endblock %}
-
 {% block css %}
 <link rel="stylesheet" href="/static/css/index.css">
-<link rel="stylesheet" href="/static/css/foundation-icons.css" />
 {% endblock %}
 
 {% block body %}
-    <div class="articles">
-        {% for item in data %}
-            <div class="article">
-                <h1><a href="/articles/{{ item.id }}">{{ item.title }}</a></h1>
-                <div class="article-container">
-                    <h6 class="date"><i class="fi-clock clock"></i>{{ item.date }}</h6>
-                    <div class="content">{{ item.content|safe }}</div>
-                    {% if item.tag %}
-                        <div class="tags">
-                        <i class="fi-pricetag-multiple bookmark"></i>
-                        {% for tag in item.tag %}
-                            <a class="tag" href="/tags/{{ tag.id }}">{{ tag.tag_name }}</a>
-                        {% endfor %}
-                        </div>
-                    {% endif %}
-                    {% if DISQUS %}
-                    <div class="comment">
-                          <div id="disqus_thread"></div>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        {% endfor %}
-    {% if page and data %}
-        {% if page-1 > 0 %}
-            <a class="paging newer" href="/?p={{ page-1 }}">&lt;&lt; Newer Posts</a>
+<div class="articles">
+{% for item in data %}
+    <article>
+        <h1 class="article-title"><a href="/articles/{{ item.id }}">{{ item.title }}</a></h1>
+        <aside>
+            <time class="published-time" datetime="{{ item.date }}"><small>{{ item.date }}</small></time>
+            <p class="tags"><small>
+                {% for tag in item.tag %}
+                    <a class="tag" href="/tags/{{ tag.id }}">{{ tag.tag_name }}</a>
+                {% endfor %}
+            </small></p>
+        </aside>
+        <section class="content">
+            {{ item.content|safe }}
+        </section>
+        {% if DISQUS %}
+        	<div id="disqus_thread"></div>
         {% endif %}
-        <a class="paging older" href="/?p={{ page+1 }}">Older Posts &gt;&gt;</a>
+    </article>
+{% endfor %}
+{% if page and data %}
+    <div class="pagination">
+    {% if page-1 > 0 %}
+        <a class="paging newer" href="/?p={{ page-1 }}">&lt;&lt; Newer Posts</a>
     {% endif %}
+    <a class="paging older" href="/?p={{ page+1 }}">Older Posts &gt;&gt;</a>
     </div>
-    {% if DISQUS %}
-    <script type="text/javascript">
-        {{ DISQUS }}
-    </script>
-    {% endif %}
+{% endif %}
+</div>
+{% if DISQUS %}
+<script type="text/javascript">
+    {{ DISQUS|safe }}
+</script>
+{% endif %}
 {% endblock %}

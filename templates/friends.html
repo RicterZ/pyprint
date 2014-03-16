@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/friends.css">
+<link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
+
+{% block body %}
+<div>
+<h1 class="friend">Friends:</h1>
+   <ul class="friends content">
+       {% if FRIENDS %}
+       {% for friend in FRIENDS %}
+       <li><a href="http://{{ friend.link }}">{{ friend.friend_name }}</a></li>
+       {% endfor %}
+       {% else %}
+       <li>你暂时没有友链。</li>
+       <li>You are not yet added any links.</li>
+       <li>あなたはまだリンクが追加されていない。</li>
+       {% endif %}
+   </ul>
+   <div id="disqus_thread"></div>
+</div>
+{% if DISQUS %}
+<script type="text/javascript">
+    {{ DISQUS | safe }}
+</script>
+{% endif %}
+{% endblock %}

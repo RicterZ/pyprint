@@ -13,5 +13,9 @@ urls = (
     '/rss.xml', 'RssHandler',
     '/tags/([\d]+)', 'TagHandler',
     '/search', 'SearchHandler',
-    #'/settings', 'SettingsHandler',
+    '/friends', 'FriendHandler',
+)
+
+urls += (
+    '/([\w\d-]+).html', 'PageHandler',
 )

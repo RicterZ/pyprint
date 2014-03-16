@@ -1,6 +1,4 @@
 #coding: utf-8
-__author__ = 'Ricter'
-
 from lib.settings import *
 from utils import clean_input, now, password_to_md5, make_session, markdown_to_html
 

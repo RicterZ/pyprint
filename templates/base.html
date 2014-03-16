@@ -5,32 +5,49 @@
     <title>{{ title }} | {{ INTRO }}</title>
     <meta name="keyword" content="{{ KEYWORD }}">
     <meta name="description" content="{{ DESCRIPTION }}">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/common.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/foundation-icons.css" />
+    <link rel="stylesheet" href="/static/css/markdown.css" />
+    <link rel="stylesheet" href="/static/css/common.css" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
     {% block css %}
     {% endblock %}
     {% block style %}
     {% endblock %}
 </head>
 <body>
-<div class="main-container">
-<div class="header">
-    <h1><a href="/">{{ NAME }}</a></h1>
-    <ul>
-        <li><a href="/timeline">Timeline</a></li>
-        <li><a href="/search">Search</a></li>
-        <!--<li><a href="/about">About me</a></li>-->
-        <li><a href="/rss.xml">RSS</a></li>
-    </ul>
-</div>
+<header>
+    <div class="avatar"><img src="http://www.gravatar.com/avatar/{{ EMAIL_MD5 }}?d=http://anime.mmmoe.info/static/img/w/w5.jpg&r=x&s=440"></div>
+    <article>
+        <h2>{{ INTRO }}</h2>
+        <a href="mailto:{{ EMAIL }}"><address><small>{{ EMAIL }}</small></address></a>
+    </article>
+    <nav>
+        <div class="form-group">
+            <form method="post" action="/search">
+                <input type="text" name="kw" placeholder="Search">
+                <button type="submit"><i class="fi-magnifying-glass"></i></button>
+            </form>
+        </div>
+        <ul>
+            <li><a href="/">Posts</a></li>
+            <li><a href="/timeline">Timeline</a></li>
+            <li><a href="/friends">Friends</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
 {% block body %}
 {% endblock %}
 </div>
-<div class="footer">
-    <p class="copyright">
-        Powered By <a target="_blank" href="http://github.com/RicterZ/rixb-webpy">rixb</a><br />
-        All content copyright {{ EMAIL }} &copy; 2014 • All rights reserved.  <br />
-        Contact: <a href="mailto:{{ EMAIL }}">{{ EMAIL }}</a><br />
+<footer>
+    <a class="rss fi-rss" href="/rss.xml"></a>
+    <p><small>Powered By <a href="http://github.com/RicterZ/rixb-webpy">rixb</a></small></p>
+    <p><small>All content copyright {{ EMAIL }} © 2014 • All rights reserved. </small></p>
+    <p class="friends">
         {% if FRIENDS %}
         Friends:
         {% for friend in FRIENDS %}
@@ -39,7 +56,7 @@
         {% endfor %}
         {% endif %}
     </p>
-</div>
+</footer>
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/rixb.js"></script>
 {% block script %}

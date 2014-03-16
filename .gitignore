@@ -1,4 +1,5 @@
+*.py
 *.pyc
-.idea
+lib
 *.db
-lib/local_settings.py
+.idea

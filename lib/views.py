@@ -1,7 +1,6 @@
-__author__ = 'Ricter'
-
 import json
-from lib.utils import markdown_to_html, render, article_to_storage, clean_input, password_to_md5
+from jinja2.environment import TemplateNotFound
+from lib.utils import render, article_to_storage
 from lib.http_response import HTTP_RESPONSE
 from lib.authentication import authentication
 from lib.models import *
@@ -179,3 +178,16 @@ class FriendLinkHandler(object):
             return response(200)
         return func()
 
+
+class FriendHandler(BaseHandler):
+    def GET(self):
+        return self.render("friends.html", title="Friends", DISQUS=self.DISQUS)
+
+
+class PageHandler(object):
+    def GET(self, page):
+        try:
+            template = env.get_template("pages/%s.html" % page)
+        except TemplateNotFound:
+            return response(404)
+        return template.render()
