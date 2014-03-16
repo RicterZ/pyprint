@@ -10,7 +10,7 @@
 <h1 class="friend">Friends:</h1>
    <ul class="friends content">
        {% if FRIENDS %}
-       {% for friend in FRIENDS %}
+       {% for friend in friends %}
        <li><a target="_blank" href="http://{{ friend.link }}">{{ friend.friend_name }}</a></li>
        {% endfor %}
        {% else %}
