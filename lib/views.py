@@ -1,4 +1,5 @@
 import json
+import copy
 from jinja2.environment import TemplateNotFound
 from lib.utils import render, article_to_storage
 from lib.http_response import HTTP_RESPONSE
@@ -181,7 +182,8 @@ class FriendLinkHandler(object):
 
 class FriendHandler(BaseHandler):
     def GET(self):
-        return self.render("friends.html", title="Friends", DISQUS=self.DISQUS)
+        return self.render("friends.html", title="Friends",
+                           DISQUS=self.DISQUS, friends=copy.deepcopy(self.FRIENDS))
 
 
 class PageHandler(object):
