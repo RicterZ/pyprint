@@ -182,8 +182,9 @@ class FriendLinkHandler(object):
 
 class FriendHandler(BaseHandler):
     def GET(self):
+        friend = copy.deepcopy(self.FRIENDS)
         return self.render("friends.html", title="Friends",
-                           DISQUS=self.DISQUS, friends=copy.deepcopy(self.FRIENDS))
+                           DISQUS=self.DISQUS, friends=friend)
 
 
 class PageHandler(object):
