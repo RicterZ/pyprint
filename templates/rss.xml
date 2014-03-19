@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-<title>{{ title }}</title>
+<title>{{ user_data.username }}</title>
+<subtitle>{{ user_data.title }}</subtitle>
+<author>
+    <name><![CDATA[ {{ user_data.username }} ]]></name>
+    <email><![CDATA[ {{ user_data.email }} ]]></email>
+</author>
 <link href="http://{{ url }}" />
-{% for item in data %}
-<item>
+<id>http://{{ url }}</id>
+{% for item in articles %}
+<entry>
   <title>{{ item.title }}</title>
-  <link>http://{{ url }}/article/{{ item.id }}</link>
-  <pubDate>{{ item.date }}</pubDate>
-  <description><![CDATA[{{ item.content }}]]></description>
-</item>
+  <link>http://{{ url }}/articles/{{ item.id }}</link>
+  <id>http://{{ url }}/articles/{{ item.id }}</id>
+  <published>{{ item.date }}</published>
+  <content type="html"><![CDATA[{{ item.content | safe }}]]></content>
+</entry>
 {% endfor %}
 </feed>

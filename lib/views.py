@@ -148,11 +148,13 @@ class ManageHandler(BaseHandler):
         return func()
 
 
-class RssHandler(BaseHandler):
+class RssHandler(object):
     def GET(self):
         web.header('Content-type', "text/xml; charset=utf-8")
-        data = markdown_to_html(list_all_articles())
-        return render("rss.xml", title=self.NAME, data=data, url=web.ctx.host)
+        articles = markdown_to_html(list_all_articles())
+        user_data = get_user_data()
+        return render("rss.xml", title=user_data.username, articles=articles,
+                      url=web.ctx.host, user_data=user_data)
 
 
 class SearchHandler(BaseHandler):
