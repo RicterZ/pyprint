@@ -10,7 +10,7 @@ urls = (
     '/editor', 'ManageHandler',
     '/editor/friends', 'FriendLinkHandler',
     '/timeline', 'TimelineHandler',
-    '/rss.xml', 'RssHandler',
+    '/feed', 'RssHandler',
     '/tags/([\d]+)', 'TagHandler',
     '/search', 'SearchHandler',
     '/friends', 'FriendHandler',

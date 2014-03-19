@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
 <title>{{ user_data.username }}</title>
 <subtitle>{{ user_data.title }}</subtitle>
+<updated>{{ now }}</updated>
 <author>
     <name><![CDATA[ {{ user_data.username }} ]]></name>
     <email><![CDATA[ {{ user_data.email }} ]]></email>
