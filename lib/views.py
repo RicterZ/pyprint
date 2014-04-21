@@ -151,7 +151,7 @@ class ManageHandler(BaseHandler):
 class RssHandler(object):
     def GET(self):
         web.header('Content-type', "text/xml; charset=utf-8")
-        articles = markdown_to_html(list_all_articles())
+        articles = markdown_to_html(list_three_articles())
         user_data = get_user_data()
         return render("rss.xml", title=user_data.username, articles=articles,
                       url=web.ctx.host, user_data=user_data, now=now())
