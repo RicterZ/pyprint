@@ -1,96 +1,34 @@
-{% extends "base.html" %}
+{% extends "manager.html" %}
 
-{% block css %}
-<link rel="stylesheet" href="/static/css/index.css">
-<link rel="stylesheet" href="/static/css/signin.css">
-<link rel="stylesheet" href="/static/css/editor.css">
-{% endblock %}
-
-{% block style %}
-<style>
-
-</style>
+{% block navbar %}
+        <li><a href="/editor" class="submenu selected-item">Posts Mangement</a></li>
+        <li><a href="/editor/settings" class="submenu">Site Settings</a></li>
+        <li><a href="/editor/friends" class="submenu">Friend Links</a></li>
 {% endblock %}
 
 {% block body %}
-<div class="manage">
-    <div class="title-container">
-        <h3 class="settings-header">
-            All POSTs
-            <a class="button publish" href="##" data-article="">Publish</a>
-            <a class="button delete" href="##" data-article="">Delete</a>
-        </h3>
-        <ul class="title-list">
+        <div class="panel-heading"><strong>Posts</strong></div>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="td-title">Aritlce Title</th>
+                <th class="td-operate">Edit</th>
+                <th class="td-operate">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for article in data %}
-            <li>
-                <a href="##" class="article-item" data-article="{{ article.id }}">
-                    {{ article.title }}
-                </a>
-            </li>
+            <tr>
+                <td class="td-title"><a href="/editor/posts/{{ article.id }}">{{ article.title }}</a></td>
+                <td class="td-operate"><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+                <td class="td-operate"><a href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
         {% endfor %}
-        </ul>
-        <div class="article-area content">
+        </tbody>
+        </table>
+        <!--<div class="article-area content">
             <input class="input" autocomplete="off" type="text"  id="edit-title" placeholder="Title" />
             <input class="input" autocomplete="off" type="text"  id="edit-tag" placeholder="Tags" />
             <textarea class="input" id="edit-content" placeholder="Content"></textarea>
-        </div>
-    </div>
-    <div class="title-container">
-        <form method="POST" action="/editor" class="setting">
-        <h3 class="settings-header">Settings<button class="button save" type="submit">Save</button></h3>
-        <div class="input-container">
-        <div class="input-group">
-            <label>Main Title:</label>
-            <input class="input" autocomplete="off" type="text" name="main_title" placeholder="Main Title(which will display in all pages)"  value="{{ TITLE }}" />
-        </div>
-        <div class="input-group">
-            <label>Word Description: </label>
-            <input class="input" autocomplete="off" type="text" name="intro" placeholder="Word description" value="{{ INTRO }}" />
-        </div>
-         <div class="input-group">
-            <label>Keywords: </label>
-            <input class="input" autocomplete="off" type="text" name="keyword" placeholder="Keywords" value="{{ KEYWORD }}" />
-        </div>
-        <div class="input-group">
-            <label>Description:</label>
-            <textarea class="input" autocomplete="off" type="text" name="desc" placeholder="Description (which in meta tag)">{{ DESCRIPTION }}</textarea>
-        </div>
-        <div class="input-group">
-            <label>Name:</label>
-            <input class="input" autocomplete="off" type="text" name="username" placeholder="Name" value="{{ NAME }}" />
-        </div>
-        <div class="input-group">
-            <label>Email:</label>
-            <input class="input" autocomplete="off" type="text" name="email" placeholder="Email Address" value="{{ EMAIL }}" />
-        </div>
-        <div class="input-group">
-            <label>Disqus: </label>
-            <textarea class="input" autocomplete="off" type="text" name="disqus" placeholder="The JavaScript of Disqus">{{ DISQUS }}</textarea>
-        </div>
-        </div>
-        </form>
-    </div>
-    <div class="title-container">
-        <h3 class="settings-header">Friend Link<a class="button add-link" href="##">Add</a></h3>
-        <div class="input-container">
-        <div class="input-group">
-            <label>Name:</label><input class="input" type="text" id="friend" placeholder="Friend name" />
-        </div>
-        <div class="input-group">
-            <label>Link:</label><input class="input" type="text" id="link" placeholder="Link" />
-        </div>
-        {% for f in FRIENFDS %}
-        <div class="input-group">
-            <label>{{ f.friend_name }}</label>
-            <input value="{{ f.link }}" type="text" />
-        </div>
-        {% endfor %}
-        </div>
-    </div>
-</div>
+        </div>-->
 {% endblock %}
-
-{% block script %}
-<script src="/static/js/editor.js"></script>
-{% endblock %}
-

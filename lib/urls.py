@@ -7,13 +7,15 @@ urls = (
     '/articles', 'ArticleHandler',
     '/articles/([\d]+)', 'ArticleHandler',
     '/signin', 'LoginHandler',
-    '/editor', 'ManageHandler',
-    '/editor/friends', 'FriendLinkHandler',
     '/timeline', 'TimelineHandler',
     '/feed', 'RssHandler',
     '/tags/([\d]+)', 'TagHandler',
     '/search', 'SearchHandler',
     '/friends', 'FriendHandler',
+    '/editor', 'ManageHandler',
+    '/editor/posts/([\d]+)', 'EditorHandler',
+    '/editor/settings', 'SettingsHandler',
+    '/editor/friends', 'LinksHandler',
 )
 
 urls += (

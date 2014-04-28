@@ -132,7 +132,23 @@ class ManageHandler(BaseHandler):
         @authentication
         def func():
             data = timeline_list()
-            return self.render("editor.html", title="Manage", data=data,
+            return self.render("editor.html", title="", data=data,
+                               TITLE=self.TITLE, DISQUS=self.DISQUS)
+        return func()
+
+    def POST(self):
+        @authentication
+        def func():
+            pass
+        return func()
+
+
+class SettingsHandler(BaseHandler):
+    def GET(self):
+        @authentication
+        def func():
+            data = timeline_list()
+            return self.render("settings.html", title="", data=data,
                                TITLE=self.TITLE, DISQUS=self.DISQUS)
         return func()
 
@@ -144,7 +160,7 @@ class ManageHandler(BaseHandler):
                 desc='', main_title='', email='', disqus=''
             )
             save_settings(data)
-            return web.seeother('/editor')
+            return web.seeother('/editor/settings')
         return func()
 
 
@@ -170,7 +186,13 @@ class SearchHandler(BaseHandler):
             return web.seeother('/search')
 
 
-class FriendLinkHandler(object):
+class LinksHandler(BaseHandler):
+    def GET(self):
+        @authentication
+        def func():
+            return self.render("links.html", title="", TITLE=self.TITLE, DISQUS=self.DISQUS)
+        return func()
+
     def POST(self):
         @authentication
         def func():
