@@ -15,11 +15,13 @@
         <section class="content">
             {{ item.content|safe }}
         </section>
+        {% if tag %}
         <p class="tags"><em>Tagged in: 
             {% for tag in item.tag %}
                 <a class="tag" href="/tags/{{ tag.id }}">{{ tag.tag_name }}</a>
             {% endfor %}
         </em></p>
+        {% endif %}
         {% if DISQUS %}
         	<div id="disqus_thread"></div>
         {% endif %}

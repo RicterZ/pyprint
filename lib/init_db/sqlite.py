@@ -8,44 +8,33 @@ from lib.utils import password_to_md5
 
 
 def init_database():
-    username = 'rixb'
-    password = 'rixb'
+    username = 'admin'
+    password = 'admin'
 
     test_blog = '''
-#Welcome to My Blog!
-This is rixb - a web.py blog system.   
-It's RESTful and lightweight.    
-Here is some test text.    
-##Code
+## 欢迎使用 PyPrint ##
+PyPrint 是一个轻量级的博客系统，总之很轻量就是了。    
+PyPrint 支持 **Markdown** 方式写作，并不支持插件、主题；代码写的也很烂。总之是我自用的。如果您觉得很难用实感抱歉。  
+#### 这是一个测试标题 ####
+这是一些测试的文本。这些文本并没有什么特别的含义。   
 
-    def say_hello_world(name):
-        if name:
-            print "Hello, %s" % name 
-        else:
-            print "Hello World!"
-    
-    say_hello_world("Ricter")
-    say_hello_world()
+    def say_hello(name=None):
+    	print 'Hello, %s!' % name if name else 'World'
 
-##Quote
 
-> Hello World!    
-> 你好世界！    
-> こんにちは、世界！
+    say_hello('Cee')
 
-##List
+上面是一个写的很渣的程序，而且我还没测试能不能跑过。我总是感觉其中的`name if name else 'World'`有问题。  
+推荐一些比较好的网站吧！  
 
-+ Python
-    + Django
-    + Web.py
-    + Torando
-+ HTML
-+ CSS
-+ Javascript
-    + Node.js
++ 知乎：[http://www.zhihu.com](http://www.zhihu.com)  
++ V2EX：[http://www.v2ex.com](http://www.v2ex.com)  
++ Hacker News：[https://news.ycombinator.com](https://news.ycombinator.com)  
 
-##And more!
-Thank you.
+其中感觉 V2EX 的氛围很好。很喜欢。   
+![QAQ](http://static.ricter.me/1.jpg)
+总之感谢您的使用。如果有任何 Bug 请反馈给我，或者去 [Github](https://github.com) 提交 issue。   
+* Ricter 敬上 *
 '''
 
     print '[*] Create database ...'
@@ -109,12 +98,12 @@ Thank you.
 
     # add some tags
     db.execute("insert into tags(tag_name) values ('HelloWorld')")
-    db.execute("insert into tags(tag_name) values ('rixb')")
+    db.execute("insert into tags(tag_name) values ('PyPrint')")
 
     # create a test blog
     db.execute('''insert into articles(title, date, content) 
     values (?, ?, ?)''', 
-        ('Hello World', str(datetime.datetime.now()).split('.')[0], test_blog.decode('utf-8')))
+        (u'欢迎使用 PyPrint', str(datetime.datetime.now()).split('.')[0], test_blog.decode('utf-8')))
     db.execute("insert into articles_tags (article_id, tag_id) values (1, 1)")
     db.execute("insert into articles_tags (article_id, tag_id) values (1, 2)")
 
@@ -122,7 +111,7 @@ Thank you.
     db.execute('''
         insert into user_data(username, blog_title, blog_description, blog_intro, blog_keyword, disqus_code, email)
         values (?, ?, ?, ?, ?, ?, ?)''', 
-        (username, 'rixb', 'Here is My Blog!', 'My Blog :)', 'rixb', '', 'root@yoursite.com'))
+        (username, 'PyPrint', 'Here is My Blog!', u'初心を忘れず', 'PyPrint', '', 'root@yoursite.com'))
 
     # create account
     db.execute("insert into auth_user(username, password) values (?, ?)", (username, password_to_md5(password)))

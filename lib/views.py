@@ -1,5 +1,4 @@
 import json
-import copy
 from jinja2.environment import TemplateNotFound
 from lib.utils import render, article_to_storage
 from lib.http_response import HTTP_RESPONSE
@@ -19,20 +18,19 @@ def response(status, message=""):
 class BaseHandler:
     def __init__(self):
         data = get_user_data()
-        self.TITLE = data.blog_title
+        self.MAIN_TITLE = data.blog_title
         self.NAME = data.username
         self.INTRO = data.blog_intro
         self.DISQUS = data.disqus_code
         self.EMAIL = data.email
-        self.FRIENDS = get_friends_link()
         self.KEYWORD = data.blog_keyword
         self.DESCRIPTION = data.blog_description
         self.EMAIL_MD5 = password_to_md5(self.EMAIL.lower())
 
     def render(self, template, **kwargs):
-        return render(template, NAME=self.NAME, EMAIL=self.EMAIL, FRIENDS=self.FRIENDS,
+        return render(template, NAME=self.NAME, EMAIL=self.EMAIL,
                       INTRO=self.INTRO, KEYWORD=self.KEYWORD, DESCRIPTION=self.DESCRIPTION,
-                      EMAIL_MD5=self.EMAIL_MD5, **kwargs)
+                      EMAIL_MD5=self.EMAIL_MD5, MAIN_TITLE=self.MAIN_TITLE, **kwargs)
 
 
 class IndexHandler(BaseHandler):
@@ -45,7 +43,7 @@ class IndexHandler(BaseHandler):
         if page < 1:
             page = 1
         data = get_tag_for_articles(markdown_to_html(list_three_articles(page=page)))
-        return self.render("index.html", title=self.TITLE, data=data, page=page)
+        return self.render("index.html", title="Index", data=data, page=page)
 
 
 class ArticleHandler(BaseHandler):
@@ -111,7 +109,7 @@ class LoginHandler(BaseHandler):
             web.setcookie("session", save_session(data.username), expires="99999")
             return response(200, "Authentication success")
         else:
-            return response(401)
+            return response(401, "Authentication failed")
 
 
 class TimelineHandler(BaseHandler):
@@ -124,7 +122,7 @@ class TagHandler(BaseHandler):
     def GET(self, tag_id):
         data = get_tag_for_articles(get_articles_by_tag(tag_id))
         tag_name = get_tag(tag_id).tag_name
-        return self.render("index.html", title=tag_name, data=data)
+        return self.render("index.html", title="Tag - " + tag_name, data=data)
 
 
 class ManageHandler(BaseHandler):
@@ -132,8 +130,22 @@ class ManageHandler(BaseHandler):
         @authentication
         def func():
             data = timeline_list()
-            return self.render("editor.html", title="Manage", data=data,
-                               TITLE=self.TITLE, DISQUS=self.DISQUS)
+            return self.render("editor.html", title="", data=data)
+        return func()
+
+    def POST(self):
+        @authentication
+        def func():
+            pass
+        return func()
+
+
+class SettingsHandler(BaseHandler):
+    def GET(self):
+        @authentication
+        def func():
+            data = timeline_list()
+            return self.render("settings.html", title="", data=data)
         return func()
 
     def POST(self):
@@ -144,7 +156,7 @@ class ManageHandler(BaseHandler):
                 desc='', main_title='', email='', disqus=''
             )
             save_settings(data)
-            return web.seeother('/editor')
+            return web.seeother('/editor/settings')
         return func()
 
 
@@ -170,15 +182,25 @@ class SearchHandler(BaseHandler):
             return web.seeother('/search')
 
 
-class FriendLinkHandler(object):
+class LinksHandler(BaseHandler):
+    def GET(self):
+        @authentication
+        def func():
+            data = get_friends_link()
+            return self.render("links.html", title="", data=data)
+        return func()
+
     def POST(self):
         @authentication
         def func():
-            web_input = web.input(name='', link='')
-            if not web_input.name or not web_input.link:
-                return response(400)
-            add_friend_link(web_input.name, web_input.link)
-            return response(200)
+            web_input = web.input(name='', link='', method='add', id=0)
+            if web_input.method == 'add':
+                if not web_input.name or not web_input.link:
+                    return response(401)
+                add_friend_link(web_input.name, web_input.link)
+            elif web_input.method == 'delete':
+                remove_friend_link(web_input.id)
+            return web.seeother('/editor/friends')
         return func()
 
 
