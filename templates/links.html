@@ -7,5 +7,71 @@
 {% endblock %}
 
 {% block body %}
-        <div class="panel-heading"><strong>Friends Links</strong></div>
-{% endblock %}
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Failed!</strong><span></span>
+    </div>
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Success!</strong><span></span>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Friends Links</strong>
+        <div class="row">
+            <form class="form-inline" role="form" method="post" action="#">
+                <div class="col-lg-2">
+                <div class="from-group">
+                    <input name="name" type="text" class="form-control" placeholder="Friend's Name">
+                </div>
+                </div>
+                <div class="col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">http://</span>
+                    <input name="link" type="text" class="form-control" placeholder="Blog's URL">
+                </div>
+                </div>
+                <button type="submit" class="btn btn-default">Add</button>
+            </form>
+        </div>
+        </div>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="td-title">Name</th>
+                <th class="td-title">Link</th>
+                <th class="td-operate">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for friend in data %}
+            <tr>
+                <td class="td-title">{{ friend.friend_name }}</td>
+                <td class="td-title"><a href="http://{{ friend.link }}" target="_blank">http://{{ friend.link }}</a></td>
+                <td class="td-operate"><a href="##" class="remove" data-id="{{ friend.id }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(".remove").click(function(){
+            var friendId = this.attributes['data-id'].value,
+                parent = $(this).parent().parent();
+            console.log(friendId);
+            $.ajax({
+                url: "/editor/friends",
+                data: {id: friendId, method: "delete"},
+                type: "POST",
+                success: function(){
+                    $(".alert-success").show();
+                    $(".alert-success span").text(" The link had been deleted!");
+                    $(parent).hide();
+                },
+                error: function(){
+                    $(".alert-danger").show();
+                    $(".alert-danger span").text(" Delete the link failed.");
+                }
+            })
+        })
+    </script>{% endblock %}

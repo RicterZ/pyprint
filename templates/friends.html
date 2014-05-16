@@ -9,7 +9,7 @@
 <div>
 <h1 class="friend">Friends:</h1>
    <ul class="friends content">
-       {% if FRIENDS %}
+       {% if friends %}
        {% for friend in friends %}
        <li><a target="_blank" href="http://{{ friend.link }}">{{ friend.friend_name }}</a></li>
        {% endfor %}

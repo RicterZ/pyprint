@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+    <script src="/static/js/jquery.js"></script>
     <style>
     body {
         background: #333;
@@ -121,6 +122,15 @@
         color: #FFF;
     }
 
+    .none-style-button {
+        background: transparent;
+        border: none;
+    }
+
+    .alert {
+        display: none;
+    }
+
     @media screen and (max-width:980px){
         .td-operate {
             display: none;
@@ -142,14 +152,12 @@
 </header>
 
 <div class="panel-container">
-    <div class="panel panel-default">
-        {% block body %}
-        {% endblock %}
-    </div>
+    {% block body %}
+    {% endblock %}
 </div>
 
 <footer>
-    <p>Powered By <a href="http://github.com/RicterZ/rixb-webpy">rixb</a> &copy; 2014 • All rights reserved.</p>
+    <p>Powered By <a href="http://github.com/RicterZ/rixb-webpy">PyPrint</a> &copy; 2014 • All rights reserved.</p>
 </footer>
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>

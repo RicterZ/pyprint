@@ -159,3 +159,7 @@ def save_settings(data):
 
 def add_friend_link(name, link):
     db.insert('friends_link', friend_name=name, link=link)
+
+
+def remove_friend_link(link_id):
+    db.delete('friends_link', where='id=%d' % int(link_id))

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>{{ title }} | {{ INTRO }}</title>
+    <title>{{ title }} | {{ MAIN_TITLE }}</title>
     <meta name="keyword" content="{{ KEYWORD }}">
     <meta name="description" content="{{ DESCRIPTION }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
 </head>
 <body>
 <header>
-    <div class="avatar"><img src="http://www.gravatar.com/avatar/{{ EMAIL_MD5 }}?d=http://anime.mmmoe.info/static/img/w/w5.jpg&r=x&s=440"></div>
+    <div class="avatar"><img src="http://www.gravatar.com/avatar/{{ EMAIL_MD5 }}?r=x&s=440"></div>
     <article>
         <h2>{{ INTRO }}</h2>
         <a href="mailto:{{ EMAIL }}"><address><small>{{ EMAIL }}</small></address></a>
@@ -45,17 +45,8 @@
 </div>
 <footer>
     <a class="rss fi-rss" href="/feed"></a>
-    <p><small>Powered By <a href="http://github.com/RicterZ/rixb-webpy">rixb</a></small></p>
+    <p><small>Powered By <a href="http://github.com/RicterZ/rixb-webpy">PyPrint</a></small></p>
     <p><small>All content copyright {{ EMAIL }} © 2014 • All rights reserved. </small></p>
-    <p class="friends">
-        {% if FRIENDS %}
-        Friends:
-        {% for friend in FRIENDS %}
-        <a target="_blank" href="http://{{ friend.link }}">{{ friend.friend_name }}</a>
-        {% if not loop.last %}|{% endif %}
-        {% endfor %}
-        {% endif %}
-    </p>
 </footer>
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/rixb.js"></script>
