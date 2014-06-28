@@ -1,10 +1,10 @@
-.friend {
+.title {
     font-size: 40px;
     font-weight: 100;
 }
 
 
-ul.friends::after, ul.friends::before {
+ul.block::after, ul.block::before {
     display:block;
     content:"";
     border-radius:100%;
@@ -18,16 +18,25 @@ ul.friends::after, ul.friends::before {
     box-shadow:#fff 0 0 0 5px;
 }
 
-ul.friends::after {
+ul.block::after {
     bottom: -7px;
 }
 
-ul.friends::before {
+ul.block::before {
     top: -7px;
 }
 
+.about {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
 
-ul.friends {
+.about p {
+    font-size: 22px;
+}
+
+.block {
     position: relative;
     border-top: 1px solid #D1DADF;
     border-bottom: 1px solid #D1DADF;
@@ -36,7 +45,7 @@ ul.friends {
 }
 
 
-.friends li {
+ul.block li {
     width: 80%;
     font-size: 24px;
     display: block;
