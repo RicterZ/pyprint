@@ -15,9 +15,9 @@
         <section class="content">
             {{ item.content|safe }}
         </section>
-        {% if item.tag %}
+        {% if item.tags %}
         <p class="tags"><em>Tagged in: 
-            {% for tag in item.tag %}
+            {% for tag in item.tags %}
                 <a class="tag" href="/tags/{{ tag.id }}">{{ tag.name }}</a> /
             {% endfor %}
         </em></p>

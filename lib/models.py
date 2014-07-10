@@ -1,7 +1,8 @@
 #coding: utf-8
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, desc
 from sqlalchemy import Column, Table, ForeignKey, Integer, String, Text, DateTime
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.ext.declarative import declarative_base
 from settings import engine
 from utils import today

@@ -38,8 +38,8 @@ class IndexHandler(BaseHandler):
             page = 1
         page = 1 if page < 1 else page
 
-        articles = web.ctx.orm.query(Article).order_by(Article.id)[page]
-        return self.render("index.html", data=[], page=page)
+        articles = web.ctx.orm.query(Article).order_by(Article.id.desc())[(page-1)*3:(page-1)*3+3]
+        return self.render("index.html", data=articles, page=page)
 
 
 class ArticleHandler(BaseHandler):
@@ -57,16 +57,18 @@ class ArticleHandler(BaseHandler):
         return response(200, json_format(article)) if web_input.format == 'json' \
             else self.render('index.html', data=article)
 
-    """def DELETE(self, article_id):
-        @authentication
-        def func():
-            if del_a_article(article_id):
-                return response(204)
-            else:
-                return response(404)
-        return func()
+    def DELETE(self, article_id):
+        #@authentication
+        #def func():
+        try:
+            article = web.ctx.orm.query(Article).filter(Article.id == article_id).one()
+            web.ctx.orm.delete(article)
+            return response(204)
+        except NoResultFound:
+            return response(404)
+        #return func()
 
-    def PUT(self, article_id):
+    """def PUT(self, article_id):
         @authentication
         def func():
             data = web.input(title='', content='', tag='')
@@ -83,10 +85,10 @@ class ArticleHandler(BaseHandler):
         data = web.input(title='', content='', tags='')
 
         if not (data.title == '' or data.content == ''):
-            tags = [Tag(name=tag) for tag in set(data.tags.split(','))
-                    if tag and not web.ctx.orm.query(Tag).filter(Tag.name == tag).all()]
-            map(web.ctx.orm.add, tags)
-            print tags
+            add_tags = [Tag(name=tag) for tag in set(data.tags.split(','))
+                        if tag and not web.ctx.orm.query(Tag).filter(Tag.name == tag).all()]
+            map(web.ctx.orm.add, add_tags)
+            tags = [web.ctx.orm.query(Tag).filter(Tag.name == tag)[0] for tag in set(data.tags.split(','))]
             article = Article(title=data.title, content=data.content, tags=tags)
             web.ctx.orm.add(article)
             return response(201)
