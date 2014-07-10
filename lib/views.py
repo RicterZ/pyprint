@@ -106,15 +106,15 @@ class LoginHandler(BaseHandler):
             web.setcookie("session", save_session(data.username), expires="99999")
             return response(200, "Authentication success")
         else:
-            return response(401, "Authentication failed")
+            return response(401, "Authentication failed")"""
 
 
 class TimelineHandler(BaseHandler):
     def GET(self):
-        data = timeline_list()
-        return self.render("timeline.html", title="Timeline", data=data)
+        return self.render("timeline.html", title="Timeline",
+                           data=web.ctx.orm.query(Article.title, Article.date).all())
 
-
+"""
 class TagHandler(BaseHandler):
     def GET(self, tag_id):
         data = get_tag_for_articles(get_articles_by_tag(tag_id))

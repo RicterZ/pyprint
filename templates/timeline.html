@@ -23,12 +23,12 @@
         '12': 'Dec'}
     %}
     {% for item in data %}
-        {% set a = item.date.split('-')[1] %}
+        {% set a = item.date.strftime('%m') %}
         <li class="item">
             {% if a != b %}<span class="month">{{ month[a] }}.</span><span class="circle"></span>{% endif %}
-            <span class="day">{{ item.date.split(' ')[0].split('-')[2] }}</span><a class="title" href="/articles/{{ item.id }}">{{ item.title }}</a>
+            <span class="day">{{ item.date.strftime('%d') }}</span><a class="title" href="/articles/{{ item.id }}">{{ item.title }}</a>
         </li>
-        {% set b = item.date.split('-')[1] %}
+        {% set b = item.date.strftime('%m') %}
     {% endfor %}
     </ul>
 {% endblock %}
