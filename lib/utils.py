@@ -3,11 +3,6 @@ import datetime
 import hashlib
 import random
 import string
-from lib.settings import *
-
-
-def render(template_file, title, **kwargs):
-    return env.get_template(template_file).render(title=title, **kwargs)
 
 
 def article_to_storage(data):
@@ -36,8 +31,15 @@ def clean_input(data):
     return data.replace('"', '').replace("'", '')
 
 
-def now():
-    return str(datetime.datetime.now()).split('.')[0]
+def json_format(item_list):
+    if not item_list:
+        return []
+    keys = [key for key in item_list[0].__dict__.keys() if key not in ['_sa_instance_state']]
+    return [dict(zip(keys, [item.__dict__[key] for key in keys])) for item in item_list]
+
+
+def today():
+    return datetime.datetime.date(datetime.datetime.today())
 
 
 def password_to_md5(password):

@@ -1,6 +1,6 @@
 import json
 from jinja2.environment import TemplateNotFound
-from lib.utils import render, article_to_storage
+from lib.utils import article_to_storage, markdown_to_html, json_format, datetime
 from lib.http_response import HTTP_RESPONSE
 from lib.authentication import authentication
 from lib.models import *
@@ -8,29 +8,25 @@ from lib.settings import *
 
 
 def response(status, message=""):
+    def __json_of_date(obj):
+        if isinstance(obj, datetime.date):
+            return obj.strftime('%Y-%m-%d')
+        else:
+            raise TypeError('{obj} is not JSON serializable'.format(obj=obj))
+
     if status == 200:
         web.header('Content-Type', 'application/json')
-        return json.dumps({"message": message})
+        return json.dumps({"message": message}, default=__json_of_date)
     else:
         raise HTTP_RESPONSE[status]
 
 
 class BaseHandler:
     def __init__(self):
-        data = get_user_data()
-        self.MAIN_TITLE = data.blog_title
-        self.NAME = data.username
-        self.INTRO = data.blog_intro
-        self.DISQUS = data.disqus_code
-        self.EMAIL = data.email
-        self.KEYWORD = data.blog_keyword
-        self.DESCRIPTION = data.blog_description
-        self.EMAIL_MD5 = password_to_md5(self.EMAIL.lower())
+        pass
 
     def render(self, template, **kwargs):
-        return render(template, NAME=self.NAME, EMAIL=self.EMAIL,
-                      INTRO=self.INTRO, KEYWORD=self.KEYWORD, DESCRIPTION=self.DESCRIPTION,
-                      EMAIL_MD5=self.EMAIL_MD5, MAIN_TITLE=self.MAIN_TITLE, **kwargs)
+        return env.get_template(template).render(**kwargs)
 
 
 class IndexHandler(BaseHandler):
@@ -40,35 +36,28 @@ class IndexHandler(BaseHandler):
             page = int(page)
         except ValueError:
             page = 1
-        if page < 1:
-            page = 1
-        data = get_tag_for_articles(markdown_to_html(list_three_articles(page=page)))
-        return self.render("index.html", title="Index", data=data, page=page)
+        page = 1 if page < 1 else page
+
+        articles = web.ctx.orm.query(Article).order_by(Article.id)[page]
+        return self.render("index.html", data=[], page=page)
 
 
 class ArticleHandler(BaseHandler):
     def GET(self, article_id=None):
         if not article_id:
             return response(403)
+
         web_input = web.input(format='', raw='false')
-        post_format = web_input.format
-        raw = web_input.raw
-        if raw == 'true':
-            data = get_tag_for_articles(article_to_storage(get_a_article(article_id)))
-        else:
-            data = get_tag_for_articles(markdown_to_html(get_a_article(article_id)))
+        article = web.ctx.orm.query(Article).filter(Article.id == article_id).all()
 
-        try:
-            data = data[0]
-        except IndexError:
+        if len(article) == 0:
             return response(404)
-        if post_format == 'json':
-            return response(200, data)
-        else:
-            return self.render("index.html", title=data.title, data=[data],
-                               DISQUS=self.DISQUS)
 
-    def DELETE(self, article_id):
+        article = article if web_input.raw == 'true' else markdown_to_html(article)
+        return response(200, json_format(article)) if web_input.format == 'json' \
+            else self.render('index.html', data=article)
+
+    """def DELETE(self, article_id):
         @authentication
         def func():
             if del_a_article(article_id):
@@ -86,18 +75,24 @@ class ArticleHandler(BaseHandler):
                     return response(200, "Update success")
                 else:
                     return response(404)
-        return func()
+        return func()"""
 
     def POST(self):
-        @authentication
-        def func():
-            data = web.input(title='', content='', tag='')
-            if not (data.title == '' or data.content == ''):
-                post_a_article(data)
-                return response(201)
-        return func()
+        #@authentication
+        #def func():
+        data = web.input(title='', content='', tags='')
 
+        if not (data.title == '' or data.content == ''):
+            tags = [Tag(name=tag) for tag in set(data.tags.split(','))
+                    if tag and not web.ctx.orm.query(Tag).filter(Tag.name == tag).all()]
+            map(web.ctx.orm.add, tags)
+            print tags
+            article = Article(title=data.title, content=data.content, tags=tags)
+            web.ctx.orm.add(article)
+            return response(201)
+        #return func()
 
+"""
 class LoginHandler(BaseHandler):
     def GET(self):
         return self.render("signin.html", title="Login")
@@ -217,3 +212,4 @@ class PageHandler(object):
         except TemplateNotFound:
             return response(404)
         return template.render()
+"""

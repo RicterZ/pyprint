@@ -1,7 +1,7 @@
 {% extends "manager.html" %}
 
 {% block navbar %}
-        <li><a href="/editor" class="submenu">Posts Mangement</a></li>
+<li xmlns="http://www.w3.org/1999/html"><a href="/editor" class="submenu">Posts Mangement</a></li>
         <li><a href="/editor/settings" class="submenu selected-item">Site Settings</a></li>
         <li><a href="/editor/friends" class="submenu">Friend Links</a></li>
 {% endblock %}
@@ -9,5 +9,11 @@
 {% block body %}
     <div class="panel panel-default">
         <div class="panel-heading"><strong>Settings</strong></div>
+        <form class="panel panel-default" role="form">
+            <div class="form-group">
+                <label>Username:</label>
+
+            </div>
+        </form>
     </div>
 {% endblock %}

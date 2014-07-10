@@ -28,7 +28,7 @@
     text-align: center;
 }
 
-.button-sign-in {
+a.button-sign-in {
     padding: 8px 5px;
     border-radius: 4px;
     display: block;
@@ -42,8 +42,9 @@
     transition: background .3s ease;
 }
 
-.button-sign-in:hover {
+a.button-sign-in:hover {
     background: #666;
+    color: #FFF;
 }
 
 .alert {
