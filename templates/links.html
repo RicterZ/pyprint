@@ -45,7 +45,7 @@
         <tbody>
         {% for friend in data %}
             <tr>
-                <td class="td-title">{{ friend.friend_name }}</td>
+                <td class="td-title">{{ friend.name }}</td>
                 <td class="td-title"><a href="http://{{ friend.link }}" target="_blank">http://{{ friend.link }}</a></td>
                 <td class="td-operate"><a href="##" class="remove" data-id="{{ friend.id }}"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>

@@ -11,11 +11,11 @@ urls = (
     '/feed', 'RssHandler',
     '/tags/([\d]+)', 'TagHandler',
     '/search', 'SearchHandler',
-    '/friends', 'FriendHandler',
+    '/friends', 'FriendsHandler',
     '/editor', 'ManageHandler',
     '/editor/posts/([\d]+)', 'EditorHandler',
     '/editor/settings', 'SettingsHandler',
-    '/editor/friends', 'LinksHandler',
+    '/editor/friends', 'FriendsManageHandler',
 )
 
 urls += (

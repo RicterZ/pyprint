@@ -48,12 +48,12 @@ class ArticleHandler(BaseHandler):
             return response(403)
 
         web_input = web.input(format='', raw='false')
-        article = web.ctx.orm.query(Article).filter(Article.id == article_id).all()
+        try:
+            article = web.ctx.orm.query(Article).filter(Article.id == article_id).one()
+        except NoResultFound as e:
+            return response(404, message=str(e))
 
-        if len(article) == 0:
-            return response(404)
-
-        article = article if web_input.raw == 'true' else markdown_to_html(article)
+        article = [article] if web_input.raw == 'true' else markdown_to_html([article])
         return response(200, json_format(article)) if web_input.format == 'json' \
             else self.render('index.html', data=article)
 
@@ -61,11 +61,10 @@ class ArticleHandler(BaseHandler):
         #@authentication
         #def func():
         try:
-            article = web.ctx.orm.query(Article).filter(Article.id == article_id).one()
-            web.ctx.orm.delete(article)
+            web.ctx.orm.delete(web.ctx.orm.query(Article).filter(Article.id == article_id).one())
             return response(204)
-        except NoResultFound:
-            return response(404)
+        except NoResultFound as e:
+            return response(404, message=str(e))
         #return func()
 
     """def PUT(self, article_id):
@@ -114,14 +113,13 @@ class TimelineHandler(BaseHandler):
         return self.render("timeline.html", title="Timeline",
                            data=web.ctx.orm.query(Article.title, Article.date).all())
 
-"""
+
 class TagHandler(BaseHandler):
     def GET(self, tag_id):
-        data = get_tag_for_articles(get_articles_by_tag(tag_id))
-        tag_name = get_tag(tag_id).tag_name
-        return self.render("index.html", title="Tag - " + tag_name, data=data)
+        tag = web.ctx.orm.query(Tag).filter(Tag.id == tag_id).all()
+        return self.render("index.html", title="Tag - " + tag[0].name, data=tag[0].articles)
 
-
+"""
 class ManageHandler(BaseHandler):
     def GET(self):
         @authentication
@@ -176,37 +174,47 @@ class SearchHandler(BaseHandler):
             data = markdown_to_html(search_article(clean_input(v)))
             return self.render("index.html", title=self.NAME, data=data)
         else:
-            return web.seeother('/search')
+            return web.seeother('/search')"""
 
 
-class LinksHandler(BaseHandler):
+class FriendsManageHandler(BaseHandler):
     def GET(self):
-        @authentication
-        def func():
-            data = get_friends_link()
-            return self.render("links.html", title="", data=data)
-        return func()
+        #@authentication
+        #def func():
+        return self.render("links.html", data=web.ctx.orm.query(FriendLink).
+                           order_by(FriendLink.id.desc()).all())
+        #return func()
 
     def POST(self):
-        @authentication
-        def func():
-            web_input = web.input(name='', link='', method='add', id=0)
-            if web_input.method == 'add':
-                if not web_input.name or not web_input.link:
-                    return response(401)
-                add_friend_link(web_input.name, web_input.link)
-            elif web_input.method == 'delete':
-                remove_friend_link(web_input.id)
-            return web.seeother('/editor/friends')
-        return func()
+        #@authentication
+        #def func():
+        web_input = web.input(name='', link='', method='add', id=0)
+        if web_input.method == 'add':
+            if not web_input.name or not web_input.link:
+                return response(401)
+            web.ctx.orm.add(FriendLink(name=web_input.name, link=web_input.link))
+        elif web_input.method == 'delete':
+            try:
+                web.ctx.orm.delete(web.ctx.orm.query(FriendLink).filter(FriendLink.id ==
+                                                                        int(web_input.id)).one())
+            except NoResultFound as e:
+                return response(500, message=str(e))
+            except ValueError as e:
+                raise response(400, message=str(e))
+        return web.seeother('/editor/friends')
+       #return func()
 
 
-class FriendHandler(BaseHandler):
+class FriendsHandler(BaseHandler):
     def GET(self):
-        return self.render("friends.html", title="Friends",
-                           DISQUS=self.DISQUS, friends=get_friends_link())
+        print dir(self)
+        return self.render("friends.html", data=web.ctx.orm.query(FriendLink).
+                           order_by(FriendLink.id.desc()).all())
 
 
+
+
+"""
 class PageHandler(object):
     def GET(self, page):
         try:

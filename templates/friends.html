@@ -28,9 +28,9 @@
 </div>
 <h1 class="title">Friends:</h1>
    <ul class="block content">
-       {% if friends %}
-       {% for friend in friends %}
-       <li><a target="_blank" href="http://{{ friend.link }}">{{ friend.friend_name }}</a></li>
+       {% if data %}
+       {% for friend in data %}
+       <li><a target="_blank" href="http://{{ friend.link }}">{{ friend.name }}</a></li>
        {% endfor %}
        {% else %}
        <li>你暂时没有友链。</li>

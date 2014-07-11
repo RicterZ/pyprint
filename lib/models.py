@@ -23,7 +23,7 @@ class Article(Base):
     title = Column(Text)
     content = Column(Text)
     date = Column(DateTime, default=today())
-    tags = relationship('Tag', secondary=association_table)
+    tags = relationship('Tag', secondary=association_table, backref='articles')
 
     def __repr__(self):
         return '<Post: {id}: {title}>'.format(id=self.id, title=self.title)
