@@ -18,6 +18,3 @@ urls = (
     '/editor/friends', 'FriendsManageHandler',
 )
 
-urls += (
-    '/([\w\d-]+).html', 'PageHandler',
-)

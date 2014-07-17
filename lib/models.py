@@ -1,11 +1,11 @@
 #coding: utf-8
-from sqlalchemy import create_engine, desc
+from sqlalchemy import create_engine, desc, or_
 from sqlalchemy import Column, Table, ForeignKey, Integer, String, Text, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.ext.declarative import declarative_base
 from settings import engine
-from utils import today
+from utils import today, password_to_md5
 
 
 Base = declarative_base()
@@ -46,10 +46,31 @@ class FriendLink(Base):
     name = Column(String)
     link = Column(String)
 
+    def __repr__(self):
+        return '<Friend {name}: {link}>'.format(self.name, self.link)
 
-articles_table = Article.__tablename__
-tags_table = Tag.__tablename__
-friend_links_table = 'friend_links'
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String)
+    password = Column(String)
+
+    def __init__(self, name, password):
+        self.name = name
+        self.password = password_to_md5(password)
+
+    def check(self, password):
+        return password_to_md5(password) == self.password
+
+    def __repr__(self):
+        return '<User: {name}>'.format(name=self.name)
+
+
+#articles_table = Article.__tablename__
+#tags_table = Tag.__tablename__
+#friend_links_table = 'friend_links'
 metadata = Base.metadata
 
 

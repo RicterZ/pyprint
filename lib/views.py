@@ -1,8 +1,10 @@
+#coding: utf-8
+
 import json
 from jinja2.environment import TemplateNotFound
 from lib.utils import article_to_storage, markdown_to_html, json_format, datetime
 from lib.http_response import HTTP_RESPONSE
-from lib.authentication import authentication
+#from lib.authentication import authentication
 from lib.models import *
 from lib.settings import *
 
@@ -39,7 +41,7 @@ class IndexHandler(BaseHandler):
         page = 1 if page < 1 else page
 
         articles = web.ctx.orm.query(Article).order_by(Article.id.desc())[(page-1)*3:(page-1)*3+3]
-        return self.render("index.html", data=articles, page=page)
+        return self.render("index.html", title='Posts', data=articles, page=page)
 
 
 class ArticleHandler(BaseHandler):
@@ -55,7 +57,7 @@ class ArticleHandler(BaseHandler):
 
         article = [article] if web_input.raw == 'true' else markdown_to_html([article])
         return response(200, json_format(article)) if web_input.format == 'json' \
-            else self.render('index.html', data=article)
+            else self.render('index.html', title=article[0].title, data=article)
 
     def DELETE(self, article_id):
         #@authentication
@@ -67,16 +69,24 @@ class ArticleHandler(BaseHandler):
             return response(404, message=str(e))
         #return func()
 
-    """def PUT(self, article_id):
-        @authentication
-        def func():
-            data = web.input(title='', content='', tag='')
-            if not (data.title == '' or data.content == ''):
-                if update_a_article(article_id, data):
-                    return response(200, "Update success")
-                else:
-                    return response(404)
-        return func()"""
+    def PUT(self, article_id):
+        #@authentication
+        #def func():
+        data = web.input(title='', content='', tag='')
+        if not (data.title == '' or data.content == ''):
+            try:
+                article = web.ctx.orm.query(Article).filter(Article.id == article_id).one()
+            except NoResultFound as e:
+                return response(404, message=str(e))
+            add_tags = [Tag(name=tag) for tag in set(data.tags.split(','))
+                        if tag and not web.ctx.orm.query(Tag).filter(Tag.name == tag).all()]
+            map(web.ctx.orm.add, add_tags)
+            tags = [web.ctx.orm.query(Tag).filter(Tag.name == tag)[0] for tag in set(data.tags.split(','))]
+            article.update().values({"title": data.title, "content": data.content, "tags": tags})
+            return response(200, "Update success")
+        else:
+            return response(400)
+        #return func()
 
     def POST(self):
         #@authentication
@@ -93,19 +103,20 @@ class ArticleHandler(BaseHandler):
             return response(201)
         #return func()
 
-"""
+
 class LoginHandler(BaseHandler):
     def GET(self):
         return self.render("signin.html", title="Login")
 
     def POST(self):
         data = web.input(username='', password='')
-        if check_login(data):
+        user = web.ctx.orm.query(User).filter(User.name == data.username).all()
+        if user and user.one().check(password=data.password):
             web.setcookie("username", data.username, expires="99999")
-            web.setcookie("session", save_session(data.username), expires="99999")
+            #web.setcookie("session", save_session(data.username), expires="99999")
             return response(200, "Authentication success")
         else:
-            return response(401, "Authentication failed")"""
+            return response(401, "Authentication failed")
 
 
 class TimelineHandler(BaseHandler):
@@ -119,22 +130,22 @@ class TagHandler(BaseHandler):
         tag = web.ctx.orm.query(Tag).filter(Tag.id == tag_id).all()
         return self.render("index.html", title="Tag - " + tag[0].name, data=tag[0].articles)
 
-"""
+
 class ManageHandler(BaseHandler):
     def GET(self):
-        @authentication
-        def func():
-            data = timeline_list()
-            return self.render("editor.html", title="", data=data)
-        return func()
+        #@authentication
+        #def func():
+        data = web.ctx.orm.query(Article.title, Article.id).all()
+        return self.render("editor.html", title="", data=data)
+        #return func()
 
     def POST(self):
-        @authentication
-        def func():
-            pass
-        return func()
+        #@authentication
+        #def func():
+        pass
+        #return func()
 
-
+"""
 class SettingsHandler(BaseHandler):
     def GET(self):
         @authentication
@@ -153,15 +164,16 @@ class SettingsHandler(BaseHandler):
             save_settings(data)
             return web.seeother('/editor/settings')
         return func()
+"""
 
 
-class RssHandler(object):
+class RssHandler(BaseHandler):
     def GET(self):
         web.header('Content-type', "text/xml; charset=utf-8")
-        articles = markdown_to_html(list_three_articles())
-        user_data = get_user_data()
-        return render("rss.xml", title=user_data.username, articles=articles,
-                      url=web.ctx.host, user_data=user_data, now=now())
+        articles = markdown_to_html(web.ctx.orm.query(Article)[:3])
+        #user_data = get_user_data()
+        return self.render("rss.xml", articles=articles,
+                           url=web.ctx.host, now=today())
 
 
 class SearchHandler(BaseHandler):
@@ -169,12 +181,16 @@ class SearchHandler(BaseHandler):
         return self.render("search.html", title='Search')
 
     def POST(self):
-        v = web.input(kw='').kw
-        if v:
-            data = markdown_to_html(search_article(clean_input(v)))
-            return self.render("index.html", title=self.NAME, data=data)
+        keyword = web.input(kw=u'').kw
+        if keyword:
+            data = markdown_to_html(web.ctx.orm.query(Article).filter(or_(
+                Article.content.like(u'%{keyword}%'.format(keyword=keyword)),
+                Article.title.like(u'%{keyword}%'.format(keyword=keyword)))))
+
+            return self.render("index.html",
+                               title=u'Search - {keyword}'.format(keyword=keyword), data=data)
         else:
-            return web.seeother('/search')"""
+            return web.seeother('/search')
 
 
 class FriendsManageHandler(BaseHandler):
@@ -208,18 +224,7 @@ class FriendsManageHandler(BaseHandler):
 class FriendsHandler(BaseHandler):
     def GET(self):
         print dir(self)
-        return self.render("friends.html", data=web.ctx.orm.query(FriendLink).
+        return self.render("friends.html", title='Friends', data=web.ctx.orm.query(FriendLink).
                            order_by(FriendLink.id.desc()).all())
 
 
-
-
-"""
-class PageHandler(object):
-    def GET(self, page):
-        try:
-            template = env.get_template("pages/%s.html" % page)
-        except TemplateNotFound:
-            return response(404)
-        return template.render()
-"""
