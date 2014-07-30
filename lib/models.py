@@ -4,12 +4,13 @@ from sqlalchemy import Table, Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship, backref
 
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+engine = create_engine('sqlite:///sqlite.db', echo=True)
 Base = declarative_base()
 
 
 posts_tags = Table('posts_tags', Base.metadata,
-    Column('')
+    Column('post_id', Integer, ForeignKey('posts.id')),
+    Column('tag_id', Integer, ForeignKey('tags.id')),
 )
 
 
@@ -27,3 +28,9 @@ class Post(Base):
     title = Column(String)
     content = Column(Text)
     tags = relationship('Tag', secondary=posts_tags, backref='posts')
+
+
+metadata = Base.metadata
+
+if __name__ == "__main__":
+    metadata.create_all(engine)

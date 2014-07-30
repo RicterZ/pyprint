@@ -1,6 +1,9 @@
 import os
-from settings import templates
+import web
 from jinja2 import Environment, FileSystemLoader
+from sqlalchemy.orm import scoped_session, sessionmaker
+from settings import templates
+from models import engine
 
 
 def render_template(template_name, **context):
@@ -16,3 +19,15 @@ def render_template(template_name, **context):
     return jinja_env.get_template(template_name).render(context)
 
 
+def load_sqlalchemy(handler):
+    web.ctx.orm = scoped_session(sessionmaker(bind=engine))
+    try:
+        return handler()
+    except web.HTTPError:
+        web.ctx.orm.commit()
+        raise
+    except:
+        web.ctx.orm.rollback()
+        raise
+    finally:
+        web.ctx.orm.commit()
