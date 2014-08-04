@@ -1,5 +1,5 @@
 #coding: utf-8
-
+from hashlib import md5
 
 templates = '../templates'
 
@@ -18,3 +18,5 @@ config = {
     'title': u'初心を忘れず',
     'disqus_shortname': 'test',
 }
+
+config['email_md5'] = md5(config['email'].lower()).digest()

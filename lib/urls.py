@@ -3,5 +3,6 @@ urlpatterns = (
     '/posts/(.*)', 'PostHandler',
     '/tags/(.*)', 'TagHandler',
     '/links', 'LinkHandler',
-    '/akarin', 'NotFoundHandler',
+    '/test', 'TestHandler',
+    '/(.*)', 'NotFoundHandler',
 )
