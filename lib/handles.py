@@ -11,11 +11,6 @@ class BaseHandler(object):
                                is_pjax=bool(web.ctx.env.get('HTTP_X_PJAX')), config=config, **kwargs)
 
 
-class TestHandler(BaseHandler):
-    def GET(self):
-        return 'Hi'
-
-
 class IndexHandler(BaseHandler):
     def GET(self):
         input_data = web.input(page=0)
@@ -37,6 +32,12 @@ class TagHandler(BaseHandler):
     def GET(self, slug):
         tag = web.ctx.orm.query(Tag).filter(Tag.slug == slug).one()
         return self.render('post.html', posts=tag.posts, title='Tag - {slug}'.format(slug=slug))
+
+
+class ArchivesHandler(BaseHandler):
+    def GET(self):
+        posts = web.ctx.orm.query(Post.title, Post.created_time).all()
+        return self.render('archives.html', posts=posts, title='Archives')
 
 
 class LinkHandler(BaseHandler):

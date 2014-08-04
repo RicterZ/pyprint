@@ -19,4 +19,4 @@ config = {
     'disqus_shortname': 'test',
 }
 
-config['email_md5'] = md5(config['email'].lower()).digest()
+config['email_md5'] = md5(config['email'].lower()).hexdigest()

@@ -1,4 +1,4 @@
-import web
+#coding: utf-8
 from lib.urls import urlpatterns
 from lib.functions import load_sqlalchemy
 from lib.handles import *
