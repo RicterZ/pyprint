@@ -5,6 +5,6 @@ urlpatterns = (
     '/tags/(.*)', 'TagHandler',
     '/archives', 'ArchivesHandler',
     '/links', 'LinkHandler',
-    '/debug', 'DebugHandler',
+    '/feed', 'FeedHandler',
     '/(.*)', 'NotFoundHandler',
 )

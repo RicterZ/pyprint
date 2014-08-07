@@ -15,7 +15,7 @@ class BaseHandler(object):
 class IndexHandler(BaseHandler):
     def GET(self, page=1):
         page = int(page) if page else 1
-        posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[(page - 1) * 3 : 3]
+        posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[(page - 1) * 3:3]
 
         return self.render('index.html', data={
             'preview': page - 1,
@@ -73,8 +73,7 @@ class NotFoundHandler(BaseHandler):
         return self.render('not_found.html', title='Akarin')
 
 
-class DebugHandler(BaseHandler):
+class FeedHandler(BaseHandler):
     def GET(self):
-        post = Post(title=u'prpr', content=u'prpr')
-        web.ctx.orm.add(post)
-        return 'Have fun!'
+        posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[0:3]
+        return self.render('feed.xml', posts=posts)
