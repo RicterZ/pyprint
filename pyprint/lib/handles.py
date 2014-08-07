@@ -65,7 +65,7 @@ class ArchivesHandler(BaseHandler):
 class LinkHandler(BaseHandler):
     def GET(self):
         links = web.ctx.orm.query(Link).all()
-        return self.render('link.html', links=links, title='Links')
+        return self.render('links.html', links=links, title='Links')
 
 
 class NotFoundHandler(BaseHandler):
