@@ -1,0 +1,59 @@
+import web
+from sqlalchemy.orm.exc import NoResultFound
+
+from settings import config
+from functions import render_template
+from models import Post, Tag, Link
+
+
+class BaseHandler(object):
+    def render(self, template, title=None, is_pjax=False, **kwargs):
+        return render_template(template, title=title if title else config['username'],
+                               is_pjax=bool(web.ctx.env.get('HTTP_X_PJAX')), config=config, **kwargs)
+
+
+class IndexHandler(BaseHandler):
+    def GET(self):
+        input_data = web.input(page=0)
+        posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[int(input_data.page) * 3 : 3]
+        return self.render('index.html', posts=posts)
+
+
+class PostHandler(BaseHandler):
+    def GET(self, title):
+        try:
+            post = web.ctx.orm.query(Post).filter(Post.title == str(title).decode('utf-8')).one()
+        except NoResultFound:
+            return web.seeother('/akarin')
+
+        return self.render('post.html', post=post, title='{title}'.format(title=title))
+
+
+class TagHandler(BaseHandler):
+    def GET(self, slug):
+        tag = web.ctx.orm.query(Tag).filter(Tag.slug == slug).one()
+        return self.render('post.html', posts=tag.posts, title='Tag - {slug}'.format(slug=slug))
+
+
+class ArchivesHandler(BaseHandler):
+    def GET(self):
+        posts = web.ctx.orm.query(Post.title, Post.created_time).all()
+        return self.render('archives.html', posts=posts, title='Archives')
+
+
+class LinkHandler(BaseHandler):
+    def GET(self):
+        links = web.ctx.orm.query(Link).all()
+        return self.render('link.html', links=links, title='Links')
+
+
+class NotFoundHandler(BaseHandler):
+    def GET(self, url):
+        return self.render('not_found.html', title='Akarin')
+
+
+class DebugHandler(BaseHandler):
+    def GET(self):
+        post = Post(title=u'prpr', content=u'prpr')
+        web.ctx.orm.add(post)
+        return 'Have fun!'
