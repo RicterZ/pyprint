@@ -13,10 +13,15 @@ class BaseHandler(object):
 
 
 class IndexHandler(BaseHandler):
-    def GET(self):
-        input_data = web.input(page=0)
-        posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[int(input_data.page) * 3 : 3]
-        return self.render('index.html', posts=posts)
+    def GET(self, page=1):
+        page = int(page) if page else 1
+        posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[(page - 1) * 3 : 3]
+
+        return self.render('index.html', data={
+            'preview': page - 1,
+            'next': page + 1,
+            'posts': posts
+        })
 
 
 class PostHandler(BaseHandler):
@@ -37,8 +42,24 @@ class TagHandler(BaseHandler):
 
 class ArchivesHandler(BaseHandler):
     def GET(self):
-        posts = web.ctx.orm.query(Post.title, Post.created_time).all()
-        return self.render('archives.html', posts=posts, title='Archives')
+        posts = web.ctx.orm.query(Post.title, Post.created_time).order_by(Post.id.desc()).all()
+
+        posts_groups = []
+        posts_group = None
+        flag = None
+
+        for i, post in enumerate(posts):
+            year = post.created_time.year
+            if not year == flag or flag is None:
+                posts_group = {'year': year, 'posts_list': [post.title]}
+            else:
+                posts_group['posts_list'].append(post.title)
+
+            if i == len(posts) - 1 or not posts_group in posts_groups:
+                posts_groups.append(posts_group)
+            flag = year
+
+        return self.render('archives.html', posts_groups=posts_groups, title='Archives')
 
 
 class LinkHandler(BaseHandler):

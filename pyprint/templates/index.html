@@ -6,7 +6,7 @@
 
 
 {% block body %}
-    {% for post in posts %}
+    {% for post in data.posts %}
         <article>
             <h1 class="title"><a href="/posts/{{ post.title }}">{{ post.title }}</a></h1>
             <aside>
@@ -17,4 +17,8 @@
             </section>
         </article>
     {% endfor %}
+    <div class="paging">
+        <a href="/page/{{ data.preview }}" class="{% if data.preview == 0 %}hide{% endif %}">&lsaquo;&lsaquo; Newer</a>
+        <a href="/page/{{ data.next }}" class="pull-right {% if data.posts|length < 3 %}hide{% endif %}">Older &rsaquo;&rsaquo;</a>
+    </div>
 {% endblock %}

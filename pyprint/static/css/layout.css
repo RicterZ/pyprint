@@ -110,10 +110,18 @@ footer .friends{
     font-size:smaller;
 }
 
+.hide {
+    visibility: hidden;
+}
+
 .wrapper {
     width:60%;
     max-width:980px;
     margin:0 auto;
+}
+
+.pull-right {
+    float: right;
 }
 
 @media screen and (max-width:980px){
