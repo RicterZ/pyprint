@@ -1,5 +1,6 @@
 import web
 from sqlalchemy.orm.exc import NoResultFound
+
 from settings import config
 from functions import render_template
 from models import Post, Tag, Link
@@ -14,14 +15,14 @@ class BaseHandler(object):
 class IndexHandler(BaseHandler):
     def GET(self):
         input_data = web.input(page=0)
-        posts = web.ctx.orm.query(Post).order_by(Post.created_time)[int(input_data.page) * 3 : 3]
+        posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[int(input_data.page) * 3 : 3]
         return self.render('index.html', posts=posts)
 
 
 class PostHandler(BaseHandler):
     def GET(self, title):
         try:
-            post = web.ctx.orm.query(Post).filter(Post.title == title).one()
+            post = web.ctx.orm.query(Post).filter(Post.title == str(title).decode('utf-8')).one()
         except NoResultFound:
             return web.seeother('/akarin')
 
@@ -50,3 +51,9 @@ class NotFoundHandler(BaseHandler):
     def GET(self, url):
         return self.render('not_found.html', title='Akarin')
 
+
+class DebugHandler(BaseHandler):
+    def GET(self):
+        post = Post(title=u'prpr', content=u'prpr')
+        web.ctx.orm.add(post)
+        return 'Have fun!'

@@ -3,6 +3,9 @@ from lib.urls import urlpatterns
 from lib.functions import load_sqlalchemy
 from lib.handles import *
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 app = web.application(urlpatterns, globals())
 app.add_processor(load_sqlalchemy)

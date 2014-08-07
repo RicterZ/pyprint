@@ -1,7 +1,11 @@
 import os
-import web
-from jinja2 import Environment, FileSystemLoader
+
+# third-party packages
+from web import ctx, HTTPError
 from sqlalchemy.orm import scoped_session, sessionmaker
+from jinja2 import Environment, FileSystemLoader
+
+# custom
 from settings import templates
 from models import engine
 
@@ -20,14 +24,14 @@ def render_template(template_name, **context):
 
 
 def load_sqlalchemy(handler):
-    web.ctx.orm = scoped_session(sessionmaker(bind=engine))
+    ctx.orm = scoped_session(sessionmaker(bind=engine))
     try:
         return handler()
-    except web.HTTPError:
-        web.ctx.orm.commit()
+    except HTTPError:
+        ctx.orm.commit()
         raise
     except:
-        web.ctx.orm.rollback()
+        ctx.orm.rollback()
         raise
     finally:
-        web.ctx.orm.commit()
+        ctx.orm.commit()

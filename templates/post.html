@@ -6,7 +6,6 @@
 
 
 {% block body %}
-    {% for post in posts %}
         <article>
             <h1 class="title"><a href="/posts/{{ post.title }}">{{ post.title }}</a></h1>
             <aside>
@@ -16,5 +15,4 @@
                 {{ post.content }}
             </section>
         </article>
-    {% endfor %}
 {% endblock %}

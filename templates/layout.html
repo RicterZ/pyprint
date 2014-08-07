@@ -6,10 +6,13 @@
     <link rel="stylesheet" href="/static/css/yue.css" />
     <link rel="stylesheet" href="/static/css/foundation-icons.css" />
     <link rel="stylesheet" href="/static/css/layout.css" />
+    <link rel="stylesheet" href="/static/css/post.css" />
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body class="yue">
@@ -31,8 +34,11 @@
         </ul>
     </nav>
 </header>
-{% block body %}
-{% endblock %}
+
+<div class="wrapper">
+    {% block body %}
+    {% endblock %}
+</div>
 
 <footer>
     <a class="rss fi-rss" href="/feed"></a>

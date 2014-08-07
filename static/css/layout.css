@@ -110,4 +110,12 @@ footer .friends{
     font-size:smaller;
 }
 
+.wrapper {
+    width:60%;
+    max-width:980px;
+    margin:0 auto;
+}
 
+@media screen and (max-width:980px){
+    .wrapper {width:100%;}
+}

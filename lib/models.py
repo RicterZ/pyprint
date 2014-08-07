@@ -1,3 +1,4 @@
+from datetime import date
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer, String, Text, ForeignKey, Date
@@ -27,7 +28,7 @@ class Post(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String, unique=True, nullable=False)
     tags = relationship('Tag', secondary=posts_tags, backref='posts')
-    created_time = Column(Date)
+    created_time = Column(Date, default=date.today())
     content = Column(Text)
 
 

@@ -1,0 +1,22 @@
+.wrapper > article {
+    padding-bottom: 60px;
+}
+
+
+.wrapper > article > h1.title {
+    text-align: center;
+    font-weight: 100;
+    font-size: 2.4em;
+}
+
+.wrapper > article > h1.title > a {
+    color: #333;
+}
+
+.wrapper > article > h1.title > a:hover {
+    color: #999;
+}
+
+.wrapper > article > aside {
+    text-align: center;
+}
