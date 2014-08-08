@@ -1,4 +1,5 @@
 import web
+from markdown import markdown
 from sqlalchemy.orm.exc import NoResultFound
 
 from settings import config
@@ -17,6 +18,9 @@ class IndexHandler(BaseHandler):
         page = int(page) if page else 1
         posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[(page - 1) * 3:3]
 
+        for post in posts:
+            post.content = markdown(post.content)
+
         return self.render('index.html', data={
             'preview': page - 1,
             'next': page + 1,
@@ -31,12 +35,17 @@ class PostHandler(BaseHandler):
         except NoResultFound:
             return web.seeother('/akarin')
 
+        post.content = markdown(post.content)
         return self.render('post.html', post=post, title='{title}'.format(title=title))
 
 
 class TagHandler(BaseHandler):
     def GET(self, slug):
         tag = web.ctx.orm.query(Tag).filter(Tag.slug == slug).one()
+
+        for post in tag.posts:
+            post.content = markdown(post.content)
+
         return self.render('index.html', data={
             'preview': 0,
             'next': 0,
