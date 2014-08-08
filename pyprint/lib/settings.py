@@ -9,10 +9,10 @@ templates = '../templates'
 debug = False
 
 db_config = {
-    'db_type': 'sqlite',
-    'db_user': 'root',
-    'db_pass': '123456',
-    'db_name': 'sqlite.db',
+    'db_type': 'mysql',
+    'db_user': 'ricter',
+    'db_pass': 'r_is_not_j0j0',
+    'db_name': 'ricter_blog',
     'port': 3306,
     'host': 'localhost',
 }

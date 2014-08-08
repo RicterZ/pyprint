@@ -71,7 +71,8 @@ class ArchivesHandler(BaseHandler):
             else:
                 posts_group['posts_list'].append(post.title)
 
-            if i == len(posts) - 1 or not posts_group in posts_groups:
+            if (i == len(posts) - 1 and posts_group not in posts_groups) or\
+                    not posts_group in posts_groups:
                 posts_groups.append(posts_group)
             flag = year
 
