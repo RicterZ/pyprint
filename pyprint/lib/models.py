@@ -1,6 +1,6 @@
-from datetime import date
+from datetime import date, datetime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Table, Column, Integer, String, Text, ForeignKey, Date
+from sqlalchemy import Table, Column, Integer, String, Text, ForeignKey, Date, Time
 from sqlalchemy.orm import relationship
 from functions import engine
 
@@ -24,7 +24,7 @@ class Post(Base):
     __tablename__ = 'posts'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String, unique=True, nullable=False)
+    title = Column(String(200), unique=True, nullable=False)
     tags = relationship('Tag', secondary=posts_tags, backref='posts')
     created_time = Column(Date, default=date.today())
     content = Column(Text)
@@ -34,8 +34,8 @@ class Link(Base):
     __tablename__ = 'links'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String)
-    url = Column(String)
+    name = Column(String(100))
+    url = Column(String(100))
 
 
 metadata = Base.metadata

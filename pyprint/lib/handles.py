@@ -41,7 +41,10 @@ class PostHandler(BaseHandler):
 
 class TagHandler(BaseHandler):
     def GET(self, slug):
-        tag = web.ctx.orm.query(Tag).filter(Tag.slug == slug).one()
+        try:
+            tag = web.ctx.orm.query(Tag).filter(Tag.slug == slug).one()
+        except NoResultFound:
+            return web.seeother('/akarin')
 
         for post in tag.posts:
             post.content = markdown(post.content)
@@ -90,3 +93,4 @@ class FeedHandler(BaseHandler):
     def GET(self):
         posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[0:3]
         return self.render('feed.xml', posts=posts, url=web.ctx.host)
+

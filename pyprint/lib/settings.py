@@ -1,11 +1,12 @@
 #coding: utf-8
+import web
 from hashlib import md5
 
 # the path of templates
 templates = '../templates'
 
 # web.py debug mode
-debug = True
+debug = False
 
 db_config = {
     'db_type': 'sqlite',
@@ -17,10 +18,7 @@ db_config = {
 }
 
 config = {
-
-    # background password
     'username': 'Ricter',
-    'password': '123456',
 
     # information of yourself
     'email': 'RicterZheng@gmail.com',
@@ -30,13 +28,19 @@ config = {
 
     # analytics_code
     'analytics_code': '''
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-53662402-1', 'auto');
-    ga('send', 'pageview');
-    ''',
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-53662402-1', 'auto');
+        ga('send', 'pageview');''',
 }
 
+
+# don't modify 0^0
 config['email_md5'] = md5(config['email'].lower()).hexdigest()
+
+web.config.debug = debug
+web.config.session_parameters['cookie_name'] = 'session'
+web.config.session_parameters['secret_key'] = '1M0ua8ve9Ia2lov1e2hjyou'
+
