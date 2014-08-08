@@ -41,6 +41,4 @@ config = {
 config['email_md5'] = md5(config['email'].lower()).hexdigest()
 
 web.config.debug = debug
-web.config.session_parameters['cookie_name'] = 'session'
-web.config.session_parameters['secret_key'] = '1M0ua8ve9Ia2lov1e2hjyou'
 
