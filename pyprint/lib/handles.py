@@ -20,8 +20,8 @@ class IndexHandler(BaseHandler):
         return self.render('index.html', data={
             'preview': page - 1,
             'next': page + 1,
-            'posts': posts
-        })
+            'posts': posts,
+        }, title='Index')
 
 
 class PostHandler(BaseHandler):
@@ -37,7 +37,11 @@ class PostHandler(BaseHandler):
 class TagHandler(BaseHandler):
     def GET(self, slug):
         tag = web.ctx.orm.query(Tag).filter(Tag.slug == slug).one()
-        return self.render('post.html', posts=tag.posts, title='Tag - {slug}'.format(slug=slug))
+        return self.render('index.html', data={
+            'preview': 0,
+            'next': 0,
+            'posts': tag.posts,
+        }, title='Tag - {slug}'.format(slug=slug))
 
 
 class ArchivesHandler(BaseHandler):
@@ -76,4 +80,4 @@ class NotFoundHandler(BaseHandler):
 class FeedHandler(BaseHandler):
     def GET(self):
         posts = web.ctx.orm.query(Post).order_by(Post.id.desc())[0:3]
-        return self.render('feed.xml', posts=posts)
+        return self.render('feed.xml', posts=posts, url=web.ctx.host)

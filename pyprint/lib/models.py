@@ -1,11 +1,9 @@
 from datetime import date
-from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer, String, Text, ForeignKey, Date
 from sqlalchemy.orm import relationship
+from functions import engine
 
-
-engine = create_engine('sqlite:///sqlite.db', echo=True)
 Base = declarative_base()
 
 

@@ -6,13 +6,34 @@
 
 
 {% block body %}
-        <article>
-            <h1 class="title"><a href="/posts/{{ post.title }}">{{ post.title }}</a></h1>
-            <aside>
-                <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
-            </aside>
-            <section>
-                {{ post.content }}
-            </section>
-        </article>
+    <article>
+        <h1 class="title"><a href="/posts/{{ post.title }}">{{ post.title }}</a></h1>
+        <aside>
+            <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
+        </aside>
+        <section class="post-content">
+            {{ post.content }}
+        </section>
+        <section class="post-tags">
+            {% if post.tags %}
+                <em>Tagged in:
+                {% for tag in post.tags %}
+                    <a href="/tags/{{ tag.slug }}">{{ tag.slug }}</a>
+                    {% if not loop.last %} / {% endif %}
+                {% endfor %}
+                </em>
+            {% endif %}
+        </section>
+        <section class="post-comments">
+            <div id="disqus_thread"></div>
+        </section>
+    </article>
+    <script>
+        var disqus_shortname = '{{ config.disqus_shortname }}';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
 {% endblock %}

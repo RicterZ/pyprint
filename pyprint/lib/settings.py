@@ -1,22 +1,42 @@
 #coding: utf-8
 from hashlib import md5
 
+# the path of templates
 templates = '../templates'
 
+# web.py debug mode
+debug = True
+
 db_config = {
-    'type': 'sqlite',
-    'username': 'root',
-    'password': '123456',
-    'name': 'blog',
+    'db_type': 'sqlite',
+    'db_user': 'root',
+    'db_pass': '123456',
+    'db_name': 'sqlite.db',
     'port': 3306,
+    'host': 'localhost',
 }
 
 config = {
-    'email': 'RicterZheng@gmail.com',
+
+    # background password
     'username': 'Ricter',
     'password': '123456',
-    'title': u'初心を忘れず',
-    'disqus_shortname': 'test',
+
+    # information of yourself
+    'email': 'RicterZheng@gmail.com',
+    'motto': u'初心を忘れず',
+    'title': u'Ricter 的 Blog',
+    'disqus_shortname': 'ricterblog2',
+
+    # analytics_code
+    'analytics_code': '''
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-53662402-1', 'auto');
+    ga('send', 'pageview');
+    ''',
 }
 
 config['email_md5'] = md5(config['email'].lower()).hexdigest()

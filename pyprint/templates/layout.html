@@ -24,7 +24,7 @@
         <img src="http://www.gravatar.com/avatar/{{ config.email_md5 }}?r=x&s=440">
     </div>
     <div class="title">
-        <h1>{{ config.title }}</h1>
+        <h1>{{ config.motto }}</h1>
         <a href="mailto:{{ config.email }}">
             <address>{{ config.email }}</address>
         </a>
@@ -53,5 +53,8 @@
         </small>
     </p>
 </footer>
+<script>
+    {{ config.analytics_code }}
+</script>
 </body>
 </html>

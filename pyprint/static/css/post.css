@@ -21,3 +21,14 @@
     text-align: center;
 }
 
+.post-comments {
+    margin-top: 30px;
+}
+
+.post-tags {
+    margin-top: 20px;
+}
+
+.post-tags > em {
+    color: #666;
+}
