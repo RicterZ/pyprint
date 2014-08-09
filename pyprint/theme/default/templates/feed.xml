@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>{{ config.username }}</title>
+<subtitle>{{ config.title }}</subtitle>
+<updated>{{ posts[0].created_date }}</updated>
+
+<author>
+    <name><![CDATA[ {{ config.username }} ]]></name>
+    <email><![CDATA[ {{ config.email }} ]]></email>
+</author>
+
+<link href="http://{{ url }}" />
+<id>http://{{ url }}</id>
+
+{% for post in posts %}
+    <entry>
+        <title>{{ post.title }}</title>
+        <link>http://{{ url }}/articles/{{ post.title }}</link>
+        <id>http://{{ url }}/articles/{{ post.title }}</id>
+        <published>{{ post.created_date }}</published>
+        <content type="html"><![CDATA[{{ post.content | safe }}]]></content>
+    </entry>
+{% endfor %}
+</feed>

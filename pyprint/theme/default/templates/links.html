@@ -1,0 +1,29 @@
+{% if is_pjax %}
+    {% extends "pjax_layout.html" %}
+{% else %}
+    {% extends "layout.html" %}
+{% endif %}
+
+
+{% block body %}
+    <article class="links">
+        <h2>About me</h2>
+        <section>
+            <p class="about-me">
+                Who am I? <br />
+                Boy or girl? :)
+            </p>
+        </section>
+
+        <h2>My Friends</h2>
+        <section>
+            <ul>
+                {% for link in links %}
+                    <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                {% else %}
+                    <p>I am alone ..</p>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+{% endblock %}
