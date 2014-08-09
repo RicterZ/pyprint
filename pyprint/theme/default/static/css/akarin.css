@@ -1,0 +1,12 @@
+article.not-found {
+    text-align: center;
+}
+
+article.not-found > h3 {
+    font-weight: 100;
+}
+
+article.not-found > img {
+    width: 300px;
+    margin: 0 auto;
+}
