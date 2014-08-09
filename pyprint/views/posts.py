@@ -1,6 +1,7 @@
 from sqlalchemy.orm.exc import NoResultFound
 from pyprint.handler import BaseHandler
-from pyprint.models import User, Post, Tag
+from pyprint.models import Post, Tag
+from pyprint.utils import get_host
 
 
 class ListPostsHandler(BaseHandler):
@@ -60,3 +61,9 @@ class ArchiveHandler(BaseHandler):
             flag = year
 
         return self.render('archives.html', title='Archives', posts_groups=posts_groups)
+
+
+class FeedHandler(BaseHandler):
+    def get(self):
+        posts = self.orm.query(Post).order_by(Post.id.desc()).limit(3)
+        return self.render('feed.xml', posts=posts, url=get_host(self.request.full_url()))

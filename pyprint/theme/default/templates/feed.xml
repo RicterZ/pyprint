@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<title>{{ config.username }}</title>
-<subtitle>{{ config.title }}</subtitle>
+<title>{{ settings.username }}</title>
+<subtitle>{{ settings.title }}</subtitle>
 <updated>{{ posts[0].created_date }}</updated>
 
 <author>
-    <name><![CDATA[ {{ config.username }} ]]></name>
-    <email><![CDATA[ {{ config.email }} ]]></email>
+    <name><![CDATA[ {{ settings.username }} ]]></name>
+    <email><![CDATA[ {{ settings.email }} ]]></email>
 </author>
 
 <link href="http://{{ url }}" />

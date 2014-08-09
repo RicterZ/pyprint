@@ -1,4 +1,4 @@
-from posts import ListPostsHandler, ListPostsByTagHandler, RetrievePostHandler, ArchiveHandler
+from posts import ListPostsHandler, ListPostsByTagHandler, RetrievePostHandler, ArchiveHandler, FeedHandler
 from links import ListLinksHandler
 from others import AkarinHandler, NotFoundHandler
 
@@ -9,7 +9,8 @@ handlers = [
     (r'/page/([\d]+)?', ListPostsHandler),
     (r'/posts/(.*)', RetrievePostHandler),
     (r'/tags/(.*)', ListPostsByTagHandler),
-    (r'/archives', ArchiveHandler,),
+    (r'/archives', ArchiveHandler),
+    (r'/feed', FeedHandler),
 
     # links.py
     (r'/links', ListLinksHandler),
