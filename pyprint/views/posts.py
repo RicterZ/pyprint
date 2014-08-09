@@ -8,11 +8,10 @@ class ListPostsHandler(BaseHandler):
         page = int(page)
         posts = self.orm.query(Post).order_by(Post.id.desc()).limit(3).offset((page - 1) * 3).all()
 
-        return self.render('index.html', data={
+        return self.render('index.html', title='Index', data={
             'preview': page - 1,
             'next': page + 1,
             'posts': posts,
-
         })
 
 
@@ -23,7 +22,7 @@ class RetrievePostHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
-        return self.render('post.html', post=post)
+        return self.render('post.html', title=post.title, post=post)
 
 
 class ListPostsByTagHandler(BaseHandler):
@@ -33,7 +32,7 @@ class ListPostsByTagHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
-        return self.render('index.html', data={
+        return self.render('index.html', title='Tag: {slug}'.format(slug=slug), data={
             'preview': 0,
             'next': 0,
             'posts': tag.posts,
@@ -60,4 +59,4 @@ class ArchiveHandler(BaseHandler):
                 posts_groups.append(posts_group)
             flag = year
 
-        return self.render('archives.html', posts_groups=posts_groups, title='Archives')
+        return self.render('archives.html', title='Archives', posts_groups=posts_groups)
