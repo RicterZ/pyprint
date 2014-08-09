@@ -27,6 +27,7 @@ class Application(tornado.web.Application):
             email_md5=md5(email.lower()).hexdigest(),
             motto=motto,
             title=title,
+            disqus_shortname=disqus_shortname,
 
             debug=debug,
         )

@@ -10,10 +10,14 @@
     <link rel="stylesheet" href="/static/css/archives.css" />
     <link rel="stylesheet" href="/static/css/akarin.css" />
     <link rel="stylesheet" href="/static/css/links.css" />
+    <link rel="stylesheet" href="/static/css/nprogress.css" />
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.pjax.js"></script>
+    <script src="/static/js/nprogress.js"></script>
     {% block head %}
     {% endblock %}
 </head>
@@ -31,9 +35,9 @@
     </div>
     <nav>
         <ul class="nav">
-            <li><a href="/">Posts</a></li>
-            <li><a href="/archives">Archives</a></li>
-            <li><a href="/links">Links</a></li>
+            <li><a class="pjax" href="/">Posts</a></li>
+            <li><a class="pjax" href="/archives">Archives</a></li>
+            <li><a class="pjax" href="/links">Links</a></li>
         </ul>
     </nav>
 </header>
@@ -53,7 +57,19 @@
         </small>
     </p>
 </footer>
+
 <script>
+    // NProgress support of pjax
+    $(document).on('pjax:start', function() { NProgress.start(); });
+    $(document).on('pjax:end', function() { NProgress.done(); });
+
+    // NProgress
+    $(document).ready(function(){ NProgress.start();});
+    $(window).load(function(){ NProgress.done(); });
+
+    // Pjax
+    $(document).pjax('.pjax', '.wrapper');
+
     {{ settings.analytics_code }}
 </script>
 </body>
