@@ -10,8 +10,22 @@
         <h2>About me</h2>
         <section>
             <p class="about-me">
-                Who am I? <br />
-                Boy or girl? :)
+                我是 Ricter，19 岁的男孩子。<br />
+                虽然其他资料上写的都是 14 岁女，是一个让人幻想的年龄段：<br />
+                然后引来了一堆 hentai &gt;////&lt;<br /><br />
+                嗯，Ricter 呢现在在 cqupt 读大二，专业目前还是生物。<br />
+                讨厌生物啦！还有化学！解剖青蛙什么的快去死QAQ。<br /><br />
+                Ricter 炒鸡喜欢猫咪，因为很萌；另外对头像萌的人有好感。<br />
+                想成为菊苣但是智商不够，崇拜会写各种 C/C++/ASM/算法 的菊苣（比如 Cee）<br />
+                各种方面都会点但是各种方面都是渣渣级别那样。<br /><br />
+                Ricter 的联系方式大概是这样的：<br />
+                Email: <a href="mailto:RicterZheng@gmail.com">RicterZheng@gmail.com</a><br />
+                QQ: i@moeloli.me<br />
+                Github: <a href="https://github.com/RicterZ">https://github.com/RicterZ</a><br />
+                Twitter: <a href="https://twitter.com/RicterZ">@RicterZ</a><br />
+                Weibo: <a href="http://www.weibo.com/3042667153">@Ricter_hacked_by_j</a><br />
+                V2EX: <a href="http://v2ex.com/member/Ricter">http://v2ex.com/member/Ricter</a><br /><br />
+                喜欢交朋友啦ww（所以说头像萌的话很容易勾搭到我..<br />
             </p>
         </section>
 
@@ -25,5 +39,14 @@
                 {% endfor %}
             </ul>
         </section>
+        <section><div id="disqus_thread"></div></section>
     </article>
-{% endblock %}
+
+    <script>
+        var disqus_shortname = '{{ settings.disqus_shortname }}';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>{% endblock %}
