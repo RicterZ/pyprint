@@ -33,7 +33,7 @@ class ListPostsByTagHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
-        return self.render('index.html', title='Tag: {slug}'.format(slug=slug), data={
+        return self.render('index.html', title='Tag: {slug}'.format(slug=tag.slug), data={
             'preview': 0,
             'next': 0,
             'posts': posts_markdown(tag.posts),
