@@ -2,3 +2,4 @@
 *.db3
 .idea
 *.db
+pyprint/localsettings.py

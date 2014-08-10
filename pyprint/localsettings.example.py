@@ -1,0 +1,1 @@
+connect_str = 'mysql+mysqldb://root:123456@localhost/dbn?charset=utf8'

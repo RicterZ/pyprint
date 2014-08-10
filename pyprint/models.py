@@ -5,8 +5,13 @@ from sqlalchemy import Text, String, Date, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
+try:
+    from localsettings import connect_str
+except ImportError:
+    connect_str = 'sqlite:///../pyprint.db'
 
-engine = create_engine('sqlite:///../pyprint.db', echo=True)
+
+engine = create_engine(connect_str, echo=True)
 Base = declarative_base()
 
 posts_tags = Table(
@@ -56,6 +61,9 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(20))
     password = Column(String(32))
+
+    def __repr__(self):
+        return '<User: %s>' % self.username
 
 
 metadata = Base.metadata
