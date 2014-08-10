@@ -1,7 +1,7 @@
 from sqlalchemy.orm.exc import NoResultFound
 from pyprint.handler import BaseHandler
 from pyprint.models import Post, Tag
-from pyprint.utils import get_host
+from pyprint.utils import get_host, posts_markdown
 
 
 class ListPostsHandler(BaseHandler):
@@ -12,7 +12,7 @@ class ListPostsHandler(BaseHandler):
         return self.render('index.html', title='Index', data={
             'preview': page - 1,
             'next': page + 1,
-            'posts': posts,
+            'posts': posts_markdown(posts),
         })
 
 
@@ -23,7 +23,7 @@ class RetrievePostHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
-        return self.render('post.html', title=post.title, post=post)
+        return self.render('post.html', title=post.title, post=posts_markdown(post)[0])
 
 
 class ListPostsByTagHandler(BaseHandler):
@@ -36,7 +36,7 @@ class ListPostsByTagHandler(BaseHandler):
         return self.render('index.html', title='Tag: {slug}'.format(slug=slug), data={
             'preview': 0,
             'next': 0,
-            'posts': tag.posts,
+            'posts': posts_markdown(tag.posts),
         })
 
 
@@ -66,4 +66,4 @@ class ArchiveHandler(BaseHandler):
 class FeedHandler(BaseHandler):
     def get(self):
         posts = self.orm.query(Post).order_by(Post.id.desc()).limit(3)
-        return self.render('feed.xml', posts=posts, url=get_host(self.request.full_url()))
+        return self.render('feed.xml', posts=posts_markdown(posts), url=get_host(self.request.full_url()))
