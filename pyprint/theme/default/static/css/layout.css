@@ -81,9 +81,10 @@ footer *{
 }
 
 footer .rss{
-    font-size:22px;
-    padding-left:1px;
+    color: #666;
+    font-size:23px;
     position:absolute;
+    padding: 1px;
     top:-15px;
     left:50%;
     margin-left:-15px;
