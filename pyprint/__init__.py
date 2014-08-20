@@ -21,6 +21,7 @@ class Application(tornado.web.Application):
         settings = dict(
             static_path=os.path.join(theme_path, 'static'),
             template_path=os.path.join(theme_path, 'templates'),
+            login_url='/signin',
 
             username=username,
             email=email,
