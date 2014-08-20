@@ -3,7 +3,7 @@ from pyprint.handler import BaseHandler
 
 class AkarinHandler(BaseHandler):
     def get(self):
-        return self.render('not_found.html')
+        return self.render('not_found.html', title='404 Not Found')
 
 
 class NotFoundHandler(BaseHandler):

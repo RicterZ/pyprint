@@ -3,4 +3,8 @@
 .idea
 *.db
 pyprint/localsettings.py
+<<<<<<< HEAD
 pyprint/theme/default/static/postimg/*
+=======
+pyprint/theme/default/*/postimg/*
+>>>>>>> 933f79e61ffde428ffeda5f8611c254dcbce84a2

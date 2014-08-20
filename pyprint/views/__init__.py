@@ -1,6 +1,7 @@
 from posts import ListPostsHandler, ListPostsByTagHandler, RetrievePostHandler, ArchiveHandler, FeedHandler
 from links import ListLinksHandler
 from others import AkarinHandler, NotFoundHandler
+from background import SignInHandler
 
 
 handlers = [
@@ -14,6 +15,9 @@ handlers = [
 
     # links.py
     (r'/links', ListLinksHandler),
+
+    # background
+    (r'/signin', SignInHandler),
 
     # others.py
     (r'/akarin', AkarinHandler),

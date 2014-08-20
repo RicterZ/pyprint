@@ -33,7 +33,7 @@
         <section>
             <ul>
                 {% for link in links %}
-                    <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                    <li><a tatget="_blank" href="http://{{ link.url }}">{{ link.name }}</a></li>
                 {% else %}
                     <p>I am alone ..</p>
                 {% endfor %}
