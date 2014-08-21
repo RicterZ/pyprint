@@ -65,5 +65,5 @@ class ArchiveHandler(BaseHandler):
 
 class FeedHandler(BaseHandler):
     def get(self):
-        posts = self.orm.query(Post).order_by(Post.id.desc()).limit(3)
+        posts = self.orm.query(Post).order_by(Post.id.desc()).limit(3).all()
         return self.render('feed.xml', posts=posts_markdown(posts), url=get_host(self.request.full_url()))
