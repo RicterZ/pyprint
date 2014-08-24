@@ -2,12 +2,13 @@ from sqlalchemy.orm.exc import NoResultFound
 from pyprint.handler import BaseHandler
 from pyprint.models import Post, Tag
 from pyprint.utils import get_host, posts_markdown
-
+from pyprint.constants import POST
 
 class ListPostsHandler(BaseHandler):
     def get(self, page=1):
         page = int(page)
-        posts = self.orm.query(Post).order_by(Post.id.desc()).limit(3).offset((page - 1) * 3).all()
+        posts = self.orm.query(Post).filter(Post.type == POST)\
+            .order_by(Post.id.desc()).limit(3).offset((page - 1) * 3).all()
 
         return self.render('index.html', title='Index', data={
             'preview': page - 1,
@@ -33,6 +34,7 @@ class ListPostsByTagHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
+        # TODO: filter diaries
         return self.render('index.html', title='Tag: %s' % tag.slug, data={
             'preview': 0,
             'next': 0,
@@ -42,7 +44,8 @@ class ListPostsByTagHandler(BaseHandler):
 
 class ArchiveHandler(BaseHandler):
     def get(self):
-        posts = self.orm.query(Post.title, Post.created_time).order_by(Post.id.desc()).all()
+        posts = self.orm.query(Post.title, Post.created_time).\
+            filter(Post.type == POST).order_by(Post.id.desc()).all()
 
         posts_groups = []
         posts_group = None
@@ -65,5 +68,5 @@ class ArchiveHandler(BaseHandler):
 
 class FeedHandler(BaseHandler):
     def get(self):
-        posts = self.orm.query(Post).order_by(Post.id.desc()).limit(3).all()
+        posts = self.orm.query(Post).filter(Post.type == POST).order_by(Post.id.desc()).limit(3).all()
         return self.render('feed.xml', posts=posts_markdown(posts), url=get_host(self.request.full_url()))

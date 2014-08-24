@@ -2,6 +2,7 @@ from posts import ListPostsHandler, ListPostsByTagHandler, RetrievePostHandler, 
 from links import ListLinksHandler
 from others import AkarinHandler, NotFoundHandler
 from background import SignInHandler, AddPostHandler, AddLinkHandler
+from diaries import RetrieveDiaryHandler, ListDiariesHandler
 
 
 handlers = [
@@ -12,6 +13,10 @@ handlers = [
     (r'/tags/(.*)', ListPostsByTagHandler),
     (r'/archives', ArchiveHandler),
     (r'/feed', FeedHandler),
+
+    # diaries.py
+    (r'/diaries', ListDiariesHandler),
+    (r'/diaries/(.*)', RetrieveDiaryHandler),
 
     # links.py
     (r'/links', ListLinksHandler),

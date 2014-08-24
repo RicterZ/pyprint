@@ -4,6 +4,7 @@ from sqlalchemy import Column, Table
 from sqlalchemy import Text, String, Date, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+from constants import POST, DIARY
 
 try:
     from localsettings import connect_str
@@ -39,6 +40,8 @@ class Post(Base):
     tags = relationship('Tag', secondary=posts_tags, backref='posts')
     created_time = Column(Date, default=date.today())
     content = Column(Text)
+    type = Column(Integer, default=POST)
+    password = Column(String(10), nullable=True)
 
     def __repr__(self):
         return '<Post: %s>' % self.title
