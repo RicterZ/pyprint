@@ -1,4 +1,4 @@
-POST = 0
-DIARY = 1
+POST = 'post'
+DIARY = 'diary'
 
 POST_ENUMS = (POST, DIARY, )

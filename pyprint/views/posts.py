@@ -7,7 +7,7 @@ from pyprint import constants
 class ListPostsHandler(BaseHandler):
     def get(self, page=1):
         page = int(page)
-        posts = self.orm.query(Post).filter(Post.type == POST)\
+        posts = self.orm.query(Post).filter(Post.type == constants.POST)\
             .order_by(Post.id.desc()).limit(3).offset((page - 1) * 3).all()
 
         return self.render('index.html', title='Index', data={
@@ -68,5 +68,5 @@ class ArchiveHandler(BaseHandler):
 
 class FeedHandler(BaseHandler):
     def get(self):
-        posts = self.orm.query(Post).filter(Post.type == POST).order_by(Post.id.desc()).limit(3).all()
+        posts = self.orm.query(Post).filter(Post.type == constants.POST).order_by(Post.id.desc()).limit(3).all()
         return self.render('feed.xml', posts=posts_markdown(posts), url=get_host(self.request.full_url()))
