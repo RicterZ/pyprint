@@ -1,2 +1,4 @@
 POST = 0
 DIARY = 1
+
+POST_ENUMS = (POST, DIARY, )

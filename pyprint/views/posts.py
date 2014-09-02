@@ -2,7 +2,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from pyprint.handler import BaseHandler
 from pyprint.models import Post, Tag
 from pyprint.utils import get_host, posts_markdown
-from pyprint.constants import POST
+from pyprint import constants
 
 class ListPostsHandler(BaseHandler):
     def get(self, page=1):
@@ -34,18 +34,18 @@ class ListPostsByTagHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
-        # TODO: filter diaries
+        posts = [post for post in tag.posts if post.type == constants.POST]
         return self.render('index.html', title='Tag: %s' % tag.slug, data={
             'preview': 0,
             'next': 0,
-            'posts': posts_markdown(tag.posts),
+            'posts': posts_markdown(posts),
         })
 
 
 class ArchiveHandler(BaseHandler):
     def get(self):
         posts = self.orm.query(Post.title, Post.created_time).\
-            filter(Post.type == POST).order_by(Post.id.desc()).all()
+            filter(Post.type == constants.POST).order_by(Post.id.desc()).all()
 
         posts_groups = []
         posts_group = None
