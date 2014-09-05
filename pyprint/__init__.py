@@ -29,6 +29,7 @@ class Application(tornado.web.Application):
             motto=motto,
             title=title,
             disqus_shortname=disqus_shortname,
+            analytics_code=analytics_code,
 
             debug=debug,
         )
