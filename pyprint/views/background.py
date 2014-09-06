@@ -24,7 +24,7 @@ class SignInHandler(BaseHandler):
 class AddPostHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        posts = self.orm.query(Post.title, Post.id).all()
+        posts = self.orm.query(Post.title, Post.id).order_by(Post.id.desc()).all()
         self.background_render('posts.html', posts=posts)
 
     @tornado.web.authenticated
