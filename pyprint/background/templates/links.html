@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block navbar %}
+        <li><a href="/kamisama/posts" class="submenu">Posts Mangement</a></li>
+        <li><a href="/kamisama/links" class="submenu selected-item">Friend Links</a></li>
+{% endblock %}
+
+{% block body %}
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Failed!</strong><span></span>
+    </div>
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Success!</strong><span></span>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Friends Links</strong>
+        <div class="row">
+            <form class="form-inline" role="form" method="post" action="#">
+                <div class="col-lg-2">
+                <div class="from-group">
+                    <input name="action" value="add" type="hidden">
+                    <input name="name" type="text" class="form-control" placeholder="Friend's Name">
+                </div>
+                </div>
+                <div class="col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">http://</span>
+                    <input name="url" type="text" class="form-control" placeholder="Blog's URL">
+                </div>
+                </div>
+                <button type="submit" class="btn btn-default">Add</button>
+            </form>
+        </div>
+        </div>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="td-title">Name</th>
+                <th class="td-title">Link</th>
+                <th class="td-operate">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for link in links %}
+            <tr>
+                <td class="td-title">{{ link.name }}</td>
+                <td class="td-title"><a href="http://{{ link.url }}" target="_blank">http://{{ link.url }}</a></td>
+                <td class="td-operate"><a href="##" class="remove" data-id="{{ link.id }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(".remove").click(function(){
+            var friendId = this.attributes['data-id'].value,
+                parent = $(this).parent().parent();
+            //console.log(friendId);
+            $.ajax({
+                url: "/kamisama/links",
+                data: {id: friendId, action: "del"},
+                type: "POST",
+                success: function(){
+                    $(".alert-success").show();
+                    $(".alert-success span").text(" The link had been deleted!");
+                    $(parent).hide();
+                },
+                error: function(){
+                    $(".alert-danger").show();
+                    $(".alert-danger span").text(" Delete the link failed.");
+                }
+            })
+        })
+    </script>{% endblock %}

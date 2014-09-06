@@ -16,10 +16,10 @@ class JinjaTemplateMixin(object):
             raise TemplateNotFound(template_name)
         return template.render(settings=self.settings, **kwargs)
 
-    def jinja2_render(self, template_name, **kwargs):
+    def _jinja2_render(self, template_name, **kwargs):
         return self._render(self.settings['template_path'], template_name, **kwargs)
 
-    def background_render(self, template_name, **kwargs):
+    def _background_render(self, template_name, **kwargs):
         return self._render(self.settings['background_template_path'], template_name, **kwargs)
 
 
@@ -31,11 +31,11 @@ class BaseHandler(tornado.web.RequestHandler, JinjaTemplateMixin):
     def render(self, template_name, **kwargs):
         """Override render method
         """
-        self.write(self.jinja2_render(template_name, is_pjax=bool(self.request.headers.get('X-Pjax', None)),
+        self.write(self._jinja2_render(template_name, is_pjax=bool(self.request.headers.get('X-Pjax', None)),
                                       **kwargs))
 
     def background_render(self, template_name, **kwargs):
-        self.write(self.background_render(template_name, **kwargs))
+        self.write(self._background_render(template_name, **kwargs))
 
     def get_current_user(self):
         return self.get_secure_cookie('username')

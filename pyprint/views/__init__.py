@@ -23,8 +23,8 @@ handlers = [
 
     # background
     (r'/login', SignInHandler),
-    (r'/kamisama/add/post', AddPostHandler),
-    (r'/kamisama/add/link', AddLinkHandler),
+    (r'/kamisama/posts', AddPostHandler),
+    (r'/kamisama/links', AddLinkHandler),
 
     # others.py
     (r'/akarin', AkarinHandler),
