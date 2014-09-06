@@ -25,11 +25,11 @@
             </tr>
         </thead>
         <tbody>
-        {% for article in data %}
+        {% for post in posts %}
             <tr>
-                <td class="td-title"><a href="/editor/posts/{{ article.id }}">{{ article.title }}</a></td>
+                <td class="td-title"><a href="/kamisama/posts/{{ post.id }}">{{ post.title }}</a></td>
                 <td class="td-operate"><a href="##"><span class="glyphicon glyphicon-edit"></span></a></td>
-                <td class="td-operate"><a class="remove" data-article="{{ article.id }}" href="##"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td class="td-operate"><a class="remove" data-article="{{ post.id }}" href="##"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -45,8 +45,9 @@
             var articleId = this.attributes['data-article'].value,
                 parent = $(this).parent().parent();
             $.ajax({
-                url: "/articles/" + articleId,
-                type: "DELETE",
+                url: "/kamisama/posts",
+                type: "POST",
+                data: {id: articleId, action: 'del'},
                 success: function(){
                     $(".alert-success").show();
                     $(".alert-success span").text(" The article had been deleted!");

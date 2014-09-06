@@ -1,7 +1,7 @@
 import tornado.web
 
 from pyprint.handler import BaseHandler
-from pyprint.models import User, Link
+from pyprint.models import User, Link, Post
 
 
 class SignInHandler(BaseHandler):
@@ -24,11 +24,21 @@ class SignInHandler(BaseHandler):
 class AddPostHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.background_render('posts.html')
+        posts = self.orm.query(Post.title, Post.id).all()
+        self.background_render('posts.html', posts=posts)
 
     @tornado.web.authenticated
     def post(self):
-        pass
+        action = self.get_argument('action', None)
+        if action == 'del':
+            post_id = self.get_argument('id', 0)
+            if post_id:
+                post = self.orm.query(Post).filter(Post.id == post_id).one()
+                self.orm.delete(post)
+                self.orm.commit()
+
+        elif action == 'add':
+            return self.redirect('/kamisama/posts')
 
 
 class AddLinkHandler(BaseHandler):
