@@ -27,3 +27,6 @@ class BaseHandler(tornado.web.RequestHandler, JinjaTemplateMixin):
         """
         self.write(self.jinja2_render(template_name, is_pjax=bool(self.request.headers.get('X-Pjax', None)),
                                       **kwargs))
+
+    def get_current_user(self):
+        return self.get_secure_cookie('username')

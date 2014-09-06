@@ -22,6 +22,7 @@ class Application(tornado.web.Application):
             static_path=os.path.join(theme_path, 'static'),
             template_path=os.path.join(theme_path, 'templates'),
             login_url='/signin',
+            cookie_secret=cookie_secret,
 
             username=username,
             email=email,
