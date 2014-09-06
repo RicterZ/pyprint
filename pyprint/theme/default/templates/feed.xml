@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>{{ settings.username }}</title>
 <subtitle>{{ settings.title }}</subtitle>
-<updated>{{ posts[0].created_date }}</updated>
+<updated>{{ posts[0].created_date if posts }}</updated>
 
 <author>
     <name><![CDATA[ {{ settings.username }} ]]></name>

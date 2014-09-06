@@ -64,18 +64,9 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(20))
     password = Column(String(32))
-    token = Column(String(32))
-
-    def verify_user(self, token):
-        return self.token == token
 
     def check(self, password):
         return self.password == md5(password).hexdigest()
-
-    def generate_token(self):
-        token = md5(uuid4().bytes + uuid4().bytes).hexdigest()
-        self.token = token
-        return token
 
     def __repr__(self):
         return '<User: %s>' % self.username

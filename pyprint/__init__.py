@@ -12,16 +12,20 @@ from models import engine
 
 
 theme_path = os.path.join(os.path.dirname(__file__), 'theme/{theme_name}'.format(theme_name=theme))
-
+background_path = os.path.join(os.path.dirname(__file__), 'background')
 
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = views.handlers
+        handlers.insert(0, (r'/kamisama/static/(.*)', tornado.web.StaticFileHandler,
+                         {'path': os.path.join(background_path, 'static')}))
 
         settings = dict(
+            background_template_path=os.path.join(background_path, 'templates'),
+
             static_path=os.path.join(theme_path, 'static'),
             template_path=os.path.join(theme_path, 'templates'),
-            login_url='/signin',
+            login_url='/login',
             cookie_secret=cookie_secret,
 
             username=username,
@@ -34,6 +38,7 @@ class Application(tornado.web.Application):
 
             debug=debug,
         )
+
 
         tornado.web.Application.__init__(self, handlers=handlers, **settings)
         self.orm = scoped_session(sessionmaker(bind=engine))
