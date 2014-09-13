@@ -1,3 +1,5 @@
+from itertools import groupby
+
 from sqlalchemy.orm.exc import NoResultFound
 from pyprint.handler import BaseHandler
 from pyprint.models import Post, Tag
@@ -47,21 +49,8 @@ class ArchiveHandler(BaseHandler):
         posts = self.orm.query(Post.title, Post.created_time).\
             filter(Post.type == constants.POST).order_by(Post.id.desc()).all()
 
-        posts_groups = []
-        posts_group = None
-        flag = None
-
-        for i, post in enumerate(posts):
-            year = post.created_time.year
-            if not year == flag or flag is None:
-                posts_group = {'year': year, 'posts_list': [post.title]}
-            else:
-                posts_group['posts_list'].append(post.title)
-
-            if (i == len(posts) - 1 and posts_group not in posts_groups) or \
-                    not posts_group in posts_groups:
-                posts_groups.append(posts_group)
-            flag = year
+        posts_groups = [{'year': year, 'posts': posts} for year, posts in
+            groupby(list(posts), key=lambda p: p.created_time.year)]
 
         return self.render('archives.html', title='Archives', posts_groups=posts_groups)
 
