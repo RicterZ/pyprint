@@ -50,7 +50,7 @@ class ArchiveHandler(BaseHandler):
             filter(Post.type == constants.POST).order_by(Post.id.desc()).all()
 
         posts_groups = [{'year': year, 'posts': posts} for year, posts in
-            groupby(posts, key=lambda p: p.created_time.year)]
+            groupby(list(posts), key=lambda p: p.created_time.year)]
 
         print posts_groups
 
