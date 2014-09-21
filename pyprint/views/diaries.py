@@ -17,14 +17,13 @@ class ListDiariesHandler(BaseHandler):
 
 class RetrieveDiaryHandler(BaseHandler):
     def get(self, title):
-        password = self.get_argument('pass', '')
+        password = self.get_argument('pass', None)
 
         try:
             post = self.orm.query(Post).filter(and_(Post.title == title)).one()
         except NoResultFound:
             return self.redirect('/akarin')
 
-        print password, post.password
         if not password == post.password:
             raise tornado.web.HTTPError(403, '= =||) Password is not correct :')
 
