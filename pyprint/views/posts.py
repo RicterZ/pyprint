@@ -49,6 +49,7 @@ class ArchiveHandler(BaseHandler):
         posts = self.orm.query(Post.title, Post.created_time).\
             filter(Post.type == constants.POST).order_by(Post.id.desc()).all()
 
+        print posts
         posts_groups = [{'year': year, 'posts': posts} for year, posts in
             groupby(list(posts), key=lambda p: p.created_time.year)]
 

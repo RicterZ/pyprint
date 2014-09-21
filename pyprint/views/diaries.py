@@ -24,6 +24,7 @@ class RetrieveDiaryHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
+        print password, post.password
         if not password == post.password:
             raise tornado.web.HTTPError(403, '= =||) Password is not correct :')
 
