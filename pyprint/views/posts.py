@@ -52,8 +52,6 @@ class ArchiveHandler(BaseHandler):
         posts_groups = [{'year': year, 'posts': list(posts)} for year, posts in
             groupby(posts, key=lambda p: p.created_time.year)]
 
-        print posts_groups
-
         return self.render('archives.html', title='Archives', posts_groups=posts_groups)
 
 
