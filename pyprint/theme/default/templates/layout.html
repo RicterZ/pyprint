@@ -21,7 +21,11 @@
     <script src="/static/js/jquery.lazyload.min.js"></script>
     <script src="/static/js/nprogress.js"></script>
     <script>
-        $("img").lazyload()
+        $(function(){
+            $("img").lazyload({
+                effect: 'fadeIn'
+            });
+        })
     </script>
     {% block head %}
     {% endblock %}
