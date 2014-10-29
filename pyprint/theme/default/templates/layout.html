@@ -18,6 +18,7 @@
     <![endif]-->
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/jquery.pjax.js"></script>
+    <script src="/static/js/jquery.lazyload.js"></script>
     <script src="/static/js/nprogress.js"></script>
     {% block head %}
     {% endblock %}
@@ -71,6 +72,9 @@
 
     // Pjax
     $(document).pjax('.pjax', '.wrapper');
+
+    //lazy load
+    $("img").lazyload();
 
     {{ settings.analytics_code }}
 </script>
