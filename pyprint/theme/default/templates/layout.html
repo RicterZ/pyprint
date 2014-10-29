@@ -22,7 +22,12 @@
     <script src="/static/js/nprogress.js"></script>
     <script>
         $(function(){
-            $("img").lazyload({
+            var images = $(".wrapper img");
+            for (var i=0; i<len(images); i++) {
+                images.attr['data-original'] = images[i].src;
+                images[i].src = "";
+            }
+            images.lazyload({
                 effect: 'fadeIn'
             });
         })
