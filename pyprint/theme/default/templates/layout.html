@@ -24,7 +24,7 @@
         $(function(){
             var images = $(".wrapper img");
             for (var i=0; i<images.length; i++) {
-                $(images).attr['data-original'] = images[i].src;
+                images[i].attr('data-original', images[i].src);
                 images[i].src = "";
             }
             images.lazyload({
