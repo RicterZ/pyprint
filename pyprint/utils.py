@@ -1,3 +1,4 @@
+import re
 from markdown import markdown
 
 
@@ -15,3 +16,7 @@ def posts_markdown(posts):
         'content': markdown(post.content),
         'tags': post.tags
     } for post in posts]
+
+
+def lazy_load(posts):
+    pass
