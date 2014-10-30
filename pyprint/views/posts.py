@@ -3,7 +3,7 @@ from itertools import groupby
 from sqlalchemy.orm.exc import NoResultFound
 from pyprint.handler import BaseHandler
 from pyprint.models import Post, Tag
-from pyprint.utils import get_host, posts_markdown
+from pyprint.utils import get_host, posts_markdown, fix_lazy_load
 from pyprint import constants
 
 class ListPostsHandler(BaseHandler):
@@ -58,4 +58,5 @@ class ArchiveHandler(BaseHandler):
 class FeedHandler(BaseHandler):
     def get(self):
         posts = self.orm.query(Post).filter(Post.type == constants.POST).order_by(Post.id.desc()).limit(3).all()
-        return self.render('feed.xml', posts=posts_markdown(posts), url=get_host(self.request.full_url()))
+        return self.render('feed.xml', posts=fix_lazy_load(posts_markdown(posts)),
+                           url=get_host(self.request.full_url()))
