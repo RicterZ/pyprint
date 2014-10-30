@@ -7,7 +7,7 @@ header{
     width:100%;
     padding:50px 0 20px;
     background-size:cover;
-    background-image:linear-gradient(to top,rgba(0,0,0,0.8) 0,rgba(0,0,0,0.0001) 100%),url(/static/imgs/banaer.jpg);
+    background-image:linear-gradient(to top,rgba(0,0,0,0.8) 0,rgba(0,0,0,0.0001) 100%),url(/static/imgs/banner.jpg);
     box-shadow:0 6px 10px #666;margin-bottom:60px;
 }
 
