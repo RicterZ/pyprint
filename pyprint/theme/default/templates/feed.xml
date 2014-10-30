@@ -17,7 +17,7 @@
         <title>{{ post.title }}</title>
         <link>http://{{ url }}/articles/{{ post.title }}</link>
         <id>http://{{ url }}/articles/{{ post.title }}</id>
-        <published>{{ post.created_date }}</published>
+        <published>{{ post.created_time }}</published>
         <content type="html"><![CDATA[{{ post.content | safe }}]]></content>
     </entry>
 {% endfor %}
