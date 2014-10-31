@@ -20,6 +20,14 @@
     <script src="/static/js/jquery.pjax.js"></script>
     <script src="/static/js/jquery.lazyload.js"></script>
     <script src="/static/js/nprogress.js"></script>
+    <script>
+        $(function(){
+            var images = $(".wrapper img");
+            images.lazyload({
+                effect: 'fadeIn'
+            });
+        })
+    </script>
     {% block head %}
     {% endblock %}
 </head>
