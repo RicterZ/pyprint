@@ -1,3 +1,14 @@
 <title>{{ title }} - {{ settings.title }}</title>
+{% block head %}
+    <script>
+        $(function(){
+            var images = $(".wrapper img");
+            images.lazyload({
+                effect: 'fadeIn'
+            });
+        })
+    </script>
+{% endblock %}
+
 {% block body %}
 {% endblock %}
