@@ -28,6 +28,7 @@
             <div id="disqus_thread"></div>
         </section>
     </article>
+    {% if post.type == 'post' %}
     <script>
         var disqus_shortname = '{{ settings.disqus_shortname }}';
         (function() {
@@ -36,4 +37,5 @@
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
+    {% endif %}
 {% endblock %}

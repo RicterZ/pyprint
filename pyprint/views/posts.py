@@ -1,6 +1,7 @@
 from itertools import groupby
 
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy import and_
 from pyprint.handler import BaseHandler
 from pyprint.models import Post, Tag
 from pyprint.utils import get_host, posts_markdown, fix_lazy_load
@@ -22,7 +23,7 @@ class ListPostsHandler(BaseHandler):
 class RetrievePostHandler(BaseHandler):
     def get(self, title):
         try:
-            post = self.orm.query(Post).filter(Post.title == title).one()
+            post = self.orm.query(Post).filter(and_(Post.title == title, Post.type == 'post')).one()
         except NoResultFound:
             return self.redirect('/akarin')
 

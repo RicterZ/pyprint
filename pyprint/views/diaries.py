@@ -20,7 +20,7 @@ class RetrieveDiaryHandler(BaseHandler):
         password = self.get_argument('pass', None)
 
         try:
-            post = self.orm.query(Post).filter(and_(Post.title == title)).one()
+            post = self.orm.query(Post).filter(and_(Post.title == title, Post.type == 'diary')).one()
         except NoResultFound:
             return self.redirect('/akarin')
 
