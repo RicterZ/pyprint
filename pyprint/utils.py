@@ -22,7 +22,8 @@ def posts_markdown(posts):
         'title': post.title,
         'created_time': post.created_time,
         'content': markdown(post.content),
-        'tags': post.tags
+        'tags': post.tags,
+        'type': post.type,
     }) for post in posts]
 
 
