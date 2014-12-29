@@ -1,3 +1,4 @@
+#coding: utf-8
 from itertools import groupby
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -11,9 +12,9 @@ class ListPostsHandler(BaseHandler):
     def get(self, page=1):
         page = int(page)
         posts = self.orm.query(Post).filter(Post.type == constants.POST)\
-            .order_by(Post.id.desc()).limit(3).offset((page - 1) * 3).all()
+            .order_by(Post.created_time.desc()).limit(3).offset((page - 1) * 3).all()
 
-        return self.render('index.html', title='Index', data={
+        return self.render('index.html', title=u'这真的是首页喵', data={
             'preview': page - 1,
             'next': page + 1,
             'posts': posts_markdown(posts),
@@ -48,7 +49,7 @@ class ListPostsByTagHandler(BaseHandler):
 class ArchiveHandler(BaseHandler):
     def get(self):
         posts = self.orm.query(Post.title, Post.created_time).\
-            filter(Post.type == constants.POST).order_by(Post.id.desc()).all()
+            filter(Post.type == constants.POST).order_by(Post.created_time.desc()).all()
 
         posts_groups = [{'year': year, 'posts': list(posts)} for year, posts in
             groupby(posts, key=lambda p: p.created_time.year)]
@@ -58,6 +59,7 @@ class ArchiveHandler(BaseHandler):
 
 class FeedHandler(BaseHandler):
     def get(self):
-        posts = self.orm.query(Post).filter(Post.type == constants.POST).order_by(Post.id.desc()).limit(3).all()
+        posts = self.orm.query(Post).filter(Post.type == constants.POST).order_by(
+            Post.created_time.desc()).limit(3).all()
         return self.render('feed.xml', posts=fix_lazy_load(posts_markdown(posts)),
                            url=get_host(self.request.full_url()))

@@ -11,7 +11,7 @@ from pyprint.constants import DIARY
 class ListDiariesHandler(BaseHandler):
     def get(self):
         diaries = self.orm.query(Post.title, Post.created_time).filter(Post.type == DIARY)\
-            .order_by(Post.id.desc()).all()
+            .order_by(Post.created_time.desc()).all()
         return self.render('diaries.html', title='Diaries', diaries=diaries)
 
 
