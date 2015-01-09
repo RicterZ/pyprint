@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+<article>
+    <aside>
+        <h1 class="center">{{ post.title }}</h1>
+        <i class="center">{{ post.created_time  }}</i>
+    </aside>
+
+    <section>
+        {{ post.content }}
+    </section>
+        <section class="post-tags">
+            {% if post.tags %}
+                <em>Tagged in:
+                {% for tag in post.tags %}
+                    <a href="/tags/{{ tag.slug }}">{{ tag.slug }}</a>
+                    {% if not loop.last %} / {% endif %}
+                {% endfor %}
+                </em>
+            {% endif %}
+        </section>
+    <hr>
+    <section>
+        <div id="disqus_thread"></div>
+    </section>
+</article>
+
+  <script>
+        var disqus_shortname = '{{ settings.disqus_shortname }}';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+{% endblock %}
+

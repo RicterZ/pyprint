@@ -11,7 +11,7 @@ from settings import *
 from models import engine
 
 
-theme_path = os.path.join(os.path.dirname(__file__), 'theme/{theme_name}'.format(theme_name=theme))
+theme_path = os.path.join(os.path.dirname(__file__), 'themes/{theme_name}'.format(theme_name=theme))
 background_path = os.path.join(os.path.dirname(__file__), 'background')
 
 class Application(tornado.web.Application):
@@ -27,6 +27,8 @@ class Application(tornado.web.Application):
             template_path=os.path.join(theme_path, 'templates'),
             login_url='/login',
             cookie_secret=cookie_secret,
+
+            post_of_page=post_of_page,
 
             username=username,
             email=email,

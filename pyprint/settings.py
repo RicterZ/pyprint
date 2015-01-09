@@ -14,8 +14,8 @@ title = 'Ricter\'s Blog'
 motto = u'初心を忘れず'
 disqus_shortname = 'ricterblog2'
 
-# theme name
-theme = 'default'
+# themes name
+theme = 'clean'
 
 # development
 debug = True
@@ -30,4 +30,14 @@ analytics_code = '''
   ga('create', 'UA-53662402-1', 'auto');
   ga('send', 'pageview');
 '''
+
+post_of_page = 3
+
+
+try:
+    module = __import__('themes.%s.config' % theme, globals(), locals(), ['*'])
+    for k in dir(module):
+        locals()[k] = getattr(module, k)
+except ImportError:
+    pass
 

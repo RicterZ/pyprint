@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/yue.css" type="text/css">
+    <title>{{ title }} - {{ settings.title }}</title>
+</head>
+
+<body>
+<div class="wrapper yue">
+    <header>
+        <h1 class="name center">{{ settings.username }}</h1>
+        <small class="center">{{ settings.motto }}</small>
+        <nav class="center nav">
+            <a href="/">Posts</a>
+            <a href="/diaries">Diary</a>
+            <a href="/links">Links</a>
+        </nav>
+    </header>
+    <hr>
+    <div class="container">
+    {% block body %}
+    {% endblock %}
+    </div>
+    <footer class="center">
+        <a href="mailto:mailto:{{ settings.email }}">{{ settings.username }}</a> © 2015 • All rights reserved
+        |
+        <a href="/feed">RSS</a>
+        <br>
+        Theme Clean powered by whtsky & Ricter
+    </footer>
+</div>
+<script>
+    {{ settings.analytics_code }}
+</script>
+</body>
+</html>

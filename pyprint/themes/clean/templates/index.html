@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <ul>
+    {% for post in data.posts %}
+        <li>
+            <a href="/posts/{{ post.title }}">{{ post.title }}</a>
+            <i class="date">{{ post.created_time }}</i>
+        </li>
+    {% endfor %}
+    </ul>
+    <hr>
+    <div class="paging">
+        <a href="/page/{{ data.preview }}" class="{% if data.preview <= 0 %}hide{% endif %}">&lsaquo;&lsaquo; Newer</a>
+        <a href="/page/{{ data.next }}" class="pull-right {% if data.posts|length < 3 or not data.next %}hide{% endif %}">Older &rsaquo;&rsaquo;</a>
+    </div>
+{% endblock %}

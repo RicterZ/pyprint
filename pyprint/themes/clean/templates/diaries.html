@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <ul>
+    {% for diary in diaries %}
+        <li>
+            <a href="/diary/{{ diary.title }}">{{ post.title }}</a>
+            <i class="date">{{ diary.created_time }}</i>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

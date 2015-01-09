@@ -8,11 +8,16 @@ from pyprint.models import Post, Tag
 from pyprint.utils import get_host, posts_markdown, fix_lazy_load
 from pyprint import constants
 
+from pyprint.settings import post_of_page
+
+
 class ListPostsHandler(BaseHandler):
     def get(self, page=1):
         page = int(page)
+
         posts = self.orm.query(Post).filter(Post.type == constants.POST)\
-            .order_by(Post.created_time.desc()).limit(3).offset((page - 1) * 3).all()
+            .order_by(Post.created_time.desc()).limit(post_of_page).offset(
+            (page - 1) * post_of_page).all()
 
         return self.render('index.html', title=u'这真的是首页喵', data={
             'preview': page - 1,
