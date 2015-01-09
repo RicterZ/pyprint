@@ -4,7 +4,7 @@
     <ul>
     {% for diary in diaries %}
         <li>
-            <a href="/diary/{{ diary.title }}">{{ post.title }}</a>
+            <a href="/diary/{{ diary.title }}">{{ diary.title }}</a>
             <i class="date">{{ diary.created_time }}</i>
         </li>
     {% endfor %}
