@@ -1,10 +1,11 @@
 .wrapper {
-    width: 800px;
+    width: 80%;
+    min-width: 800px;
+    max-width: 1024px;
     margin: 0 auto;
 }
 
 .container {
-    width: 80%;
     margin: 0 auto;
 }
 
