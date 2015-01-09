@@ -28,9 +28,11 @@ class BaseHandler(tornado.web.RequestHandler, JinjaTemplateMixin):
     def orm(self):
         return self.application.orm
 
-    def render(self, template_name, **kwargs):
+    def render(self, template_name, headers={}, **kwargs):
         """Override render method
         """
+        for key, value in headers.iteritems():
+            self.set_header(key, value)
         self.write(self._jinja2_render(template_name, is_pjax=bool(self.request.headers.get('X-Pjax', None)),
                                       **kwargs))
 
