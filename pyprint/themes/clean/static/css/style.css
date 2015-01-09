@@ -1,7 +1,5 @@
 .wrapper {
-    width: 80%;
-    min-width: 800px;
-    max-width: 960px;
+    width: 800px;
     margin: 0 auto;
 }
 
@@ -119,6 +117,20 @@ textarea.post {
     font-size: 18px;
     margin-bottom: 30px;
     font-family:  "Georgia", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", "SimSun", sans-serif;
+}
+
+@media screen and (max-width: 600px) {
+    .date {
+        display: none;
+    }
+
+    .wrapper {
+        width: 100%;
+    }
+
+    .content {
+        margin: 0;
+    }
 }
 
 @media screen and (max-width: 980px) {
