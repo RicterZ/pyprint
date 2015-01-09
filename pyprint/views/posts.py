@@ -67,7 +67,7 @@ class FeedHandler(BaseHandler):
         posts = self.orm.query(Post).filter(Post.type == constants.POST).order_by(
             Post.created_time.desc()).limit(3).all()
         headers = {
-            'Content-Type': 'application/atom+xml',
+            'Content-Type': 'application/xml',
         }
         return self.render('feed.xml', posts=fix_lazy_load(posts_markdown(posts)),
                            url=get_host(self.request.full_url()), headers=headers)
