@@ -1,6 +1,12 @@
 pyprint
 =======
 
-Just for me   
-Just say goodbye to web.py    
-And the function-base handler of Flask
+Blog system just for me   
+
+### Usage
+
+    git clone https://github.com/RicterZ/pyprint
+    cd pyprint
+    python pyprint/models.py
+    python main.py --port=8888 --address=0.0.0.0
+
