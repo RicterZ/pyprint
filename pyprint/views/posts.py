@@ -13,7 +13,7 @@ from pyprint.settings import post_of_page
 
 class ListPostsHandler(BaseHandler):
     def get(self, page=1):
-        page = int(page)
+        page = int(page) if int(page) else 1
 
         posts = self.orm.query(Post).filter(Post.type == constants.POST)\
             .order_by(Post.created_time.desc()).limit(post_of_page).offset(
