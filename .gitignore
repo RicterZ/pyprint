@@ -4,3 +4,4 @@
 *.db
 pyprint/localsettings.py
 pyprint/themes/default/static/postimg/*
+*.log
