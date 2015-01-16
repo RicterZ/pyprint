@@ -41,6 +41,10 @@
         border: none;
     }
 
+    .navbar > ul > li {
+        display: list-item;
+    }
+
     .panel-container {
         box-shadow: #999 1px 1px 2px 1px inset;
         background: #EEE;
@@ -84,7 +88,7 @@
         background-color: #35aadc;
     }
 
-    .selected-item::after {
+    .arrow::after {
         clear: both;
         position: absolute;
         right: 0px;
@@ -94,12 +98,36 @@
         border-width:10px;
         border-style:solid dashed dashed dashed;
         border-color:transparent #FFF transparent transparent;
+        -webkit-transition: margin 400ms;
+        -moz-transition: margin 400ms;
+        transition: margin 400ms;
+        pointer-events: none;
+    }
+
+    .submenu {
+        -webkit-transition: background 400ms;
+        -moz-transition: background 400ms;
+        transition: background 400ms;
+    }
+
+    .selected-item + .arrow::after {
+        margin-top: -46px;
+    }
+
+    /*.selected-item +*/
+    .selected-item + a:hover::after{
+        margin-top: 0;
     }
 
     .submenu:hover {
         background-color: #e14d43;
         color: #FFF;
         text-decoration: blink;
+    }
+
+    .submenu:hover + .arrow::after {
+        margin-top: -46px;
+        pointer-events: none;
     }
 
     .panel-default > .panel-heading {
@@ -112,6 +140,13 @@
         padding-top: 10px;
         text-align: center;
         color: #FFF;
+    }
+
+    .login-form {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
     }
 
     footer a {
@@ -131,7 +166,15 @@
         display: none;
     }
 
+    .new-post-button {
+        margin: -5px;
+    }
+
     @media screen and (max-width:980px){
+        .login-form {
+            width: 100%;
+        }
+
         .td-operate {
             display: none;
         }

@@ -1,4 +1,5 @@
 import tornado.web
+from sqlalchemy.orm.exc import NoResultFound
 
 from pyprint.handler import BaseHandler
 from pyprint.models import User, Link, Post
@@ -6,14 +7,17 @@ from pyprint.models import User, Link, Post
 
 class SignInHandler(BaseHandler):
     def get(self):
-        return self.render('login.html', title='Sign in')
+        return self.background_render('login.html')
 
     def post(self):
         username = self.get_argument('username', None)
         password = self.get_argument('password', None)
 
         if username and password:
-            user = self.orm.query(User).filter(User.username==username).one()
+            try:
+                user = self.orm.query(User).filter(User.username==username).one()
+            except NoResultFound:
+                return self.redirect('/login')
             if user.check(password):
                 self.set_secure_cookie('username', user.username)
                 self.redirect('/kamisama/posts')

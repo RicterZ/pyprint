@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block navbar %}
-        <li><a href="/kamisama/posts" class="submenu selected-item">Posts Mangement</a></li>
-        <li><a href="/kamisama/links" class="submenu">Friend Links</a></li>
+        <a href="/kamisama/posts" class="submenu selected-item">Posts Mangement</a>
+        <a href="/kamisama/links" class="submenu arrow">Friend Links</a>
 {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@
         <strong>Success!</strong><span></span>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading"><strong>Posts</strong><a class="btn btn-default btn-sm pull-right" href="editor/post">New Article</a></div>
+        <div class="panel-heading"><strong>Posts</strong><a class="btn btn-default btn-sm pull-right new-post-button" href="editor/post">New Article</a></div>
         <table class="table table-striped">
         <thead>
             <tr>

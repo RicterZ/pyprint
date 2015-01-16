@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "layout.html" %}
 
-</body>
-</html>
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Login</strong>
+        </div>
+        <form class="form-horizontal login-form" role="form" action="/login" method="post">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Username:</label>
+                <div class="col-sm-8"><input type="text" placeholder="Username" name="username" class="form-control"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Password:</label>
+                <div class="col-sm-8"><input type="password" placeholder="Password" name="password" class="form-control"></div>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}
