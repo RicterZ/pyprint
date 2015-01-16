@@ -1,6 +1,5 @@
 from datetime import date
 from hashlib import md5
-from uuid import uuid4
 
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Table
@@ -8,7 +7,7 @@ from sqlalchemy import Text, String, Date, Integer, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-from constants import POST_ENUMS
+from constants import POST_ENUMS, POST
 from settings import connect_str
 
 
@@ -40,7 +39,7 @@ class Post(Base):
     tags = relationship('Tag', secondary=posts_tags, backref='posts')
     created_time = Column(Date, default=date.today())
     content = Column(Text)
-    type = Column(Enum(*POST_ENUMS))
+    type = Column(Enum(*POST_ENUMS), default=POST)
     password = Column(String(10), nullable=True)
 
     def __repr__(self):

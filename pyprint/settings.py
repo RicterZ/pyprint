@@ -1,11 +1,5 @@
 #coding: utf-8
 
-try:
-    from localsettings import connect_str, cookie_secret
-except ImportError:
-    raise Exception('Please add connect_str and cookie_secret in localsettings.py')
-
-
 
 # website settings
 username = 'Ricter'
@@ -32,6 +26,12 @@ analytics_code = '''
 '''
 
 post_of_page = 3
+
+
+try:
+    from localsettings import connect_str, cookie_secret
+except ImportError:
+    raise Exception('Please add connect_str and cookie_secret in localsettings.py')
 
 
 try:

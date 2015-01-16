@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block navbar %}
+        <a href="/kamisama/posts" class="submenu selected-item">Posts Mangement</a>
+        <a href="/kamisama/links" class="submenu arrow">Friend Links</a>
+{% endblock %}
+
+{% block body %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>New Article</strong>
+        </div>
+
+        <form class="yue" method="post" action="">
+            <button type="submit" class="btn btn-default btn-sm pull-right post-button" href="/kamisama/posts/add">Publish</button>
+            <input type="text" name="title" placeholder="Title" class="post-title" autocomplete="off">
+            <textarea name="content" placeholder="Content" class="post-content"></textarea>
+        </form>
+    </div>
+{% endblock %}

@@ -25,7 +25,7 @@ class SignInHandler(BaseHandler):
         return self.redirect('/login')
 
 
-class AddPostHandler(BaseHandler):
+class ManagePostHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         posts = self.orm.query(Post.title, Post.id).order_by(Post.id.desc()).all()
@@ -41,8 +41,25 @@ class AddPostHandler(BaseHandler):
                 self.orm.delete(post)
                 self.orm.commit()
 
-        elif action == 'add':
-            return self.redirect('/kamisama/posts')
+
+class AddPostHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        self.background_render('add_post.html', post=None)
+
+    def post(self):
+        title = self.get_argument('title', None)
+        content = self.get_argument('content', None)
+        tags = self.get_argument('tags', '').strip().split(',')
+        if not title or not content:
+            return self.redirect('/kamisama/posts/add')
+
+        post = self.orm.query(Post.title).filter(Post.title == title).all()
+        if post:
+            return self.write('<script>alert("Title has already existed");window.history.go(-1);</script>')
+        self.orm.add(Post(title=title, content=content))
+        self.orm.commit()
+        return self.redirect('/kamisama/posts')
 
 
 class AddLinkHandler(BaseHandler):
