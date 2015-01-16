@@ -12,7 +12,7 @@
             <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
         </aside>
         <section class="post-content">
-            {{ post.content }}
+            {{ post.content|markdown }}
         </section>
         <section class="post-tags">
             {% if post.tags %}

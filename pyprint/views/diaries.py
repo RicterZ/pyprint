@@ -4,7 +4,6 @@ from sqlalchemy import and_
 from sqlalchemy.orm.exc import NoResultFound
 from pyprint.handler import BaseHandler
 from pyprint.models import Post
-from pyprint.utils import posts_markdown
 from pyprint.constants import DIARY
 
 
@@ -27,4 +26,4 @@ class RetrieveDiaryHandler(BaseHandler):
         if post.password and not password == post.password:
             raise tornado.web.HTTPError(403, '๑`･ᴗ･´๑')
 
-        return self.render('post.html', title=post.title, post=posts_markdown(post)[0])
+        return self.render('post.html', title=post.title, post=post)

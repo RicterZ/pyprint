@@ -1,6 +1,8 @@
 import tornado.web
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
+from utils import markdown, fix_lazy_load
+
 
 class JinjaTemplateMixin(object):
     """A simple mixin of jinja2
@@ -9,6 +11,8 @@ class JinjaTemplateMixin(object):
     """
     def _render(self, _type, template_name, **kwargs):
         env = Environment(loader=FileSystemLoader(_type))
+        env.filters['markdown'] = markdown
+        env.filters['fix_lazy_load'] = fix_lazy_load
 
         try:
             template = env.get_template(template_name)

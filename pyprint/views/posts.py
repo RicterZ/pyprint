@@ -5,7 +5,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import and_
 from pyprint.handler import BaseHandler
 from pyprint.models import Post, Tag
-from pyprint.utils import get_host, posts_markdown, fix_lazy_load
+from pyprint.utils import get_host
 from pyprint import constants
 
 from pyprint.settings import post_of_page
@@ -22,7 +22,7 @@ class ListPostsHandler(BaseHandler):
         return self.render('index.html', title=u'这真的是首页喵', data={
             'preview': page - 1,
             'next': page + 1,
-            'posts': posts_markdown(posts),
+            'posts': posts
         })
 
 
@@ -33,7 +33,7 @@ class RetrievePostHandler(BaseHandler):
         except NoResultFound:
             return self.redirect('/akarin')
 
-        return self.render('post.html', title=post.title, post=posts_markdown(post)[0])
+        return self.render('post.html', title=post.title, post=post)
 
 
 class ListPostsByTagHandler(BaseHandler):
@@ -47,7 +47,7 @@ class ListPostsByTagHandler(BaseHandler):
         return self.render('index.html', title='Tag: %s' % tag.slug, data={
             'preview': 0,
             'next': 0,
-            'posts': posts_markdown(posts),
+            'posts': posts,
         })
 
 
@@ -69,5 +69,5 @@ class FeedHandler(BaseHandler):
         headers = {
             'Content-Type': 'application/xml',
         }
-        return self.render('feed.xml', posts=fix_lazy_load(posts_markdown(posts)),
+        return self.render('feed.xml', posts=posts,
                            url=get_host(self.request.full_url()), headers=headers)

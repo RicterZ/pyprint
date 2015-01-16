@@ -9,7 +9,7 @@
     </aside>
 
     <section>
-        {{ post.content }}
+        {{ post.content|markdown }}
     </section>
         <section class="post-tags">
             {% if post.tags %}
