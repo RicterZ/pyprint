@@ -37,6 +37,8 @@ class BaseHandler(tornado.web.RequestHandler, JinjaTemplateMixin):
         """
         for key, value in headers.iteritems():
             self.set_header(key, value)
+        self.set_header('X-JuJu', 'C3e_1s_j0j0')
+        self.set_header('X-Powered-by', 'PyPrint')
         self.write(self._jinja2_render(template_name, is_pjax=bool(self.request.headers.get('X-Pjax', None)),
                                       **kwargs))
 
