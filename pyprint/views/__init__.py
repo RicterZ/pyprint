@@ -1,6 +1,6 @@
 from posts import ListPostsHandler, ListPostsByTagHandler, RetrievePostHandler, ArchiveHandler, FeedHandler
 from links import ListLinksHandler
-from others import AkarinHandler, NotFoundHandler
+from others import AkarinHandler, NotFoundHandler, HitokotoHandler
 from background import SignInHandler, ManagePostHandler, AddLinkHandler, AddPostHandler
 from diaries import RetrieveDiaryHandler, ListDiariesHandler
 
@@ -29,5 +29,6 @@ handlers = [
 
     # others.py
     (r'/akarin', AkarinHandler),
+    (r'/hitokoto', HitokotoHandler),
     (r'/(.*)', NotFoundHandler),
 ]

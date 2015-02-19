@@ -1,3 +1,4 @@
+import urllib2
 from pyprint.handler import BaseHandler
 
 
@@ -9,3 +10,9 @@ class AkarinHandler(BaseHandler):
 class NotFoundHandler(BaseHandler):
     def get(self, path):
         return self.redirect('/akarin')
+
+
+class HitokotoHandler(BaseHandler):
+    def get(self):
+        hitokoto_url = 'http://api.hitokoto.us/rand?encode=js&charset=utf-8'
+        self.write(urllib2.urlopen(hitokoto_url).read())
