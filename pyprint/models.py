@@ -1,18 +1,14 @@
 from datetime import date
 from hashlib import md5
 
-from sqlalchemy import create_engine
 from sqlalchemy import Column, Table
 from sqlalchemy import Text, String, Date, Integer, ForeignKey, Enum
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 
+from database import Base, engine
 from constants import POST_ENUMS, POST
-from settings import connect_str
 
 
-engine = create_engine(connect_str, echo=True)
-Base = declarative_base()
 
 posts_tags = Table(
     'posts_tags', Base.metadata,

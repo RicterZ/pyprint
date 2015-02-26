@@ -3,7 +3,6 @@ from hashlib import md5
 
 # third-part
 import tornado.web
-from sqlalchemy.orm import scoped_session, sessionmaker
 
 # custom
 import views
@@ -41,9 +40,5 @@ class Application(tornado.web.Application):
             debug=debug,
         )
 
-
         tornado.web.Application.__init__(self, handlers=handlers, **settings)
-        self.orm = scoped_session(sessionmaker(bind=engine))
-
-
 

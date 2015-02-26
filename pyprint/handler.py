@@ -1,6 +1,7 @@
 import tornado.web
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
+import database
 from utils import markdown, fix_lazy_load
 
 
@@ -30,7 +31,10 @@ class JinjaTemplateMixin(object):
 class BaseHandler(tornado.web.RequestHandler, JinjaTemplateMixin):
     @property
     def orm(self):
-        return self.application.orm
+        return database.db()
+
+    def on_finish(self):
+        database.db.remove()
 
     def render(self, template_name, headers={}, **kwargs):
         """Override render method
