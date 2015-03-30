@@ -65,9 +65,11 @@ class BaseHandler(tornado.web.RequestHandler, JinjaTemplateMixin):
         self.set_header('X-Powered-by', 'PyPrint')
         self.write(self._jinja2_render(template_name, is_pjax=bool(self.request.headers.get('X-Pjax', None)),
                                       **kwargs))
+        self.finish()
 
     def background_render(self, template_name, **kwargs):
         self.write(self._background_render(template_name, **kwargs))
+        self.finish()
 
     def get_current_user(self):
         return self.get_secure_cookie('username')
