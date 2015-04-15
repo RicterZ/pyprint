@@ -95,6 +95,7 @@ footer .rss{
     border-radius:100%;
     background:#FFF;
     border:1px solid #D1DADF;
+    line-height: 10px;
     -webkit-transition:box-shadow 400ms;
     -moz-transition:box-shadow 400ms;
     transition:box-shadow 400ms;
