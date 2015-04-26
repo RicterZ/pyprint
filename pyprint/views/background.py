@@ -47,6 +47,7 @@ class AddPostHandler(BaseHandler):
     def get(self):
         self.background_render('add_post.html', post=None)
 
+    @tornado.web.authenticated
     def post(self):
         title = self.get_argument('title', None)
         content = self.get_argument('content', None)
