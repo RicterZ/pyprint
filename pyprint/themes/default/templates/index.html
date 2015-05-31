@@ -8,7 +8,7 @@
 {% block body %}
     {% for post in data.posts %}
         <article>
-            <h1 class="title"><a class="pjax" href="/posts/{{ post.title }}">{{ post.title }}</a></h1>
+            <h1 class="title"><a class="pjax" href="/posts/{{ post.title|urlencode }}">{{ post.title }}</a></h1>
             <aside>
                 <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
             </aside>

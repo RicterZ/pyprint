@@ -15,8 +15,8 @@
 {% for post in posts %}
     <entry>
         <title>{{ post.title }}</title>
-        <link>http://{{ url }}/articles/{{ post.title }}</link>
-        <id>http://{{ url }}/articles/{{ post.title }}</id>
+        <link>http://{{ url }}/articles/{{ post.title|urlencode }}</link>
+        <id>http://{{ url }}/articles/{{ post.title|urlencode }}</id>
         <published>{{ post.created_time }}</published>
         <content type="html"><![CDATA[{{ post.content | markdown | fix_lazy_load | safe }}]]></content>
     </entry>
