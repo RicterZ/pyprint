@@ -1,4 +1,5 @@
 import tornado.web
+from datetime import date
 from sqlalchemy.orm.exc import NoResultFound
 
 from pyprint.handler import BaseHandler
@@ -58,7 +59,7 @@ class AddPostHandler(BaseHandler):
         post = self.orm.query(Post.title).filter(Post.title == title).all()
         if post:
             return self.write('<script>alert("Title has already existed");window.history.go(-1);</script>')
-        self.orm.add(Post(title=title, content=content))
+        self.orm.add(Post(title=title, content=content, created_time=date.today()))
         self.orm.commit()
         return self.redirect('/kamisama/posts')
 
