@@ -1,0 +1,108 @@
+
+.avatar {
+    overflow: hidden;
+    border: 4px solid #FFF;
+    margin: 20px auto;
+    box-shadow: 0 0 10px #000;
+    width: 120px;
+    border-radius: 100%;
+}
+
+.avatar img {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.email {
+    text-decoration: blink;
+}
+
+.email i {
+    text-align: center;
+    font-size: 1.1em;
+    display: block;
+}
+
+.motto {
+    margin: auto;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.mdl-navigation > a {
+    font-weight: 600;
+}
+
+blockquote:before, blockquote:after {
+    display: none;
+}
+
+.navbar {
+    z-index: 1;
+}
+
+.yue img {
+    width: 80%;
+}
+
+.yue p, .yue ul, .yue ol, .yue blockquote {
+    font-size: 1.0em;
+}
+
+.yue code {
+    font-size: 0.8em;
+}
+
+.pull-right {
+    float: right;
+}
+
+.hide {
+    display: none
+}
+
+h1.year {
+    font-weight: 600;
+    font-size: 2.0em;
+}
+
+.container {
+    margin: auto;
+    padding-top: 60px;
+}
+
+.time {
+    padding-bottom: 20px;
+}
+
+hr.post {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(228,228,228,0), rgba(228,228,228,0.75), rgba(228,228,228,0));
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    margin: 40px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    display: none;
+}
+
+.mdl-nav {
+    color: #666;
+    font-size: 0.8em;
+    padding: 16px 40px 0;
+    position: absolute;
+    bottom: 0;
+}
+
+.mdl-nav a {
+    text-decoration: blink;
+    color: #666;
+}

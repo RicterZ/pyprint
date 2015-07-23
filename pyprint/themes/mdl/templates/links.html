@@ -1,0 +1,41 @@
+{% if is_pjax %}
+    {% extends "pjax_layout.html" %}
+{% else %}
+    {% extends "layout.html" %}
+{% endif %}
+
+
+{% block body %}
+    <article class="links">
+        <h2>About me</h2>
+        <section>
+            <p class="about-me">
+                // 一个喜欢卖萌的少年，渴望成为菊苣。<br><br>
+                Email: <a href="mailto:RicterZheng@gmail.com">RicterZheng@gmail.com</a><br>
+                Github: <a href="https://github.com/RicterZ">https://github.com/RicterZ</a><br>
+                Twitter: <a href="https://twitter.com/RicterZ">@RicterZ</a><br>
+            </p>
+        </section>
+
+        <h2>My Friends</h2>
+        <section>
+            <ul>
+                {% for link in links %}
+                    <li><a target="_blank" href="http://{{ link.url }}">{{ link.name }}</a></li>
+                {% else %}
+                    <p>I am alone ..</p>
+                {% endfor %}
+            </ul>
+        </section>
+        <section><div id="disqus_thread"></div></section>
+    </article>
+
+    <script>
+        var disqus_shortname = '{{ settings.disqus_shortname }}';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+{% endblock %}

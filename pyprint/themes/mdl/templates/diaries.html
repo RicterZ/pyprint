@@ -1,0 +1,13 @@
+{% if is_pjax %}
+    {% extends "pjax_layout.html" %}
+{% else %}
+    {% extends "layout.html" %}
+{% endif %}
+
+{% block body %}
+    <ul class="posts-group">
+        {% for diary in diaries %}
+            <li><h2>{{ diary.created_time }} / <a class="pjax" href="/diaries/{{ diary.title|urlencode }}?pass=">{{ diary.title }}</a></h2></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

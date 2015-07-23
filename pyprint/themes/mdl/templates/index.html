@@ -4,16 +4,12 @@
     {% extends "layout.html" %}
 {% endif %}
 
-{% block head %}
-    <link rel="stylesheet" href="/static/css/posts.css">
-{% endblock %}
-
 {% block body %}
     {% for post in data.posts %}
         <article>
             <h1 class="title"><a class="pjax" href="/posts/{{ post.title|urlencode }}">{{ post.title }}</a></h1>
-            <aside>
-                <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
+            <aside class="time">
+                Posted at <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
             </aside>
             <section class="post-content">
                 {{ post.content|markdown }}
@@ -29,6 +25,9 @@
             {% endif %}
             </section>
         </article>
+        {% if not loop.last %}
+            <hr class="post">
+        {% endif %}
     {% endfor %}
     <div class="paging">
         <a href="/page/{{ data.preview }}" class="{% if data.preview <= 0 %}hide{% endif %} pjax">&lsaquo;&lsaquo; Newer</a>

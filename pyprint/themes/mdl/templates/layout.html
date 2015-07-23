@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="/static/css/yue.css">
     <script src="/static/js/material.min.js"></script>
     <link rel="stylesheet" href="/static/css/font.css">
-    <link rel="stylesheet" href="/static/css/layout.css">
-    {% block head %}
-    {% endblock %}
-    <style>
-    </style>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.pjax.js"></script>
+    <script src="/static/js/jquery.scrollTo.js"></script>
+    <script src="/static/js/jquery.lazyload.js"></script>
+    {% block head %}{% endblock %}
 </head>
 
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-    <div class="mdl-layout__drawer">
+<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-bar"></div>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header wrapper" id="top">
+    <div class="mdl-layout__drawer navbar">
         <header class="demo-drawer-header">
             <div class="avatar">
                 <img src="/static/imgs/avatar.jpg">
@@ -27,16 +29,19 @@
             </div>
         </header>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Home</a>
-            <a class="mdl-navigation__link" href="">Archives</a>
-            <a class="mdl-navigation__link" href="">Diary</a>
-            <a class="mdl-navigation__link" href="">About & Link</a>
+            <a class="mdl-navigation__link pjax" href="/">Home</a>
+            <a class="mdl-navigation__link pjax" href="/archives">Archives</a>
+            <a class="mdl-navigation__link pjax" href="/diaries">Diary</a>
+            <a class="mdl-navigation__link pjax" href="/links">About & Link</a>
+            <a class="mdl-navigation__link" href="/feed">RSS</a>
+            <p class="mdl-nav">Powered by <a target="_blank" href="http://github.com/RicterZ/pyprint">PyPrint.</a>
+                <br>All content copyright <a href="mailto:ricterzheng@gmail.com">Ricter</a> © 2014 • All rights reserved.</p>
         </nav>
     </div>
     <main class="mdl-layout__content yue">
         <div class="page-content">
             <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet wrapper">
+                <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet container">
                     {% block body %}
                     {% endblock %}
                 </div>
@@ -45,4 +50,18 @@
     </main>
 </div>
 </body>
+<script>
+    $(document).on('pjax:start', function() {
+        $.scrollTo('#top', 1000);
+        $('.mdl-progress').show();
+    });
+
+    $(document).on('pjax:end', function() {
+        $('.mdl-progress').hide();
+    });
+    // Pjax
+    $(document).pjax('.pjax', '.container');
+
+    {{ settings.analytics_code }}
+</script>
 </html>

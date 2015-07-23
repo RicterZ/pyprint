@@ -4,16 +4,11 @@
     {% extends "layout.html" %}
 {% endif %}
 
-{% block head %}
-    <link rel="stylesheet" href="/static/css/posts.css">
-{% endblock %}
-
-
 {% block body %}
     <article>
       <h1 class="title"><a class="pjax" href="/{% if post.type == 'post' %}posts{% else %}diaries{% endif %}/{{ post.title|urlencode }}">{{ post.title }}</a></h1>
-        <aside>
-            <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
+        <aside class="time">
+            Posted at <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
         </aside>
         <section class="post-content">
             {{ post.content|markdown }}
