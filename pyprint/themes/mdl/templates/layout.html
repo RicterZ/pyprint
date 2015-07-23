@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="/static/css/font.css">
     <link rel="stylesheet" href="/static/css/material-scrolltop.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/material.min.js"></script>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/jquery.pjax.js"></script>
     <script src="/static/js/material-scrolltop.js"></script>
+    <script src="/static/js/material-progress.js"></script>
     {% block head %}{% endblock %}
 </head>
 
@@ -52,6 +52,16 @@
 </div>
 </body>
 <script>
+
+    $('.pjax').click(function() {
+        $('body').animate({
+            scrollTop: 0
+        }, {
+            duration: 200,
+            queue: false
+        });
+    });
+
     $(document).ready(function() {
         $('body').materialScrollTop({
             revealElement: 'header',
@@ -61,9 +71,6 @@
 
     $(document).on('pjax:start', function() {
         $('.mdl-progress').show();
-        $('body').animate({
-            scrollTop: 0
-        });
     });
 
     $(document).on('pjax:end', function() {

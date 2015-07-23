@@ -47,6 +47,7 @@
             }, _.options.duration, _.options.easing, _.options.onScrollEnd);
             return false;
         });
+
     }
 
     $.fn.materialScrollTop = function() {
