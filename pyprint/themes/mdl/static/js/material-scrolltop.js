@@ -25,7 +25,7 @@
             duration: 600,
             easing: 'swing',
             onScrollEnd: false
-        }
+        };
 
         _.options = $.extend({}, _.initial, settings);
 

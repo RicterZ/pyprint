@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/font.css">
     <link rel="stylesheet" href="/static/css/material-scrolltop.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/material.min.js"></script>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/jquery.pjax.js"></script>
     <script src="/static/js/material-scrolltop.js"></script>
@@ -16,7 +17,7 @@
 
 <body>
 <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-bar"></div>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header wrapper" id="top">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--overlay-drawer-button wrapper" id="top">
     <div class="mdl-layout__drawer navbar">
         <header class="demo-drawer-header">
             <div class="avatar">
@@ -54,15 +55,15 @@
     $(document).ready(function() {
         $('body').materialScrollTop({
             revealElement: 'header',
-            revealPosition: 'bottom',
-            onScrollEnd: function() {
-                console.log('Scrolling End');
-            }
+            revealPosition: 'bottom'
         });
     });
 
     $(document).on('pjax:start', function() {
         $('.mdl-progress').show();
+        $('body').animate({
+            scrollTop: 0
+        });
     });
 
     $(document).on('pjax:end', function() {
@@ -73,5 +74,6 @@
     $(document).pjax('.pjax', '.container');
 
     {{ settings.analytics_code }}
+
 </script>
 </html>
