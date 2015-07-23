@@ -52,13 +52,14 @@
 </body>
 <script>
     $(document).on('pjax:start', function() {
-        $.scrollTo('#top', 1000);
         $('.mdl-progress').show();
     });
 
     $(document).on('pjax:end', function() {
         $('.mdl-progress').hide();
+        $.scrollTo('#top', 1000);
     });
+
     // Pjax
     $(document).pjax('.pjax', '.container');
 
