@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} - {{ settings.title }}</title>
+    <link rel="stylesheet" href="/static/css/material.min.css">
+    <link rel="stylesheet" href="/static/css/yue.css">
+    <script src="/static/js/material.min.js"></script>
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    {% block head %}
+    {% endblock %}
+    <style>
+    </style>
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <div class="mdl-layout__drawer">
+        <header class="demo-drawer-header">
+            <div class="avatar">
+                <img src="/static/imgs/avatar.jpg">
+            </div>
+            <p class="motto">初心を忘れず</p>
+            <div>
+                <a class="email mdl-color-text--blue-grey-600" href="mailto:ricterzheng@gmail.com"><i>ricterzheng@gmail.com</i></a>
+            </div>
+        </header>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Home</a>
+            <a class="mdl-navigation__link" href="">Archives</a>
+            <a class="mdl-navigation__link" href="">Diary</a>
+            <a class="mdl-navigation__link" href="">About & Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content yue">
+        <div class="page-content">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet wrapper">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

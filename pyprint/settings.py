@@ -1,6 +1,4 @@
-#coding: utf-8
-
-
+# coding: utf-8
 # website settings
 username = 'Ricter'
 email = 'RicterZheng@gmail.com'
@@ -9,7 +7,7 @@ motto = u'初心を忘れず'
 disqus_shortname = 'ricterblog2'
 
 # themes name
-theme = 'default'
+theme = 'mdl'
 
 # development
 debug = True
@@ -40,4 +38,3 @@ try:
         locals()[k] = getattr(module, k)
 except ImportError:
     pass
-
