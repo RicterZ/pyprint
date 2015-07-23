@@ -5,13 +5,12 @@
     <title>{{ title }} - {{ settings.title }}</title>
     <link rel="stylesheet" href="/static/css/material.min.css">
     <link rel="stylesheet" href="/static/css/yue.css">
-    <script src="/static/js/material.min.js"></script>
     <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/material-scrolltop.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/jquery.pjax.js"></script>
-    <script src="/static/js/jquery.scrollTo.js"></script>
-    <script src="/static/js/jquery.lazyload.js"></script>
+    <script src="/static/js/material-scrolltop.js"></script>
     {% block head %}{% endblock %}
 </head>
 
@@ -48,16 +47,26 @@
             </div>
         </div>
     </main>
+    <button class="material-scrolltop" type="button"></button>
 </div>
 </body>
 <script>
+    $(document).ready(function() {
+        $('body').materialScrollTop({
+            revealElement: 'header',
+            revealPosition: 'bottom',
+            onScrollEnd: function() {
+                console.log('Scrolling End');
+            }
+        });
+    });
+
     $(document).on('pjax:start', function() {
         $('.mdl-progress').show();
     });
 
     $(document).on('pjax:end', function() {
         $('.mdl-progress').hide();
-        $.scrollTo('#top', 1000);
     });
 
     // Pjax
