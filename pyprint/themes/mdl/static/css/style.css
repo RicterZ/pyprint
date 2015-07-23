@@ -107,4 +107,6 @@ hr.post {
     color: #666;
 }
 
-
+.mdl-layout {
+    position: absolute;
+}
