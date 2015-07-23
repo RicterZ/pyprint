@@ -17,38 +17,42 @@
 
 <body>
 <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-bar"></div>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--overlay-drawer-button wrapper" id="top">
-    <div class="mdl-layout__drawer navbar">
-        <header class="demo-drawer-header">
-            <div class="avatar">
-                <img src="/static/imgs/avatar.jpg">
-            </div>
-            <p class="motto">初心を忘れず</p>
-            <div>
-                <a class="email mdl-color-text--blue-grey-600" href="mailto:ricterzheng@gmail.com"><i>ricterzheng@gmail.com</i></a>
-            </div>
-        </header>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link pjax" href="/">Home</a>
-            <a class="mdl-navigation__link pjax" href="/archives">Archives</a>
-            <a class="mdl-navigation__link pjax" href="/diaries">Diary</a>
-            <a class="mdl-navigation__link pjax" href="/links">About & Link</a>
-            <a class="mdl-navigation__link" href="/feed">RSS</a>
-            <p class="mdl-nav">Powered by <a target="_blank" href="http://github.com/RicterZ/pyprint">PyPrint.</a>
-                <br>All content copyright <a href="mailto:ricterzheng@gmail.com">Ricter</a> © 2014 • All rights reserved.</p>
-        </nav>
-    </div>
-    <main class="mdl-layout__content yue">
-        <div class="page-content">
-            <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet container">
-                    {% block body %}
-                    {% endblock %}
+<div class="mdl-layout__container">
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header has-drawer is-upgraded wrapper" id="top">
+        <div class="mdl-layout__drawer navbar">
+            <header class="demo-drawer-header">
+                <div class="avatar">
+                    <img src="/static/imgs/avatar.jpg">
+                </div>
+                <p class="motto">初心を忘れず</p>
+                <div>
+                    <a class="email mdl-color-text--blue-grey-600" href="mailto:ricterzheng@gmail.com"><i>ricterzheng@gmail.com</i></a>
+                </div>
+            </header>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link pjax" href="/">Home</a>
+                <a class="mdl-navigation__link pjax" href="/archives">Archives</a>
+                <a class="mdl-navigation__link pjax" href="/diaries">Diary</a>
+                <a class="mdl-navigation__link pjax" href="/links">About & Link</a>
+                <a class="mdl-navigation__link" href="/feed">RSS</a>
+                <div class="mdl-layout-spacer"></div>
+                <p class="mdl-nav">Powered by <a target="_blank" href="http://github.com/RicterZ/pyprint">PyPrint.</a>
+                    <br>All content copyright <a href="mailto:ricterzheng@gmail.com">Ricter</a> © 2014 • All rights reserved.</p>
+            </nav>
+        </div>
+        <main class="mdl-layout__content yue">
+            <div class="page-content">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet container">
+                        {% block body %}
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <button class="material-scrolltop" type="button"></button>
+        </main>
+        <div class="mdl-layout__obfuscator"></div>
+        <button class="material-scrolltop" type="button"></button>
+    </div>
 </div>
 </body>
 <script>
