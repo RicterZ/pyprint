@@ -107,10 +107,9 @@ hr.post {
     color: #666;
 }
 
-.mdl-layout {
-    /* position: absolute; */
-}
-
 .not-found {
     padding-top: 60px;
+}
+
+.mdl-layout__container {
 }

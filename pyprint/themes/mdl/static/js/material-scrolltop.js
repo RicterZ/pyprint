@@ -9,7 +9,6 @@
  */
 (function($) {
     function mScrollTop(element, settings) {
-
         var _ = this,
             breakpoint;
         var scrollTo = 0;
