@@ -110,3 +110,7 @@ hr.post {
 .mdl-layout {
     /* position: absolute; */
 }
+
+.not-found {
+    padding-top: 60px;
+}
