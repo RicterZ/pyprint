@@ -159,6 +159,8 @@ function handleSubmit(event, container, options) {
 //
 // Returns whatever $.ajax returns.
 function pjax(options) {
+  // options.url += '?r=' + Math.random().toString()
+  options.cache = false
   options = $.extend(true, {}, $.ajaxSettings, pjax.defaults, options)
 
   if ($.isFunction(options.url)) {
