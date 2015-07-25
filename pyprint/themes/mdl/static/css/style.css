@@ -112,4 +112,6 @@ hr.post {
 }
 
 .mdl-layout__container {
+    position: static;
+    height: 100vh;
 }
