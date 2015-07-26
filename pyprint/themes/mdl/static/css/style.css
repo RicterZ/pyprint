@@ -1,16 +1,16 @@
 
 .avatar {
     overflow: hidden;
-    border: 4px solid #FFF;
+    /* border: 4px solid #FFF; */
     margin: 20px auto;
     box-shadow: 0 0 10px #000;
     width: 120px;
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .avatar img {
     width: 100%;
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .email {
