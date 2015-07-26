@@ -6,6 +6,16 @@
     box-shadow: 0 0 10px #000;
     width: 120px;
     border-radius: 50%;
+    -webkit-transition: -webkit-transform 400ms;
+    -moz-transition: -moz-transform 400ms;
+    transition: transform 400ms;
+}
+
+
+.avatar:hover {
+    -webkit-transform:rotate(390deg);
+    -moz-transform:rotate(390deg);
+    transform:rotate(390deg);
 }
 
 .avatar img {
