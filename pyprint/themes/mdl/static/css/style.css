@@ -78,6 +78,7 @@ h1.year {
 }
 
 .container {
+    word-break: break-all;
     margin: auto;
     padding-top: 60px;
 }
