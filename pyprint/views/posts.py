@@ -19,7 +19,7 @@ class ListPostsHandler(BaseHandler):
             .order_by(Post.created_time.desc()).limit(post_of_page).offset(
             (page - 1) * post_of_page).all()
 
-        return self.render('index.html', title=u'这真的是首页喵', data={
+        return self.render('index.html', title=u'初心を忘れず', data={
             'preview': page - 1,
             'next': page + 1,
             'posts': posts
