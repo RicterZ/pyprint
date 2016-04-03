@@ -1,3 +1,5 @@
-tornado>=4.0
+tornado==4.1
 sqlalchemy>=0.9.7
 jinja2>=2.7.3
+MySQL-python==1.2.5
+markdown==2.4.1
