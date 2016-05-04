@@ -52,9 +52,6 @@ blockquote:before, blockquote:after {
     position: fixed;
 }
 
-.yue img {
-    width: 80%;
-}
 
 .yue p, .yue ul, .yue ol, .yue blockquote {
     font-size: 1.0em;
