@@ -7,7 +7,7 @@
 {% block body %}
     <ul class="posts-group">
         {% for diary in diaries %}
-            <li><h2>{{ diary.created_time }} / <a class="pjax" href="/diaries/{{ diary.title|urlencode }}?pass=">{{ diary.title }}</a></h2></li>
+            <li><h2>{{ diary.created_time }} / <a class="_pjax" href="/diaries/{{ diary.title|urlencode }}?pass=">{{ diary.title }}</a></h2></li>
         {% endfor %}
     </ul>
 {% endblock %}
