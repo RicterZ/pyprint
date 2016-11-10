@@ -2,7 +2,7 @@
 
 {% block body %}
 {% for post in data.posts %}
-<a href="/{% if post.type == 'post' %}posts{% else %}diaries{% endif %}/{{ post.title|urlencode }}">{{ post.title }}</a>
+<a class="title" href="/{% if post.type == 'post' %}posts{% else %}diaries{% endif %}/{{ post.title|urlencode }}">{{ post.title }}</a>
 <pre>
 <code>
 Posted at {{ post.created_time }}
@@ -10,8 +10,8 @@ Posted at {{ post.created_time }}
 {{ post.content }}a
 </code>
 </pre>
-{% endfor %}
 <br>------------------------------------------<br>
+{% endfor %}
 <a href="/page/{{ data.preview }}" class="{% if data.preview <= 0 %}hide{% endif %}"><< Newer</a>
 <a href="/page/{{ data.next }}" class="pull-right {% if data.posts|length < 3 or not data.next %}hide{% endif %}">Older >></a>
 {% endblock %}
