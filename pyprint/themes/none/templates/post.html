@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <a class="pjax" href="/{% if post.type == 'post' %}posts{% else %}diaries{% endif %}/{{ post.title|urlencode }}">{{ post.title }}</a>
-    Posted at {{ post.created_time }}
-    ======================
-    {{ post.content|markdown }}
+<a href="/{% if post.type == 'post' %}posts{% else %}diaries{% endif %}/{{ post.title|urlencode }}">{{ post.title }}</a>
+<pre>
+<code>
+Posted at {{ post.created_time }}
+======================
+{{ post.content|markdown }}
+</code>
+</pre>
 {% endblock %}
