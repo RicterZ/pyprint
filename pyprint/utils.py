@@ -1,4 +1,5 @@
 import re
+import HTMLParser
 from markdown import markdown as md
 
 
@@ -19,6 +20,8 @@ def markdown(content):
 
 
 def markdown_image(content):
+    html_parser = HTMLParser.HTMLParser()
+    content = html_parser.unescape(content)
     return re.sub('!\[(.*?)\]\((.*?)\)', '<img src="\g<2>" alt="\g<1>">', content)
 
 
