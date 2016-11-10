@@ -1,7 +1,6 @@
 import re
 from markdown import markdown as md
 
-re.sub('!\[\]\(\)')
 
 class Storage(dict):
     def __getattr__(self, item):
