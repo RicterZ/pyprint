@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - {{ settings.title }}</title>
+    <style>
+        * {
+            font-family: monospace;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<body>
+{{ settings.username }} - {{ settings.motto }}
+<br>
+<!-- 这款主题叫做：我不想用标签你打我啊 -->
+<br>------------------------------------------<br>
+<a href="/">Posts</a>
+<a href="/diaries">Diary</a>
+<a href="/links">Links</a>
+<a href="/feed">RSS</a>
+<br>------------------------------------------<br>
+{% block body %}
+{% endblock %}
+<br>------------------------------------------<br>
+<a href="mailto:mailto:{{ settings.email }}">{{ settings.username }}</a> © 2015 • All rights reserved
+<script>
+    {{ settings.analytics_code }}
+</script>
+</body>
+</html>

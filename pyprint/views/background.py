@@ -16,7 +16,7 @@ class SignInHandler(BaseHandler):
 
         if username and password:
             try:
-                user = self.orm.query(User).filter(User.username==username).one()
+                user = self.orm.query(User).filter(User.username == username).one()
             except NoResultFound:
                 return self.redirect('/login')
             if user.check(password):

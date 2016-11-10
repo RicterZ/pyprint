@@ -7,7 +7,7 @@ motto = u'初心を忘れず'
 disqus_shortname = 'ricterblog2'
 
 # themes name
-theme = 'mdl'
+theme = 'none'
 
 # development
 debug = True
