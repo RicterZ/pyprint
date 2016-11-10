@@ -2,12 +2,13 @@
 
 {% block body %}
 {% for post in data.posts %}
+<br>
 <a class="title" href="/{% if post.type == 'post' %}posts{% else %}diaries{% endif %}/{{ post.title|urlencode }}">{{ post.title }}</a>
 <pre>
 <code>
 Posted at {{ post.created_time }}
 ======================
-{{ post.content }}a
+{{ post.content }}
 </code>
 </pre>
 <br>------------------------------------------<br>
