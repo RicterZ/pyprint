@@ -9,6 +9,11 @@
             font-family: monospace;
         }
 
+        body {
+            width: 100%;
+            margin: 0 auto;
+        }
+
         a {
             color: #000;
             text-decoration: none;
@@ -18,11 +23,15 @@
             font-size: 20px;
         }
 
+        img {
+            max-width: 100%;
+        }
+
     </style>
 </head>
 
 <body>
-{{ settings.username }} - {{ settings.motto }}
+<h1>{{ settings.username }} - {{ settings.motto }}</h1>
 <br>
 <!-- 这款主题叫做：我不想用标签你打我啊 -->
 <br>------------------------------------------<br>
