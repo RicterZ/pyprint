@@ -2,7 +2,7 @@ import tornado.web
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
 import database
-from utils import markdown, fix_lazy_load
+from utils import markdown, fix_lazy_load, markdown_image
 
 
 class JinjaEnvironment(object):
@@ -30,6 +30,7 @@ class JinjaTemplateMixin(object):
     def _render(self, path, template_name, is_background=False, **kwargs):
         env = JinjaEnvironment(path=path, is_background=is_background)
         env.filters['markdown'] = markdown
+        env.filters['markdown_image'] = markdown_image
         env.filters['fix_lazy_load'] = fix_lazy_load
 
         try:
