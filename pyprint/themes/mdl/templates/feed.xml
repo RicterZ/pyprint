@@ -21,7 +21,7 @@
         {% if post.password == "" or post.password == None %}
             <content type="html"><![CDATA[{{ post.content | markdown | fix_lazy_load | safe }}]]></content>
         {% else %}
-            <content type="html"><![CDATA[ Password protected ]]></content>
+            <content type="html"><![CDATA[ Password Protected ]]></content>
         {% endif %}
     </entry>
 {% endfor %}
