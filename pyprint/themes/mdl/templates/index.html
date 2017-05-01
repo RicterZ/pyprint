@@ -11,6 +11,7 @@
             <aside class="time">
                 Posted at <time datetime="{{ post.created_time }}">{{ post.created_time }}</time>
             </aside>
+        {% if post.password == "" or post.password == None %}
             <section class="post-content">
                 {{ post.content|markdown }}
             </section>
@@ -24,6 +25,12 @@
                 </em>
             {% endif %}
             </section>
+        {% else %}
+            <section>
+                Password protected
+            </section>
+        {% endif %}
+
         </article>
         {% if not loop.last %}
             <hr class="post">

@@ -18,7 +18,11 @@
         <link>http://{{ url }}/posts/{{ post.title|urlencode }}</link>
         <id>http://{{ url }}/posts/{{ post.title|urlencode }}</id>
         <published>{{ post.created_time }}</published>
-        <content type="html"><![CDATA[{{ post.content | markdown | fix_lazy_load | safe }}]]></content>
+        {% if post.password == "" or post.password == None %}
+            <content type="html"><![CDATA[{{ post.content | markdown | fix_lazy_load | safe }}]]></content>
+        {% else %}
+            <content type="html"><![CDATA[ Password protected ]]></content>
+        {% endif %}
     </entry>
 {% endfor %}
 </feed>

@@ -6,3 +6,4 @@ pyprint/localsettings.py
 pyprint/themes/default/static/postimg/*
 *.log
 .python-version
+.DS_Store

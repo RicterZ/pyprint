@@ -24,6 +24,6 @@ class RetrieveDiaryHandler(BaseHandler):
             return self.redirect('/akarin')
 
         if post.password and not password == post.password:
-            raise tornado.web.HTTPError(403, '๑`･ᴗ･´๑')
+            raise tornado.web.HTTPError(403, 'Password Protected')
 
         return self.render('post.html', title=post.title, post=post)

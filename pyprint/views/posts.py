@@ -1,4 +1,6 @@
 # coding: utf-8
+import tornado.web
+
 from itertools import groupby
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -28,10 +30,15 @@ class ListPostsHandler(BaseHandler):
 
 class RetrievePostHandler(BaseHandler):
     def get(self, title):
+        password = self.get_argument('pass', None)
+
         try:
             post = self.orm.query(Post).filter(and_(Post.title == title, Post.type == 'post')).one()
         except NoResultFound:
             return self.redirect('/akarin')
+
+        if post.password and not password == post.password:
+            raise tornado.web.HTTPError(403, 'Password Protected')
 
         return self.render('post.html', title=post.title, post=post)
 
@@ -57,7 +64,7 @@ class ArchiveHandler(BaseHandler):
             filter(Post.type == constants.POST).order_by(Post.created_time.desc()).all()
 
         posts_groups = [{'year': year, 'posts': list(posts)} for year, posts in
-            groupby(posts, key=lambda p: p.created_time.year)]
+                        groupby(posts, key=lambda p: p.created_time.year)]
 
         return self.render('archives.html', title='Archives', posts_groups=posts_groups)
 
