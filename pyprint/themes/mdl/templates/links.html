@@ -21,7 +21,7 @@
         <section>
             <ul>
                 {% for link in links %}
-                <li>{{ link.name }}<a target="_blank" href="http://{{ link.url }}">{{ link.url }}</a></li>
+                <li>{{ link.name }}:&nbsp;<a target="_blank" href="http://{{ link.url }}">{{ link.url }}</a></li>
                 {% else %}
                     <p>I am alone ..</p>
                 {% endfor %}
